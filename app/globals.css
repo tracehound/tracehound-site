@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --foreground: oklch(13% 0 271);
+  --foreground-hover: oklch(23% 0 271);
+  --foreground-accent: oklch(29% 0 271);
+  --foreground-accent-hover: oklch(39% 0 271);
+  --border: oklch(36% 0 271);
+  --border-accent: oklch(87% 0 122);
+  --background: oklch(100% 0 271);
+  --background-accent: oklch(99% 0 97);
+  --accent-primary: oklch(86% 0.25 132);
+  --accent-primary-hover: oklch(96% 0.25 132);
+  --accent-secondary: oklch(63% 0.25 14);
+  --accent-secondary-hover: oklch(73% 0.25 14);
+  --error: oklch(63% 0.2 30);
+  --success: oklch(73% 0.2 145);
+  --warning: oklch(82% 0.2 97);
+}
+
+@theme inline {
+  --font-heading: var(--font-darker-grotesque);
+  --font-sans: var(--font-space-grotesque);
+  --font-mono: var(--font-space-grotesque);
+  --foreground: var(--foreground);
+  --foreground-hover: var(--foreground-hover);
+  --foreground-accent: var(--foreground-accent);
+  --foreground-accent-hover: var(--foreground-accent-hover);
+  --border: var(--border);
+  --border-accent: var(--border-accent);
+  --background: var(--background);
+  --background-accent: var(--background-accent);
+  --accent-primary: var(--accent-primary);
+  --accent-primary-hover: var(--accent-primary-hover);
+  --accent-secondary: var(--accent-secondary);
+  --accent-secondary-hover: var(--accent-secondary-hover);
+  --error: var(--error);
+  --success: var(--success);
+  --warning: var(--warning);
+}
+
+body {
+  background: var(--background-accent);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesque);
+}
