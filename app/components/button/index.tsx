@@ -1,13 +1,13 @@
 import { cn } from '@/app/lib/utils'
 import { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
-import { createElement, PropsWithChildren } from 'react'
+import { ComponentPropsWithoutRef, createElement, PropsWithChildren } from 'react'
 
 type ButtonProps = {
   variant: 'primary' | 'secondary' | 'neutral' | 'light'
   size?: 'lg' | 'md' | 'sm'
   href?: string
-}
+} & ComponentPropsWithoutRef<'button'>
 
 export function Button({
   variant = 'primary',

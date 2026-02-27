@@ -3,25 +3,46 @@ import { NavLink } from './link'
 export function NavItems() {
   return (
     <>
-      <NavLink activeClass="bg-(--accent-primary)" href="/platform">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/platform">
         PLATFORM
       </NavLink>
-      <NavLink activeClass="bg-(--accent-primary)" href="/products">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/products">
         PRODUCTS
       </NavLink>
-      <NavLink activeClass="bg-(--accent-primary)" href="/docs">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/docs">
         DOCS
       </NavLink>
-      <NavLink activeClass="bg-(--accent-primary)" href="/services">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/services">
         SERVICES
       </NavLink>
-      <NavLink activeClass="bg-(--accent-primary)" href="/blog">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/blog">
         BLOG
       </NavLink>
-      <NavLink activeClass="bg-(--accent-primary)" href="/faq">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/faq">
         FAQ
       </NavLink>
-      <NavLink activeClass="bg-(--accent-primary)" href="/contact">
+      <NavLink
+        className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+        activeClass="bg-(--accent-primary)"
+        href="/contact">
         CONTACT
       </NavLink>
     </>

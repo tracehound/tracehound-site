@@ -9,17 +9,13 @@ export function NavLink({
   href,
   activeClass,
   children,
-}: PropsWithChildren<LinkProps & { activeClass: string }>) {
+  className,
+}: PropsWithChildren<LinkProps & { activeClass: string; className?: string }>) {
   const pathname = usePathname()
   const isActive = (path: string) => path === pathname
 
   return (
-    <Link
-      href={href}
-      className={cn(
-        isActive(href.toString()) && activeClass,
-        'pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit',
-      )}>
+    <Link href={href} className={cn(isActive(href.toString()) && activeClass, className)}>
       {children}
     </Link>
   )
