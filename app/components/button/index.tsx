@@ -23,9 +23,9 @@ export function Button({
         'bg-(--accent-primary) text-(--foreground) hover:bg-(--accent-primary-hover)',
       variant === 'secondary' &&
         'bg-(--foreground) text-(--background) hover:bg-(--foreground-hover)',
-      variant === 'neutral' &&
-        'bg-(--background-accent) text-(--background) hover:bg-(--background-accent-hover)',
-      variant === 'light' && 'bg-(--foreground) text-(--background) hover:bg-(--foreground-hover)',
+      variant === 'neutral' && 'bg-(--border) text-(--background) hover:bg-(--foreground)',
+      variant === 'light' &&
+        'bg-(--background) text-(--foreground) hover:text-(--accent-secondary)',
       size === 'lg' && 'h-12 px-7 text-xl/normal',
       size === 'md' && 'h-11 px-6 text-xl/normal',
       size === 'sm' && 'h-9 px-5 text-lg/normal',

@@ -10,14 +10,13 @@ import {
 } from '@phosphor-icons/react/dist/ssr'
 import { Badge } from '../badge'
 import { Container } from '../container'
-import { Row } from '../patterns/row'
 
 export function SolutionSection() {
   return (
-    <section className="relative w-full py-16 lg:py-24 xl:py-40 bg-(--foreground)">
+    <section
+      className="relative w-full py-16 lg:py-24 xl:py-30 bg-(--foreground)"
+      data-background="dark">
       <Container>
-        <Row />
-
         <header className="flex flex-col mb-12 px-6 lg:mb-16 xl:mb-25 xl:max-w-200 xl:px-12">
           <Badge variant="primary">SOLUTION</Badge>
           <h3 className="mt-3 mb-5 font-heading font-bold text-(--background) text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
@@ -113,7 +112,7 @@ export function SolutionSection() {
           </div>
         </article>
 
-        <blockquote className="text-(--border-accent) border-l-4 border-(--border-accent) pl-6 mt-12 lg:mt-16 xl:mt-25 xl:pl-12">
+        <blockquote className="text-(--border-accent) border-l-4 border-(--border-accent) pl-6 mt-12 lg:mt-16 xl:mt-25 xl:pl-12 xl:ml-12">
           <strong>Tracehound</strong> takes decisions from your existing security systems and
           applies them through a deterministic containment layer. <br />
           Payload sizes are bounded. Memory usage is hard-coded limited. Disk saturation gracefully

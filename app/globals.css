@@ -7,8 +7,8 @@
   --foreground-accent-hover: oklch(39% 0 271);
   --border: oklch(36% 0 271);
   --border-accent: oklch(87% 0 122);
-  --background: oklch(100% 0 271);
-  --background-accent: oklch(99% 0 97);
+  --background: oklch(100% 0 0);
+  --background-accent: oklch(99.641% 0.00655 97.462);
   --accent-primary: oklch(86% 0.25 132);
   --accent-primary-hover: oklch(96% 0.25 132);
   --accent-secondary: oklch(63% 0.25 14);

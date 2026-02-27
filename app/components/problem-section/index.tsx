@@ -5,7 +5,7 @@ import { Row } from '../patterns/row'
 
 export function ProblemSection() {
   return (
-    <section className="relative w-full py-16 lg:py-24 xl:py-40">
+    <section className="relative w-full py-16 lg:py-24 xl:py-30" data-background="light">
       <Container>
         <Row />
 

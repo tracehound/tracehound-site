@@ -11,7 +11,7 @@ import { Row } from '../patterns/row'
 
 export function KeyFeatures() {
   return (
-    <section className="relative w-full py-16 lg:py-24 xl:py-40">
+    <section className="relative w-full py-16 lg:py-24 xl:py-30" data-background="light">
       <Container>
         <Row />
 
@@ -22,13 +22,9 @@ export function KeyFeatures() {
           </h3>
         </header>
 
-        <article className="grid grid-cols-1 px-6 gap-16 xl:gap-0 xl:grid-cols-2 xl:grid-rows-3 xl:px-12">
-          <div className="flex flex-col gap-7.5 border border-transparent group hover:z-10 hover:border-(--accent-primary) transition-colors xl:p-12 xl:bg-(--background) ">
-            <FireIcon
-              size={64}
-              weight="thin"
-              className="group-hover:text-(--accent-primary) transition-colors"
-            />
+        <article className="grid grid-cols-1 px-6 gap-8 xl:gap-16 xl:grid-cols-2 xl:grid-rows-3 xl:px-12">
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+            <FireIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
               <h4 className="font-bold text-xl/5 xl:text-3xl/8">Zero-Hot-Path Overhead</h4>
@@ -49,12 +45,8 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 border border-transparent group hover:z-10 hover:border-(--accent-primary) transition-colors xl:p-12 xl:bg-(--background) ">
-            <ShippingContainerIcon
-              size={64}
-              weight="thin"
-              className="group-hover:text-(--accent-primary) transition-colors"
-            />
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+            <ShippingContainerIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
               <h4 className="font-bold text-xl/5 xl:text-3xl/8">Process Isolation Architecture</h4>
@@ -73,12 +65,8 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 border border-transparent group hover:z-10 hover:border-(--accent-primary) transition-colors xl:p-12 xl:bg-(--background) ">
-            <NetworkSlashIcon
-              size={64}
-              weight="thin"
-              className="group-hover:text-(--accent-primary) transition-colors"
-            />
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+            <NetworkSlashIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
               <h4 className="font-bold text-xl/5 xl:text-3xl/8">Deterministic Failure Modes</h4>
@@ -101,12 +89,8 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 border border-transparent group hover:z-10 hover:border-(--accent-primary) transition-colors xl:p-12 xl:bg-(--background) ">
-            <LinkIcon
-              size={64}
-              weight="thin"
-              className="group-hover:text-(--accent-primary) transition-colors"
-            />
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+            <LinkIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
               <h4 className="font-bold text-xl/5 xl:text-3xl/8">Forensic Evidence Chain</h4>
@@ -127,12 +111,8 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 border border-transparent group hover:z-10 hover:border-(--accent-primary) transition-colors xl:p-12 xl:bg-(--background) ">
-            <FalloutShelterIcon
-              size={64}
-              weight="thin"
-              className="group-hover:text-(--accent-primary) transition-colors"
-            />
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+            <FalloutShelterIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
               <h4 className="font-bold text-xl/5 xl:text-3xl/8">Bounded Blast Radius</h4>
