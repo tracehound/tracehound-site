@@ -3,12 +3,12 @@ import Link from 'next/link'
 function NavItems() {
   return (
     <>
-      <Link href="/platform">Platform</Link>
-      <Link href="/products">Products</Link>
-      <Link href="/docs">Docs</Link>
-      <Link href="/services">Services</Link>
-      <Link href="/blog">Blog</Link>
-      <Link href="/help">Help</Link>
+      <Link href="/platform">PLATFORM</Link>
+      <Link href="/products">PRODUCTS</Link>
+      <Link href="/docs">DOCS</Link>
+      <Link href="/services">SERVICES</Link>
+      <Link href="/blog">BLOG</Link>
+      <Link href="/help">HELP</Link>
     </>
   )
 }
@@ -16,7 +16,7 @@ function NavItems() {
 export function Navigation() {
   return (
     <>
-      <nav className="hidden items-center gap-4 [&_a]:px-3 [&_a]:pb-0.5 [&_a]:font-heading [&_a]:font-bold [&_a]:text-lg/normal [&_a]:text-foreground [&_a]:hover:bg-(--accent-primary) [&_a]:transition-colors xl:flex">
+      <nav className="hidden items-center gap-4 [&_a]:pt-2.5 [&_a]:pb-3.5 [&_a]:px-3 [&_a]:font-heading [&_a]:font-bold [&_a]:text-lg/5 [&_a]:text-foreground [&_a]:hover:bg-(--accent-primary) [&_a]:transition-colors xl:flex">
         <NavItems />
       </nav>
 

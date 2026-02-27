@@ -1,10 +1,10 @@
 'use client'
 
-import { FC, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { LightPillarProps } from './types'
 
-const LightPillar: FC<LightPillarProps> = ({
+export default function LightPillar({
   topColor = '#5227FF',
   bottomColor = '#FF9FFC',
   intensity = 1.0,
@@ -18,7 +18,7 @@ const LightPillar: FC<LightPillarProps> = ({
   mixBlendMode = 'screen',
   pillarRotation = 0,
   quality = 'high',
-}) => {
+}: LightPillarProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
@@ -425,5 +425,3 @@ const LightPillar: FC<LightPillarProps> = ({
     />
   )
 }
-
-export default LightPillar

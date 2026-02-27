@@ -28,9 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(darkerGrotesque.variable, spaceGrotesque.variable, 'antialiased')}>
         <Column direction="left" />
-        <div className="w-full min-h-screen border-x border-(--border-accent) border-dashed mx-auto py-6 xl:py-20 max-w-[calc(100%-6rem)] md:max-w-[calc(100%-10rem)] xl:max-w-[calc(100%-20rem)] 2xl:max-w-360">
-          {children}
-        </div>
+        {children}
         <Column direction="right" />
       </body>
     </html>

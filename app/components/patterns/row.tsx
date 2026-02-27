@@ -1,15 +1,23 @@
+import { cn } from '@/app/lib/utils'
+
 export function Row() {
   return (
-    <div className="relative flex items-center -ml-2.75 -my-2.5 w-[calc(100%+21px)] -z-1 pointer-events-none">
-      <span className="relative size-5">
-        <i className="w-5 h-px bg-(--border-accent) absolute top-2.5 left-0" />
-        <i className="w-px h-5 bg-(--border-accent) absolute top-0 left-2.5" />
-      </span>
-      <span className="flex-1 border-t border-(--border-accent) border-dashed h-px" />
-      <span className="relative size-5">
-        <i className="w-5 h-px bg-(--border-accent) absolute top-2.5 left-0" />
-        <i className="w-px h-5 bg-(--border-accent) absolute top-0 left-2.5" />
-      </span>
+    <div className="relative h-px w-full flex items-center justify-between -z-1 border-t border-(--border-accent) border-dashed pointer-events-none">
+      <span
+        className={cn(
+          'absolute -top-2.5 -left-2.75',
+          'before:w-5 before:h-px before:bg-(--border)/50 before:absolute before:top-2.25 before:left-0',
+          'after:w-px after:h-5 after:bg-(--border)/50 after:absolute after:top-0 after:left-2.5',
+        )}
+      />
+
+      <span
+        className={cn(
+          'absolute -top-2.5 right-2.5',
+          'before:w-5 before:h-px before:bg-(--border)/50 before:absolute before:top-2.25 before:left-0',
+          'after:w-px after:h-5 after:bg-(--border)/50 after:absolute after:top-0 after:left-2.5',
+        )}
+      />
     </div>
   )
 }
