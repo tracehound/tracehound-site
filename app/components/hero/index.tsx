@@ -4,10 +4,8 @@ import { Container } from '../container'
 export function Hero() {
   return (
     <Container>
-      <section
-        className="flex justify-between flex-col gap-6 xl:gap-12 px-6 2xl:flex-row 2xl:items-end 2xl:gap-0 xl:px-12"
-        data-background="light">
-        <h2 className="text-3xl/8 tracking-normal font-normal font-heading flex flex-col xl:whitespace-nowrap md:text-4xl/12 xl:text-8xl/22">
+      <section className="flex justify-between flex-col gap-6 xl:gap-12 px-6 2xl:flex-row 2xl:items-end 2xl:gap-0 xl:px-12">
+        <h2 className="text-2xl/6 tracking-normal font-normal font-heading flex flex-col md:text-6xl/16 xl:whitespace-nowrap xl:text-8xl/22">
           Deterministic
           <strong className="font-bold">runtime security buffer</strong>
           for modern applications

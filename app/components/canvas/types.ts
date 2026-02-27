@@ -1,88 +1,52 @@
-export interface LightPillarProps {
-  topColor?: string
-  bottomColor?: string
-  intensity?: number
-  rotationSpeed?: number
-  interactive?: boolean
-  className?: string
-  glowAmount?: number
-  pillarWidth?: number
-  pillarHeight?: number
-  noiseIntensity?: number
-  mixBlendMode?: React.CSSProperties['mixBlendMode']
-  pillarRotation?: number
-  quality?: 'low' | 'medium' | 'high'
+import * as THREE from 'three'
+
+export type PixelBlastVariant = 'square' | 'circle' | 'triangle' | 'diamond'
+
+export interface TouchPoint {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  force: number
+  age: number
 }
 
-export interface FuzzyTextProps {
-  children: React.ReactNode
-  fontSize?: number | string
-  fontWeight?: string | number
-  fontFamily?: string
+export interface TouchTexture {
+  canvas: HTMLCanvasElement
+  texture: THREE.Texture
+  addTouch: (norm: { x: number; y: number }) => void
+  update: () => void
+  radiusScale: number
+  size: number
+}
+
+export interface ReinitConfig {
+  antialias: boolean
+  liquid: boolean
+  noiseAmount: number
+}
+
+export type PixelBlastProps = {
+  variant?: PixelBlastVariant
+  pixelSize?: number
   color?: string
-  enableHover?: boolean
-  baseIntensity?: number
-  hoverIntensity?: number
-  fuzzRange?: number
-  fps?: number
-  direction?: 'horizontal' | 'vertical' | 'both'
-  transitionDuration?: number
-  clickEffect?: boolean
-  glitchMode?: boolean
-  glitchInterval?: number
-  glitchDuration?: number
-  gradient?: string[] | null
-  letterSpacing?: number
   className?: string
-}
-
-export interface LiquidEtherProps {
-  mouseForce?: number
-  cursorSize?: number
-  isViscous?: boolean
-  viscous?: number
-  iterationsViscous?: number
-  iterationsPoisson?: number
-  dt?: number
-  BFECC?: boolean
-  resolution?: number
-  isBounce?: boolean
-  colors?: string[]
   style?: React.CSSProperties
-  className?: string
-  autoDemo?: boolean
-  autoSpeed?: number
-  autoIntensity?: number
-  takeoverDuration?: number
-  autoResumeDelay?: number
-  autoRampDuration?: number
-}
-
-export interface SimOptions {
-  iterations_poisson: number
-  iterations_viscous: number
-  mouse_force: number
-  resolution: number
-  cursor_size: number
-  viscous: number
-  isBounce: boolean
-  dt: number
-  isViscous: boolean
-  BFECC: boolean
-}
-
-export interface LiquidEtherWebGL {
-  output?: { simulation?: { options: SimOptions; resize: () => void } }
-  autoDriver?: {
-    enabled: boolean
-    speed: number
-    resumeDelay: number
-    rampDurationMs: number
-    mouse?: { autoIntensity: number; takeoverDuration: number }
-    forceStop: () => void
-  }
-  resize: () => void
-  start: () => void
-  pause: () => void
-  dispose: () => void
+  antialias?: boolean
+  patternScale?: number
+  patternDensity?: number
+  liquid?: boolean
+  liquidStrength?: number
+  liquidRadius?: number
+  pixelSizeJitter?: number
+  enableRipples?: boolean
+  rippleIntensityScale?: number
+  rippleThickness?: number
+  rippleSpeed?: number
+  liquidWobbleSpeed?: number
+  autoPauseOffscreen?: boolean
+  speed?: number
+  transparent?: boolean
+  edgeFade?: number
+  noiseAmount?: number
 }

@@ -5,11 +5,9 @@ import { Row } from '../patterns/row'
 
 export function SecurityCompliance() {
   return (
-    <section className="relative w-full py-16 lg:py-24 xl:py-30" data-background="light">
+    <section className="relative w-full py-16 lg:py-24 xl:py-30">
       <Container>
-        <Row />
-
-        <header className="flex flex-col mb-10 px-6 pt-6 lg:mb-12 xl:mb-15 xl:max-w-200 xl:px-12 xl:pt-12">
+        <header className="w-full flex flex-col p-6 xl:p-12">
           <Badge variant="neutral">BOUNDARIES</Badge>
           <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
             Security & Compliance
@@ -18,6 +16,8 @@ export function SecurityCompliance() {
             Liability Boundary — Clear and Documented
           </p>
         </header>
+
+        <Row />
 
         <article className="grid grid-cols-1 gap-12 px-6 pt-6 lg:gap-y-24 items-start lg:grid-cols-2 xl:grid-cols-3 xl:px-12 xl:pt-12">
           <div className="flex flex-col gap-2.5 xl:gap-7.5">

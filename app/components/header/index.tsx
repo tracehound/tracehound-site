@@ -25,7 +25,7 @@ export function Header() {
   })
   return (
     <motion.header
-      className={cn('sticky top-0 z-99 w-full pt-6 pb-20 xl:pt-12 xl:pb-40')}
+      className={cn('sticky top-0 z-99 w-full pb-20 xl:pb-40')}
       animate={hidden ? 'hidden' : 'visible'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       variants={{
@@ -33,7 +33,6 @@ export function Header() {
         hidden: { y: '-100%' },
       }}>
       <Container>
-        <Row />
         <div className="w-full flex items-center justify-between p-6 xl:px-12 xl:py-6 bg-(--background-accent)/1 backdrop-blur-lg">
           <motion.h1 className="font-heading font-bold text-[32px]/8 text-foreground">
             <Link href="/" className="flex items-center gap-4" title="Tracehound">
@@ -43,6 +42,7 @@ export function Header() {
 
           <Navigation />
         </div>
+        <Row />
       </Container>
     </motion.header>
   )

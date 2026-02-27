@@ -13,11 +13,9 @@ import { Container } from '../container'
 
 export function SolutionSection() {
   return (
-    <section
-      className="relative w-full py-16 lg:py-24 xl:py-30 bg-(--foreground)"
-      data-background="dark">
-      <Container>
-        <header className="flex flex-col mb-12 px-6 lg:mb-16 xl:mb-25 xl:max-w-200 xl:px-12">
+    <Container>
+      <section className="relative w-full py-16 lg:py-24 xl:py-30 bg-(--foreground)">
+        <header className="w-full flex flex-col pt-0! p-6 xl:p-24">
           <Badge variant="primary">SOLUTION</Badge>
           <h3 className="mt-3 mb-5 font-heading font-bold text-(--background) text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
             Don't Decide — Contain.
@@ -28,7 +26,7 @@ export function SolutionSection() {
           </p>
         </header>
 
-        <article className="flex flex-col items-center justify-start gap-6 px-6 md:gap-12 xl:gap-18 lg:flex-row xl:px-12">
+        <article className="flex flex-col items-center justify-around px-6 lg:flex-row xl:px-24">
           <div className="flex flex-col items-center text-(--background)">
             <figure className="bg-(--background) text-(--foreground) rounded-md p-4 mb-3">
               <WarningIcon size={32} />
@@ -112,14 +110,14 @@ export function SolutionSection() {
           </div>
         </article>
 
-        <blockquote className="text-(--border-accent) border-l-4 border-(--border-accent) pl-6 mt-12 lg:mt-16 xl:mt-25 xl:pl-12 xl:ml-12">
+        <blockquote className="text-(--border-accent) border-l-4 border-(--border-accent) pl-6 mt-12 lg:mt-16 xl:mt-25 xl:pl-12 xl:ml-24">
           <strong>Tracehound</strong> takes decisions from your existing security systems and
           applies them through a deterministic containment layer. <br />
           Payload sizes are bounded. Memory usage is hard-coded limited. Disk saturation gracefully
           degrades. <br />
           Even in fail-open mode, the attacker cannot win — because the system fails predictably.
         </blockquote>
-      </Container>
-    </section>
+      </section>
+    </Container>
   )
 }

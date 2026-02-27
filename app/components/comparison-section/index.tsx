@@ -10,11 +10,9 @@ import { Row } from '../patterns/row'
 
 export function ComparisonSection() {
   return (
-    <section className="relative w-full py-16 lg:py-24 xl:py-30" data-background="light">
+    <section className="relative w-full py-16 lg:py-24 xl:py-30">
       <Container>
-        <Row />
-
-        <header className="flex flex-col mb-12 px-6 pt-6 lg:mb-16 xl:mb-25 xl:max-w-200 xl:px-12 xl:pt-12">
+        <header className="w-full flex flex-col p-6 xl:p-12">
           <Badge variant="secondary">DIFFERENTIATION</Badge>
           <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
             Comparison
@@ -24,7 +22,9 @@ export function ComparisonSection() {
           </p>
         </header>
 
-        <article className="relative w-full overflow-x-auto flex flex-col justify-start gap-6 px-6 md:gap-12 xl:gap-18 lg:flex-row xl:px-12">
+        <Row />
+
+        <article className="relative w-full overflow-x-auto flex flex-col justify-start gap-6 px-6 pt-6 md:gap-12 xl:gap-18 lg:flex-row xl:px-12 xl:pt-12">
           <table className="w-full">
             <thead>
               <tr className="[&_tr]:border-b [&_tr]:border-(--border-accent)">

@@ -5,20 +5,20 @@ import { Row } from '../patterns/row'
 
 export function ProblemSection() {
   return (
-    <section className="relative w-full py-16 lg:py-24 xl:py-30" data-background="light">
+    <section className="relative w-full py-16 lg:py-24 xl:py-30">
       <Container>
-        <Row />
-
-        <header className="flex flex-col mb-10 px-6 pt-6 lg:mb-12 xl:mb-15 xl:max-w-200 xl:px-12 xl:pt-12">
+        <header className="w-full flex flex-col p-6 xl:p-12">
           <Badge variant="secondary">PROBLEM</Badge>
-          <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
+          <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16 xl:max-w-200">
             Why Security Layers Become the Attack Surface
           </h3>
-          <p className="font-sans font-light text-lg md:text-2xl xl:text-[32px]">
+          <p className="font-sans font-light text-lg md:text-2xl xl:text-[32px] xl:max-w-200">
             Traditional WAFs and RASP solutions stop threats — but often stop your application in
             the process.
           </p>
         </header>
+
+        <Row />
 
         <article className="grid grid-cols-1 gap-12 px-6 pt-6 lg:gap-y-24 items-start lg:grid-cols-2 xl:grid-cols-3 xl:px-12 xl:pt-12">
           <div className="flex flex-col gap-2.5 xl:gap-7.5">

@@ -9,7 +9,7 @@ export function Footer() {
       <Container>
         <Row />
 
-        <header className="flex flex-col px-6 pt-6 xl:px-12 xl:pt-12">
+        <header className="w-full flex flex-col p-6 xl:p-12">
           <Logo className="mb-3 [&_path]:fill-(--border)!" />
           <h4 className="font-bold font-heading text-xl mb-2 md:text-2xl xl:text-5xl">
             Runtime security buffer
@@ -19,7 +19,7 @@ export function Footer() {
           </p>
         </header>
 
-        <nav className="flex items-start gap-8 lg:gap-24 xl:gap-48 my-15 px-6 pt-6 xl:px-12 xl:pt-12 [&_a]:hover:underline">
+        <nav className="flex items-start flex-col xl:flex-row gap-8 lg:gap-24 xl:gap-48 px-6 pt-6 xl:px-12 xl:pt-12 [&_a]:hover:underline">
           <div className="flex flex-col gap-7.5">
             <h5 className="text-xl font-bold md:text-3xl font-heading">Products</h5>
             <ul className="flex flex-col pl-5 list-disc gap-2">
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
         </nav>
 
-        <div className="flex items-center justify-between px-6 pt-6 xl:px-12 xl:pt-12">
+        <div className="flex items-center justify-between px-6 mt-6 gap-4 flex-col lg:mt-12 xl:flex-row xl:gap-0 xl:px-12 xl:mt-24">
           <p>&copy; 2026 Tracehound. All rights reserved.</p>
           <p>
             Tracehound is a product of{' '}
