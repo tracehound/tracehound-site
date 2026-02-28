@@ -15,7 +15,10 @@ export function NavLink({
   const isActive = (path: string) => path === pathname
 
   return (
-    <Link href={href} className={cn(isActive(href.toString()) && activeClass, className)}>
+    <Link
+      href={href}
+      className={cn(isActive(href.toString()) && activeClass, className)}
+      data-active={isActive(href.toString())}>
       {children}
     </Link>
   )

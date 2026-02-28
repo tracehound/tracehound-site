@@ -1,4 +1,5 @@
 import { Code } from '@/app/components/code'
+import type { Metadata } from 'next/types'
 
 const coreUsage = `
     import { createTracehound } from '@tracehound/core'
@@ -47,6 +48,12 @@ const fastifyIntegration = `
 
 `
 
+export const metadata: Metadata = {
+  title: 'Documentation',
+  description:
+    'Tracehound Core is a deterministic and fail-open runtime security layer designed to operate between detection systems and operational response.',
+}
+
 export default function Docs() {
   return (
     <div className="flex flex-col min-h-screen px-6 xl:px-12">
@@ -74,7 +81,7 @@ export default function Docs() {
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
             About the project
           </h3>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb6 xl:mb-9">
+          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             It doesn't use heuristics or "guess" if a request is malicious; instead, it acts as a
             high-integrity buffer for explicit security signals (Scents) from external detectors.
           </p>
@@ -85,12 +92,14 @@ export default function Docs() {
           </p>
         </div>
 
+        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
             Why we built this
           </h3>
 
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb6 xl:mb-9">
+          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             Modern security architectures often face a trade-off between "blocking and breaking" or
             "logging and losing" forensic details. We built Tracehound to solve the gap between
             real-time traffic and backend security analysis:
@@ -114,6 +123,8 @@ export default function Docs() {
             </li>
           </ul>
         </div>
+
+        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
 
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
@@ -148,6 +159,8 @@ export default function Docs() {
           </ul>
         </div>
 
+        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
             Quick Start
@@ -171,6 +184,8 @@ export default function Docs() {
 
           <Code code={fastifyIntegration} />
         </div>
+
+        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
 
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">

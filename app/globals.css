@@ -53,3 +53,23 @@ h5,
 h6 {
   font-family: var(--font-darker-grotesque);
 }
+
+.scrollbar::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 1rem;
+  background: var(--border-accent);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: var(--border);
+  border: 1px solid var(--border-accent);
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
