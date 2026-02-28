@@ -4,28 +4,22 @@ import { Container } from '../container'
 export function Hero() {
   return (
     <Container>
-      <section className="flex justify-between flex-col gap-6 xl:gap-12 px-6 2xl:flex-row 2xl:items-end 2xl:gap-0 xl:px-12">
-        <h2 className="text-2xl/6 tracking-normal font-normal font-heading flex flex-col md:text-6xl/16 xl:whitespace-nowrap xl:text-8xl/22">
-          Deterministic
-          <strong className="font-bold">runtime security buffer</strong>
-          for modern applications
+      <section className="flex justify-between flex-col gap-6 px-6 pt-12 xl:gap-12 xl:px-12 xl:pt-24">
+        <h2 className="text-2xl/6 tracking-normal font-normal font-heading flex flex-col md:text-6xl/16 xl:text-8xl/22">
+          Deterministic runtime buffer <strong>for security evidence.</strong>
         </h2>
-
-        <div className="text-base flex flex-col gap-10 xl:text-3xl/11 2xl:max-w-5/12">
-          <p className="xl:pr-8 md:max-w-7/12 xl:max-w-full">
-            Tracehound actively contains security-relevant runtime anomalies in a bounded,
-            deterministic layer. It isolates, rate-limits, and quarantines threats
-            <strong> — without making security decisions.</strong>
-          </p>
-
-          <div className="flex flex-col gap-4 md:gap-10 md:flex-row md:items-center">
-            <Button variant="primary" href="/services" size="lg">
-              INIT RUNTIME
-            </Button>
-            <Button variant="secondary" href="/docs" size="lg">
-              READ THE DOCUMENTS
-            </Button>
-          </div>
+        <p className="text-base xl:text-3xl/11 xl:max-w-8/12">
+          <strong>Tracehound</strong> ingests security signals, quarantines suspicious events, and
+          preserves them in a tamper-evident AuditChain. Fail-open, bounded, and designed for
+          verifiable forensic integrity.
+        </p>
+        <div className="flex flex-col gap-4 md:gap-10 md:flex-row md:items-center">
+          <Button variant="primary" href="/services" size="lg">
+            INIT RUNTIME
+          </Button>
+          <Button variant="secondary" href="/docs" size="lg">
+            READ THE DOCUMENTS
+          </Button>
         </div>
       </section>
     </Container>

@@ -5,7 +5,6 @@ import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { Container } from '../container'
-import { Row } from '../patterns/row'
 import { Logo } from './logo'
 import { Navigation } from './navigation'
 
@@ -25,7 +24,7 @@ export function Header() {
   })
   return (
     <motion.header
-      className={cn('sticky top-0 z-99 w-full pb-20 xl:pb-40')}
+      className={cn('sticky top-0 z-99 w-full pb-8 xl:pb-16')}
       animate={hidden ? 'hidden' : 'visible'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       variants={{
@@ -42,7 +41,6 @@ export function Header() {
 
           <Navigation />
         </div>
-        <Row />
       </Container>
     </motion.header>
   )

@@ -1,13 +1,64 @@
+'use client'
+
+import { Portal } from '@/app/lib/utils'
+import { ListIcon } from '@phosphor-icons/react/dist/ssr'
+import { AnimatePresence, motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
+import { useEffect, useEffectEvent, useState } from 'react'
+import { NavLink } from './link'
+import { NavItems } from './nav-item'
+
 export function MobileNav() {
+  const pathname = usePathname()
+  const [open, setOpen] = useState(false)
+
+  const closeMenuOnRouteChange = useEffectEvent(() => {
+    setOpen(false)
+  })
+
+  useEffect(() => {
+    closeMenuOnRouteChange()
+  }, [pathname])
+
   return (
-    <button className="size-10 flex items-center justify-center bg-(--accent-primary) xl:hidden">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="var(--foreground)"
-        className="size-6 pointer-events-none select-none"
-        viewBox="0 0 256 256">
-        <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z" />
-      </svg>
-    </button>
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="p-2.5 text-(--foreground) bg-(--accent-primary) xl:hidden">
+        <ListIcon size={24} weight="light" />
+      </button>
+
+      <Portal>
+        <AnimatePresence>
+          {open && (
+            <>
+              {/* backdrop */}
+              <motion.div
+                className="fixed inset-0 bg-(--background-accent)/10 z-9998 backdrop-blur-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setOpen(false)}
+              />
+
+              {/* dropdown */}
+              <motion.div
+                className="max-w-sm fixed inset-0 mx-auto z-9999 grid grid-cols-2 items-center justify-center py-16 [&_a]:text-center"
+                initial={{ opacity: 0, y: -16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}>
+                <NavLink
+                  className="pt-2.5 pb-3.5 px-3 font-heading font-bold text-lg/5 hover:bg-(--accent-primary) transition-colors text-inherit"
+                  activeClass="bg-(--accent-primary)"
+                  href="/">
+                  HOME
+                </NavLink>
+                <NavItems />
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </Portal>
+    </>
   )
 }

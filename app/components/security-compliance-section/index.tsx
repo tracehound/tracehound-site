@@ -78,7 +78,7 @@ export function SecurityCompliance() {
           </div>
         </article>
 
-        <blockquote className="text-(--foreground-accent) border-l-4 border-(--foreground-accent) pl-6 mt-6 lg:mt-12 xl:mt-16 xl:pl-12 xl:ml-12">
+        <blockquote className="text-(--foreground-accent) border-l-4 border-(--foreground-accent) pl-6 mt-8 lg:mt-16 xl:mt-24 xl:pl-12 xl:ml-12">
           <strong>Worst-case scenario:</strong> Self-DoS due to misconfiguration. <br />
           <strong>Second scenario:</strong> Local resource exhaustion. <br />
           <br />

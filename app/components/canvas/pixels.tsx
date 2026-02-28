@@ -40,7 +40,7 @@ export default function PixelBlast({
     scene: THREE.Scene
     camera: THREE.OrthographicCamera
     material: THREE.ShaderMaterial
-    clock: THREE.Timer
+    clock: THREE.Clock
     clickIx: number
     uniforms: {
       uResolution: { value: THREE.Vector2 }
@@ -143,7 +143,7 @@ export default function PixelBlast({
       const quadGeom = new THREE.PlaneGeometry(2, 2)
       const quad = new THREE.Mesh(quadGeom, material)
       scene.add(quad)
-      const clock = new THREE.Timer()
+      const clock = new THREE.Clock()
       const setSize = () => {
         const w = container.clientWidth || 1
         const h = container.clientHeight || 1
@@ -245,7 +245,7 @@ export default function PixelBlast({
           raf = requestAnimationFrame(animate)
           return
         }
-        uniforms.uTime.value = timeOffset + clock.getElapsed() * speedRef.current
+        uniforms.uTime.value = timeOffset + clock.getElapsedTime() * speedRef.current
         if (liquidEffect) {
           const liqEffect = liquidEffect as Effect & { uniforms: Map<string, THREE.Uniform> }
           const timeUniform = liqEffect.uniforms.get('uTime')
