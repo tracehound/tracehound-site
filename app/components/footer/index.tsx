@@ -5,7 +5,7 @@ import { Row } from '../patterns/row'
 
 export function Footer() {
   return (
-    <footer className="relative w-full py-16 lg:py-24 xl:py-40 text-(--border)">
+    <footer className="relative w-full pb-6 lg:pb-12 xl:pb-24 text-(--border)">
       <Container>
         <Row />
 

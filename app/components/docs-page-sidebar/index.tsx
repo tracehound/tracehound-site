@@ -2,10 +2,16 @@ import { NavLink } from '../header/link'
 
 export function DocumentPageSidebar() {
   return (
-    <aside className="relative flex-col gap-4 hidden lg:flex lg:px-3 lg:w-54 xl:px-12 xl:w-80">
-      <div className="flex flex-col mb-4">
+    <aside className="sticky top-16 flex-col gap-4 h-full hidden lg:flex lg:px-3 lg:w-54 xl:px-12 xl:w-80">
+      <div className="flex flex-col">
         <h6 className="font-bold font-heading mb-2">Getting Started</h6>
 
+        <NavLink
+          className="px-2 py-1.5 border-l-2 border-transparent text-sm hover:bg-(--accent-primary)/10"
+          activeClass="bg-(--accent-primary)/20 border-(--accent-primary)!"
+          href="/docs">
+          Summary
+        </NavLink>
         <NavLink
           className="px-2 py-1.5 border-l-2 border-transparent text-sm hover:bg-(--accent-primary)/10"
           activeClass="bg-(--accent-primary)/20 border-(--accent-primary)!"
@@ -20,7 +26,7 @@ export function DocumentPageSidebar() {
         </NavLink>
       </div>
 
-      <div className="flex flex-col mb-4">
+      <div className="flex flex-col">
         <h6 className="font-bold font-heading mb-2">References</h6>
 
         <NavLink
@@ -37,7 +43,7 @@ export function DocumentPageSidebar() {
         </NavLink>
       </div>
 
-      <div className="flex flex-col mb-4">
+      <div className="flex flex-col">
         <h6 className="font-bold font-heading mb-2">Guides</h6>
 
         <NavLink
