@@ -25,7 +25,7 @@ export function Header() {
 
   return (
     <motion.header
-      className={cn('sticky top-0 z-99 w-full pb-8 xl:pb-16')}
+      className={cn('sticky top-0 z-99 w-full mb-8 xl:mb-16')}
       animate={hidden ? 'hidden' : 'visible'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       variants={{

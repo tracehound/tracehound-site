@@ -1,6 +1,7 @@
 import { DocsContent } from '@/app/components/docs-content'
 import { DocsContentBlock } from '@/app/components/docs-content-block'
 import { DocsHeader } from '@/app/components/docs-header'
+import { DocsList } from '@/app/components/docs-list'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import { Separator } from '@/app/components/separator'
@@ -19,24 +20,26 @@ export default function Introduction() {
 
       <DocsContent>
         <DocsContentBlock title="What is Tracehound?">
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+          <p className="font-sans md:text-lg xl:text-xl">
             Tracehound is a <strong>deterministic security</strong> buffer for Node.js applications.
           </p>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+          <p className="font-sans md:text-lg xl:text-xl">
             When your WAF or detection system identifies a threat, Tracehound:
           </p>
-          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg mb-3 lg:mb-6 xl:mb-9">
-            <li>
-              <strong>Isolates</strong> the threat in a quarantine buffer
-            </li>
-            <li>
-              <strong>Records</strong> tamper-proof forensic evidence
-            </li>
-            <li>
-              <strong>Fails safely</strong> without blocking legitimate traffic
-            </li>
-          </ul>
-          <p className="font-sans md:text-lg xl:text-xl lg:mb-6">
+          <DocsList
+            items={[
+              <p>
+                <strong>Isolates</strong> the threat in a quarantine buffer
+              </p>,
+              <p>
+                <strong>Records</strong> tamper-proof forensic evidence
+              </p>,
+              <p>
+                <strong>Fails safely</strong> without blocking legitimate traffic
+              </p>,
+            ]}
+          />
+          <p className="font-sans md:text-lg xl:text-xl">
             Think of it as the black box recorder for your security infrastructure.
           </p>
         </DocsContentBlock>
@@ -44,31 +47,25 @@ export default function Introduction() {
         <Separator />
 
         <DocsContentBlock title="Why Tracehound?">
-          <h4 className="mb-5 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            The Problem
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">The Problem</h4>
+          <p className="font-sans md:text-lg xl:text-xl">
             Modern security stacks have a gap. What happens between threat detection and incident
             response? Usually:
           </p>
-          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg mb-3 lg:mb-6 xl:mb-9">
+          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
             <li>Logs get lost or rotated</li>
             <li>Evidence is scattered across systems</li>
             <li>Replay attacks can't be proven</li>
             <li>Memory fills up with no eviction strategy</li>
           </ul>
-          <h4 className="mb-5 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            The Solution
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            Tracehound fills this gap:
-          </p>
+          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">The Solution</h4>
+          <p className="font-sans md:text-lg xl:text-xl">Tracehound fills this gap:</p>
           <Image
             width={945}
             height={120}
             src="/diagrams/problem-solution.svg"
             alt="Problem and Solutionture"
-            className="select-none mb-3 lg:mb-6 xl:mb-9"
+            className="select-none"
             objectFit="contain"
             decoding="async"
             loading="lazy"
@@ -116,14 +113,14 @@ export default function Introduction() {
             height={274}
             src="/diagrams/architecture.svg"
             alt="Architecture"
-            className="select-none mb-3 lg:mb-6 xl:mb-9"
+            className="select-none"
             objectFit="contain"
             decoding="async"
             loading="lazy"
           />
 
-          <h4 className="mb-5 font-heading font-bold text-lg md:text-xl xl:text-3xl">Core Flow</h4>
-          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg mb-3 lg:mb-6 xl:mb-9">
+          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">Core Flow</h4>
+          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
             <li>
               <strong>Intercept:</strong> agent.intercept(scent) receives threat data
             </li>
@@ -145,71 +142,83 @@ export default function Introduction() {
         <Separator />
 
         <DocsContentBlock title="Who Is It For?">
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Security-Conscious Teams
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            If you need to prove what happened during an incident, Tracehound provides court-grade
-            evidence.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
+              Security-Conscious Teams
+            </h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              If you need to prove what happened during an incident, Tracehound provides court-grade
+              evidence.
+            </p>
+          </div>
 
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Compliance Requirements
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            GDPR, SOC2, PCI-DSS all require evidence retention. Tracehound's audit chain is designed
-            for compliance.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
+              Compliance Requirements
+            </h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              GDPR, SOC2, PCI-DSS all require evidence retention. Tracehound's audit chain is
+              designed for compliance.
+            </p>
+          </div>
 
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            High-Traffic Services
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            Tracehound uses bounded memory with deterministic eviction. No memory leaks, no OOM
-            crashes.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
+              High-Traffic Services
+            </h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              Tracehound uses bounded memory with deterministic eviction. No memory leaks, no OOM
+              crashes.
+            </p>
+          </div>
 
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Fintech & Healthcare
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            When a breach costs millions, forensic evidence is non-negotiable.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
+              Fintech & Healthcare
+            </h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              When a breach costs millions, forensic evidence is non-negotiable.
+            </p>
+          </div>
         </DocsContentBlock>
 
         <Separator />
 
         <DocsContentBlock title="Core Principles">
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            1. Fail-Open
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            Tracehound <strong>never blocks legitimate traffic.</strong> If the agent crashes,
-            traffic passes through.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">1. Fail-Open</h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              Tracehound <strong>never blocks legitimate traffic.</strong> If the agent crashes,
+              traffic passes through.
+            </p>
+          </div>
 
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            2. Decision-Free
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            Tracehound <strong>does not make security decisions.</strong> Your WAF/detector decides
-            what's a threat. Tracehound quarantines and records.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
+              2. Decision-Free
+            </h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              Tracehound <strong>does not make security decisions.</strong> Your WAF/detector
+              decides what's a threat. Tracehound quarantines and records.
+            </p>
+          </div>
 
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            3. Deterministic
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            Same input → same output. No ML, no heuristics, no surprises.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
+              3. Deterministic
+            </h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              Same input → same output. No ML, no heuristics, no surprises.
+            </p>
+          </div>
 
-          <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            4. Open Core
-          </h4>
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-            Core security features are <strong>free and open source.</strong> Commercial packages
-            extend capability, not safety.
-          </p>
+          <div className="flex flex-col gap-2">
+            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">4. Open Core</h4>
+            <p className="font-sans md:text-lg xl:text-xl">
+              Core security features are <strong>free and open source.</strong> Commercial packages
+              extend capability, not safety.
+            </p>
+          </div>
         </DocsContentBlock>
       </DocsContent>
 

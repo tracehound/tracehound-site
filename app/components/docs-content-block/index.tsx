@@ -12,8 +12,8 @@ export function DocsContentBlock({
   children,
 }: PropsWithChildren<DocsContentBlock>) {
   return (
-    <div className={cn('flex flex-col', className)}>
-      <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">{title}</h3>
+    <div className={cn('flex flex-col gap-4 lg:gap-6 xl:gap-8', className)}>
+      <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">{title}</h3>
       {children}
     </div>
   )

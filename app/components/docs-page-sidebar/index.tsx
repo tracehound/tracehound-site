@@ -1,5 +1,5 @@
 import { navigation } from '@/app/lib/navigation'
-import { groupByCategory } from '@/app/lib/utils'
+import { cn, groupByCategory } from '@/app/lib/utils'
 import { useMemo } from 'react'
 import { NavLink } from '../header/link'
 
@@ -7,10 +7,14 @@ export function DocumentPageSidebar() {
   const grouped = useMemo(() => groupByCategory(navigation), navigation)
 
   return (
-    <aside className="scrollbar -mt-px sticky top-16 flex-col h-full hidden overflow-y-auto border-b border-dashed border-(--border-accent) max-h-[calc(100vh-156px)] lg:flex lg:w-54 xl:w-96">
+    <aside className="scrollbar -mt-px sticky top-24 flex-col h-full hidden overflow-y-auto border-y border-dashed border-(--border-accent) max-h-[calc(100vh-156px)] lg:flex lg:w-54 xl:w-96">
       {Object.entries(grouped).map(([label, items]) => (
         <details key={label} className="flex flex-col group" open>
-          <summary className="flex items-center justify-between border-t border-dashed border-(--border-accent) font-bold font-heading py-3 px-6 list-none cursor-pointer hover:bg-(--accent-primary)/10">
+          <summary
+            className={cn(
+              'flex items-center justify-between border-dashed border-(--border-accent) font-bold font-heading py-3 px-6 list-none cursor-pointer hover:bg-(--accent-primary)/10',
+              label !== 'Getting Started' && 'border-t',
+            )}>
             {label}
 
             <svg

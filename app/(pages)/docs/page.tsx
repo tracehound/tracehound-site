@@ -2,57 +2,12 @@ import { Code } from '@/app/components/code'
 import { DocsContent } from '@/app/components/docs-content'
 import { DocsContentBlock } from '@/app/components/docs-content-block'
 import { DocsHeader } from '@/app/components/docs-header'
+import { DocsList } from '@/app/components/docs-list'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import { Separator } from '@/app/components/separator'
 import type { Metadata } from 'next/types'
-
-const coreUsage = `
-    import { createTracehound } from '@tracehound/core'
-
-    const tracehound = createTracehound({
-      quarantine: { maxCount: 1000 },
-      rateLimit: { windowMs: 60000, maxRequests: 100 },
-    })
-
-    // Intercept a potential threat signal (Scent)
-    const result = tracehound.agent.intercept({
-      id: 'unique-id',
-      timestamp: Date.now(),
-      source: '127.0.0.1',
-      payload: { path: '/api/v1/user', method: 'POST' },
-    })
-
-    if (result.status === 'quarantined') {
-      console.log('Threat quarantined. Signature:', result.handle.signature)
-    }
-
-`
-const expressIntegration = `
-    import express from 'express'
-    import { createTracehound } from '@tracehound/core'
-    import { tracehound } from '@tracehound/express'
-
-    const app = express()
-    const th = createTracehound()
-
-    // Mount the middleware
-    app.use(tracehound({ agent: th.agent }))
-
-    app.get('/', (req, res) => res.send('Protected by Tracehound'))
-
-`
-const fastifyIntegration = `
-    import fastify from 'fastify'
-    import { createTracehound } from '@tracehound/core'
-    import { tracehoundPlugin } from '@tracehound/fastify'
-
-    const app = fastify()
-    const th = createTracehound()
-
-    app.register(tracehoundPlugin, { agent: th.agent })
-
-`
+import { coreUsage, expressIntegration, fastifyIntegration } from './codes'
 
 export const metadata: Metadata = {
   title: 'Documentation',
@@ -74,7 +29,7 @@ export default function Docs() {
 
       <DocsContent>
         <DocsContentBlock title="About the project">
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+          <p className="font-sans md:text-lg xl:text-xl">
             It doesn't use heuristics or "guess" if a request is malicious; instead, it acts as a
             high-integrity buffer for explicit security signals (Scents) from external detectors.
           </p>
@@ -88,78 +43,78 @@ export default function Docs() {
         <Separator />
 
         <DocsContentBlock title="Why we built this">
-          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+          <p className="font-sans md:text-lg xl:text-xl">
             Modern security architectures often face a trade-off between "blocking and breaking" or
             "logging and losing" forensic details. We built Tracehound to solve the gap between
             real-time traffic and backend security analysis:
           </p>
 
-          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
-            <li>
-              <strong>Resilience:</strong> Fail-open semantics ensure security tooling never becomes
-              a self-imposed DoS vector.
-            </li>
-
-            <li>
-              <strong>Forensic Integrity:</strong> Tamper-evident AuditChain provides an immutable
-              record of what actually happened, solving the "log tampering" problem.
-            </li>
-
-            <li>
-              <strong>Decoupling:</strong> By trusting external logic for detection, Tracehound
-              remains a lightweight, stable, and deterministic buffer that stays out of the way of
-              your application logic.
-            </li>
-          </ul>
+          <DocsList
+            items={[
+              <p>
+                <strong>Resilience:</strong> Fail-open semantics ensure security tooling never
+                becomes a self-imposed DoS vector.
+              </p>,
+              <p>
+                <strong>Forensic Integrity:</strong> Tamper-evident AuditChain provides an immutable
+                record of what actually happened, solving the "log tampering" problem.
+              </p>,
+              <p>
+                <strong>Decoupling:</strong> By trusting external logic for detection, Tracehound
+                remains a lightweight, stable, and deterministic buffer that stays out of the way of
+                your application logic.
+              </p>,
+            ]}
+          />
         </DocsContentBlock>
 
         <Separator />
 
         <DocsContentBlock title="Key features">
-          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
-            <li>
-              <strong>Deterministic Security Buffer:</strong> No heuristics, no false positives. It
-              only operates on explicit signals.
-            </li>
-            <li>
-              <strong>Decision-Free Architecture:</strong> Trusts external detection logic, focusing
-              on deterministic evidence handling and bounded ingestion safety.
-            </li>
-            <li>
-              <strong>Fail-Open Semantics:</strong> Designed for high-velocity APIs where production
-              availability is paramount.
-            </li>
-            <li>
-              <strong>AuditChain:</strong> Merkle-chained, tamper-evident forensic logging of all
-              security events.
-            </li>
-            <li>
-              <strong>Bounded Runtime Controls:</strong> Size, queue, and timeout controls are
-              enforced in core paths; performance envelope is deployment-dependent.
-            </li>
-            <li>
-              <strong>Cold Storage Adapters:</strong> Automatic archival of evidence to S3, R2, or
-              GCS.
-            </li>
-          </ul>
+          <DocsList
+            items={[
+              <p>
+                <strong>Deterministic Security Buffer:</strong> No heuristics, no false positives.
+                It only operates on explicit signals.
+              </p>,
+              <p>
+                <strong>Decision-Free Architecture:</strong> Trusts external detection logic,
+                focusing on deterministic evidence handling and bounded ingestion safety.
+              </p>,
+              <p>
+                <strong>Fail-Open Semantics:</strong> Designed for high-velocity APIs where
+                production availability is paramount.
+              </p>,
+              <p>
+                <strong>AuditChain:</strong> Merkle-chained, tamper-evident forensic logging of all
+                security events.
+              </p>,
+              <p>
+                <strong>Bounded Runtime Controls:</strong> Size, queue, and timeout controls are
+                enforced in core paths; performance envelope is deployment-dependent.
+              </p>,
+              <p>
+                <strong>Cold Storage Adapters:</strong> Automatic archival of evidence to S3, R2, or
+                GCS.
+              </p>,
+            ]}
+          />
         </DocsContentBlock>
 
         <Separator />
 
         <DocsContentBlock title="Quick Start">
-          <h5 className="mb-3 font-heading font-bold text-base md:text-xl xl:text-2xl">
-            Core Usage
-          </h5>
+          <h5 className="font-heading font-bold text-base md:text-xl xl:text-2xl">Core Usage</h5>
 
           <Code code={coreUsage} />
 
-          <h5 className="mb-3 mt-6 font-heading font-bold text-base md:text-xl xl:text-2xl">
+          <h5 className="font-heading font-bold text-base md:text-xl xl:text-2xl">
             Express Integration
           </h5>
 
           <Code code={expressIntegration} />
 
-          <h5 className="mb-3 mt-6 font-heading font-bold text-base md:text-xl xl:text-2xl">
+          <h5 className="font-heading font-bold text-base md:text-xl xl:text-2xl">
             Fastify Integration
           </h5>
 
@@ -169,24 +124,26 @@ export default function Docs() {
         <Separator />
 
         <DocsContentBlock title="Core principles">
-          <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
-            <li>
-              <strong>Decision-free:</strong> Tracehound never decides if a request is malicious. It
-              only acts on external decisions.
-            </li>
-            <li>
-              <strong>Detection is external:</strong> Use your existing WAF, SIEM, or ML engine to
-              drive Tracehound.
-            </li>
-            <li>
-              <strong>Forensics &gt; Visualization:</strong> Immutable evidence is our primary
-              product, not pretty dashboards.
-            </li>
-            <li>
-              <strong>Local-First:</strong> Operates within your application runtime for low-latency
-              interception and auditability.
-            </li>
-          </ul>
+          <DocsList
+            items={[
+              <p>
+                <strong>Decision-free:</strong> Tracehound never decides if a request is malicious.
+                It only acts on external decisions.
+              </p>,
+              <p>
+                <strong>Detection is external:</strong> Use your existing WAF, SIEM, or ML engine to
+                drive Tracehound.
+              </p>,
+              <p>
+                <strong>Forensics &gt; Visualization:</strong> Immutable evidence is our primary
+                product, not pretty dashboards.
+              </p>,
+              <p>
+                <strong>Local-First:</strong> Operates within your application runtime for
+                low-latency interception and auditability.
+              </p>,
+            ]}
+          />
         </DocsContentBlock>
       </DocsContent>
 
