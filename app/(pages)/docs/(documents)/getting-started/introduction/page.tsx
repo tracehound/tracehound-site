@@ -1,6 +1,10 @@
+import { DocsContent } from '@/app/components/docs-content'
+import { DocsContentBlock } from '@/app/components/docs-content-block'
 import { DocsHeader } from '@/app/components/docs-header'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
+import { Separator } from '@/app/components/separator'
+import Image from 'next/image'
 import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
@@ -10,14 +14,11 @@ export const metadata: Metadata = {
 
 export default function Introduction() {
   return (
-    <div className="flex flex-col min-h-screen px-6 xl:px-12">
+    <DocsPageLayout>
       <DocsHeader label="GETTING STARTED" title="Introduction" />
 
-      <DocsPageLayout>
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            What is Tracehound?
-          </h3>
+      <DocsContent>
+        <DocsContentBlock title="What is Tracehound?">
           <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             Tracehound is a <strong>deterministic security</strong> buffer for Node.js applications.
           </p>
@@ -38,14 +39,11 @@ export default function Introduction() {
           <p className="font-sans md:text-lg xl:text-xl lg:mb-6">
             Think of it as the black box recorder for your security infrastructure.
           </p>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Why Tracehound?
-          </h3>
+        <DocsContentBlock title="Why Tracehound?">
           <h4 className="mb-5 font-heading font-bold text-lg md:text-xl xl:text-3xl">
             The Problem
           </h4>
@@ -65,10 +63,15 @@ export default function Introduction() {
           <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             Tracehound fills this gap:
           </p>
-          <img
+          <Image
+            width={945}
+            height={120}
             src="/diagrams/problem-solution.svg"
-            alt="Problem and Solution"
-            className="object-cover w-fit select-none mb-3 lg:mb-6 xl:mb-9"
+            alt="Problem and Solutionture"
+            className="select-none mb-3 lg:mb-6 xl:mb-9"
+            objectFit="contain"
+            decoding="async"
+            loading="lazy"
           />
 
           <div className="w-full overflow-x-auto">
@@ -103,19 +106,20 @@ export default function Introduction() {
               </tbody>
             </table>
           </div>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            How It Works
-          </h3>
-
-          <img
+        <DocsContentBlock title="How It Works">
+          <Image
+            width={720}
+            height={274}
             src="/diagrams/architecture.svg"
             alt="Architecture"
-            className="object-cover w-fit select-none mb-3 lg:mb-6 xl:mb-9"
+            className="select-none mb-3 lg:mb-6 xl:mb-9"
+            objectFit="contain"
+            decoding="async"
+            loading="lazy"
           />
 
           <h4 className="mb-5 font-heading font-bold text-lg md:text-xl xl:text-3xl">Core Flow</h4>
@@ -136,15 +140,11 @@ export default function Introduction() {
               <strong>Export:</strong> Evidence can flow to S3/R2/GCS cold storage
             </li>
           </ul>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Who Is It For?
-          </h3>
-
+        <DocsContentBlock title="Who Is It For?">
           <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
             Security-Conscious Teams
           </h4>
@@ -175,15 +175,11 @@ export default function Introduction() {
           <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             When a breach costs millions, forensic evidence is non-negotiable.
           </p>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Core Principles
-          </h3>
-
+        <DocsContentBlock title="Core Principles">
           <h4 className="mb-2 font-heading font-bold text-lg md:text-xl xl:text-3xl">
             1. Fail-Open
           </h4>
@@ -214,16 +210,21 @@ export default function Introduction() {
             Core security features are <strong>free and open source.</strong> Commercial packages
             extend capability, not safety.
           </p>
-        </div>
-      </DocsPageLayout>
+        </DocsContentBlock>
+      </DocsContent>
 
       <DocsNavigation
+        prev={{
+          href: '/docs',
+          title: 'Summary',
+          summary: 'Get started with Tracehound',
+        }}
         next={{
           href: '/docs/getting-started/quickstart',
           title: 'Quickstart',
           summary: 'Get running in 5 minutes',
         }}
       />
-    </div>
+    </DocsPageLayout>
   )
 }

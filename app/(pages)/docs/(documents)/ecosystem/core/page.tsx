@@ -1,3 +1,4 @@
+import { DocsContent } from '@/app/components/docs-content'
 import { DocsHeader } from '@/app/components/docs-header'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Core() {
   return (
-    <div className="flex flex-col min-h-screen px-6 xl:px-12">
+    <DocsPageLayout>
       <DocsHeader
         label="ECOSYSTEM"
         title="Core"
@@ -18,7 +19,7 @@ export default function Core() {
           preserve evidence."
       />
 
-      <DocsPageLayout>
+      <DocsContent>
         <div className="flex flex-col">
           <h2 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">Horizon</h2>
           <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
@@ -26,7 +27,7 @@ export default function Core() {
             capabilities for teams that need to go beyond core defaults.
           </p>
         </div>
-      </DocsPageLayout>
+      </DocsContent>
 
       <DocsNavigation
         prev={{
@@ -40,6 +41,6 @@ export default function Core() {
           summary: 'Runtime behavioral observation for threat detection',
         }}
       />
-    </div>
+    </DocsPageLayout>
   )
 }

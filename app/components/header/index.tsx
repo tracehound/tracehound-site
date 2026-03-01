@@ -22,6 +22,7 @@ export function Header() {
     }
     lastScrollYRef.current = latest
   })
+
   return (
     <motion.header
       className={cn('sticky top-0 z-99 w-full pb-8 xl:pb-16')}

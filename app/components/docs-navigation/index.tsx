@@ -1,5 +1,6 @@
 import type { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
+import { Row } from '../patterns/row'
 
 type Step = {
   href: Url
@@ -15,9 +16,9 @@ type DocsNavigationProps = {
 export function DocsNavigation({ prev, next }: DocsNavigationProps) {
   return (
     <>
-      <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed my-8 xl:my-16" />
+      <Row className="mb-8 xl:mb-16" />
 
-      <div className="w-full flex items-start">
+      <div className="w-full flex items-start px-6 xl:px-12">
         {prev && (
           <div className="w-full flex flex-col items-start justify-end gap-4">
             <strong>Prev Steps</strong>

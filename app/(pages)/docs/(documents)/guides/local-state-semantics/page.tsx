@@ -1,3 +1,4 @@
+import { DocsContent } from '@/app/components/docs-content'
 import { DocsHeader } from '@/app/components/docs-header'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
@@ -11,18 +12,18 @@ export const metadata: Metadata = {
 
 export default function LocaleStateSemantics() {
   return (
-    <div className="flex flex-col min-h-screen px-6 xl:px-12">
+    <DocsPageLayout>
       <DocsHeader
         label="GUIDES"
         title="Locale State Semantics"
         summary="This document outlines the general behaviour of the Tracehound instances."
       />
 
-      <DocsPageLayout>
+      <DocsContent>
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">WIP</h3>
         </div>
-      </DocsPageLayout>
+      </DocsContent>
 
       <DocsNavigation
         prev={{
@@ -36,6 +37,6 @@ export default function LocaleStateSemantics() {
           summary: 'Latency guarantees and performance characteristics',
         }}
       />
-    </div>
+    </DocsPageLayout>
   )
 }

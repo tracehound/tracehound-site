@@ -1,3 +1,4 @@
+import { DocsContent } from '@/app/components/docs-content'
 import { DocsHeader } from '@/app/components/docs-header'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function SecurityAssurance() {
   return (
-    <div className="flex flex-col min-h-screen px-6 xl:px-12">
+    <DocsPageLayout>
       <DocsHeader
         label="GUIDES"
         title="Security Assurance"
@@ -19,11 +20,11 @@ export default function SecurityAssurance() {
           behind Tracehound's design as a High-Assurance Security Substrate."
       />
 
-      <DocsPageLayout>
+      <DocsContent>
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">WIP</h3>
         </div>
-      </DocsPageLayout>
+      </DocsContent>
 
       <DocsNavigation
         prev={{
@@ -37,6 +38,6 @@ export default function SecurityAssurance() {
           summary: 'Evidence retention, eviction and more',
         }}
       />
-    </div>
+    </DocsPageLayout>
   )
 }

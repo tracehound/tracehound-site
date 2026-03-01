@@ -1,8 +1,12 @@
 import { cn } from '@/app/lib/utils'
 
-export function Row() {
+export function Row({ className }: { className?: string }) {
   return (
-    <div className="relative -top-px h-px w-full flex items-center justify-between -z-1 border-t border-(--border-accent) border-dashed pointer-events-none">
+    <div
+      className={cn(
+        'relative -top-px h-px w-full flex items-center justify-between -z-1 border-t border-(--border-accent) border-dashed pointer-events-none',
+        className,
+      )}>
       <span
         className={cn(
           'absolute -top-2.5 -left-2.75',

@@ -1,4 +1,10 @@
 import { Code } from '@/app/components/code'
+import { DocsContent } from '@/app/components/docs-content'
+import { DocsContentBlock } from '@/app/components/docs-content-block'
+import { DocsHeader } from '@/app/components/docs-header'
+import { DocsNavigation } from '@/app/components/docs-navigation'
+import { DocsPageLayout } from '@/app/components/docs-page-layout'
+import { Separator } from '@/app/components/separator'
 import type { Metadata } from 'next/types'
 
 const coreUsage = `
@@ -56,31 +62,18 @@ export const metadata: Metadata = {
 
 export default function Docs() {
   return (
-    <div className="flex flex-col min-h-screen px-6 xl:px-12">
-      <header className="w-full flex flex-col pb-6 xl:pb-12">
-        <h2 className="mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-6xl/16">
-          Summary
-        </h2>
+    <DocsPageLayout>
+      <DocsHeader
+        title="Summary"
+        summary={[
+          'Tracehound Core is a deterministic and fail-open runtime security layer designed to operate between detection systems and operational response.',
+          'It provides bounded ingestion, rate and buffer controls, controlled choke mechanisms, and reproducible event processing.',
+          'The system does not classify threats or enforce policies. Instead, it guarantees controlled runtime behavior and integrity of the resulting event chain.',
+        ]}
+      />
 
-        <p className="font-sans font-light text-lg mb-2 md:text-xl xl:text-2xl xl:mb-4">
-          Tracehound Core is a deterministic and fail-open runtime security layer designed to
-          operate between detection systems and operational response.
-        </p>
-        <p className="font-sans font-light text-lg mb-2 md:text-xl xl:text-2xl xl:mb-4">
-          It provides bounded ingestion, rate and buffer controls, controlled choke mechanisms, and
-          reproducible event processing.
-        </p>
-        <p className="font-sans font-light text-lg md:text-xl xl:text-2xl">
-          The system does not classify threats or enforce policies. Instead, it guarantees
-          controlled runtime behavior and integrity of the resulting event chain.
-        </p>
-      </header>
-
-      <article className="flex flex-col gap-6 lg:gap-8 xl:gap-12">
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            About the project
-          </h3>
+      <DocsContent>
+        <DocsContentBlock title="About the project">
           <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             It doesn't use heuristics or "guess" if a request is malicious; instead, it acts as a
             high-integrity buffer for explicit security signals (Scents) from external detectors.
@@ -90,15 +83,11 @@ export default function Docs() {
             Tracehound ensures that security events are forever auditable without disrupting
             production traffic.
           </p>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Why we built this
-          </h3>
-
+        <DocsContentBlock title="Why we built this">
           <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
             Modern security architectures often face a trade-off between "blocking and breaking" or
             "logging and losing" forensic details. We built Tracehound to solve the gap between
@@ -122,15 +111,11 @@ export default function Docs() {
               your application logic.
             </li>
           </ul>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Key features
-          </h3>
-
+        <DocsContentBlock title="Key features">
           <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
             <li>
               <strong>Deterministic Security Buffer:</strong> No heuristics, no false positives. It
@@ -157,15 +142,11 @@ export default function Docs() {
               GCS.
             </li>
           </ul>
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Quick Start
-          </h3>
-
+        <DocsContentBlock title="Quick Start">
           <h5 className="mb-3 font-heading font-bold text-base md:text-xl xl:text-2xl">
             Core Usage
           </h5>
@@ -183,15 +164,11 @@ export default function Docs() {
           </h5>
 
           <Code code={fastifyIntegration} />
-        </div>
+        </DocsContentBlock>
 
-        <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
+        <Separator />
 
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-            Core principles
-          </h3>
-
+        <DocsContentBlock title="Core principles">
           <ul className="pl-2 xl:list-disc xl:pl-6 text-lg">
             <li>
               <strong>Decision-free:</strong> Tracehound never decides if a request is malicious. It
@@ -210,8 +187,16 @@ export default function Docs() {
               interception and auditability.
             </li>
           </ul>
-        </div>
-      </article>
-    </div>
+        </DocsContentBlock>
+      </DocsContent>
+
+      <DocsNavigation
+        next={{
+          href: '/docs/getting-started/introduction',
+          title: 'Introduction',
+          summary: 'Get started with Tracehound',
+        }}
+      />
+    </DocsPageLayout>
   )
 }
