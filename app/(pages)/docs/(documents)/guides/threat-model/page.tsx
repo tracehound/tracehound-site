@@ -1,4 +1,6 @@
-import { Badge } from '@/app/components/badge'
+import { DocsHeader } from '@/app/components/docs-header'
+import { DocsNavigation } from '@/app/components/docs-navigation'
+import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
@@ -10,24 +12,31 @@ export const metadata: Metadata = {
 export default function ThreatModel() {
   return (
     <div className="flex flex-col min-h-screen px-6 xl:px-12">
-      <header className="w-full flex flex-col pb-6 xl:pb-12">
-        <Badge variant="secondary">GUIDES</Badge>
-        <h2 className="mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-6xl/16">
-          Threat Model
-        </h2>
+      <DocsHeader
+        label="GUIDES"
+        title="Threat Model"
+        summary="This document outlines the deterministic security boundaries, predictable failure modes,
+          and legal/liability constraints of the Tracehound Resilience Edge."
+      />
 
-        <p className="font-sans font-light text-lg md:text-xl xl:text-2xl">
-          This document outlines the deterministic security boundaries, predictable failure modes,
-          and legal/liability constraints of the Tracehound Resilience Edge. It is designed to
-          provide a clear understanding of the product's operational behavior under extreme duress.
-        </p>
-      </header>
-
-      <article className="flex flex-col gap-6 lg:gap-8 xl:gap-12">
+      <DocsPageLayout>
         <div className="flex flex-col">
           <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">WIP</h3>
         </div>
-      </article>
+      </DocsPageLayout>
+
+      <DocsNavigation
+        prev={{
+          href: '/docs/guides/evidence-lifecycle',
+          title: 'Evidence Lifecycle',
+          summary: 'Evidence retention, eviction and more',
+        }}
+        next={{
+          href: '/docs/guides/cold-storage-security',
+          title: 'Cold Storage Security',
+          summary: 'Long-term archival layer for evidence',
+        }}
+      />
     </div>
   )
 }

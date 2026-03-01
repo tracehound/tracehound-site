@@ -1,10 +1,14 @@
 'use client'
 
+import { navigation } from '@/app/lib/navigation'
+import { groupByCategory } from '@/app/lib/utils'
 import { useRouter } from 'next/navigation'
-import { type ChangeEvent } from 'react'
+import { useMemo, type ChangeEvent } from 'react'
 
 export function DocumentPageSelect() {
   const router = useRouter()
+
+  const grouped = useMemo(() => groupByCategory(navigation), navigation)
 
   const onChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     router.push(event.target.value)
@@ -18,31 +22,15 @@ export function DocumentPageSelect() {
           defaultValue="/docs"
           onChange={onChangeHandler}>
           <option value="/docs">Select page</option>
-          <optgroup label="Getting Started">
-            <option value="/docs/introduction">Introduction</option>
-            <option value="/docs/quickstart">Quickstart</option>
-          </optgroup>
-          <optgroup label="References">
-            <option value="/docs/configuration">Configuration</option>
-            <option value="/docs/api-reference">API Reference</option>
-          </optgroup>
-          <optgroup label="Guides">
-            <option value="/docs/concepts">Concepts</option>
-            <option value="/docs/advanced">Advanced</option>
-            <option value="/docs/examples">Examples</option>
-            <option value="/docs/security-assurance">Security Assurance</option>
-          </optgroup>
-          <optgroup label="Packages">
-            <option value="/docs/core">Core</option>
-            <option value="/docs/horizon">Horizon</option>
-            <option value="/docs/argos">Argos</option>
-            <option value="/docs/talos">Talos</option>
-            <option value="/docs/huginn">Huginn</option>
-            <option value="/docs/muninn">Muninn</option>
-            <option value="/docs/norns">Norns</option>
-            <option value="/docs/furies">Furies</option>
-            <option value="/docs/watchtower">Watchtower</option>
-          </optgroup>
+          {Object.entries(grouped).map(([label, items]) => (
+            <optgroup key={label} label={label}>
+              {items.map((item) => (
+                <option key={item.slug} value={`/docs/${item.slug}`}>
+                  {item.title}
+                </option>
+              ))}
+            </optgroup>
+          ))}
         </select>
 
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

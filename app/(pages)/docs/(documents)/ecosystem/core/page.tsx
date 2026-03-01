@@ -1,4 +1,6 @@
-import { Badge } from '@/app/components/badge'
+import { DocsHeader } from '@/app/components/docs-header'
+import { DocsNavigation } from '@/app/components/docs-navigation'
+import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
@@ -9,22 +11,35 @@ export const metadata: Metadata = {
 export default function Core() {
   return (
     <div className="flex flex-col min-h-screen px-6 xl:px-12">
-      <header className="w-full flex flex-col pb-6 xl:pb-12">
-        <Badge variant="secondary">ECOSYSTEM</Badge>
-        <h2 className="mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-6xl/16">
-          Core
-        </h2>
-        <p className="font-sans font-light text-lg md:text-xl xl:text-2xl">
-          The main Tracehound package. Includes everything you need to quarantine threats and
-          preserve evidence.
-        </p>
-      </header>
+      <DocsHeader
+        label="ECOSYSTEM"
+        title="Core"
+        summary="The main Tracehound package. Includes everything you need to quarantine threats and
+          preserve evidence."
+      />
 
-      <article className="flex flex-col gap-6 lg:gap-8 xl:gap-12">
+      <DocsPageLayout>
         <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">WIP</h3>
+          <h2 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">Horizon</h2>
+          <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+            Horizon is a config extender for the Tracehound substrate. It unlocks scale-out
+            capabilities for teams that need to go beyond core defaults.
+          </p>
         </div>
-      </article>
+      </DocsPageLayout>
+
+      <DocsNavigation
+        prev={{
+          href: '/docs/guides/performance-sla-specification',
+          title: 'Performance SLA',
+          summary: 'Latency guarantees and performance characteristics',
+        }}
+        next={{
+          href: '/docs/ecosystem/argos',
+          title: 'Argos',
+          summary: 'Runtime behavioral observation for threat detection',
+        }}
+      />
     </div>
   )
 }

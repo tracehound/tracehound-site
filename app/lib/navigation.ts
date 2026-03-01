@@ -6,7 +6,6 @@ import {
   FilmReelIcon,
   HeadCircuitIcon,
   ListChecksIcon,
-  ResizeIcon,
   ShieldStarIcon,
   TargetIcon,
 } from '@phosphor-icons/react/dist/ssr'
@@ -123,13 +122,6 @@ export const navigation: Navigation[] = [
       'The main Tracehound package. Includes everything you need to quarantine threats and preserve evidence.',
     category: 'Ecosystem',
     icon: CastleTurretIcon,
-  },
-  {
-    slug: 'ecosystem/horizon',
-    title: 'Horizon',
-    summary: 'Horizon is a config extender for the Tracehound substrate.',
-    category: 'Ecosystem',
-    icon: ResizeIcon,
   },
   {
     slug: 'ecosystem/argos',

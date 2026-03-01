@@ -1,16 +1,7 @@
-import { type Navigation, navigation } from '@/app/lib/navigation'
+import { navigation } from '@/app/lib/navigation'
+import { groupByCategory } from '@/app/lib/utils'
 import { useMemo } from 'react'
 import { NavLink } from '../header/link'
-
-function groupByCategory(pages: Navigation[]): Record<Navigation['category'], Navigation[]> {
-  return pages.reduce(
-    (acc, page) => {
-      ;(acc[page.category] ??= []).push(page)
-      return acc
-    },
-    {} as Record<Navigation['category'], Navigation[]>,
-  )
-}
 
 export function DocumentPageSidebar() {
   const grouped = useMemo(() => groupByCategory(navigation), navigation)
