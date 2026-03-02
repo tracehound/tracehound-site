@@ -9,13 +9,16 @@ import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import { Separator } from '@/app/components/separator'
 import { Table } from '@/app/components/table'
+import Image from 'next/image'
 import type { Metadata } from 'next/types'
 import {
+  errorHandlingCode,
   failSafeCode,
+  gracefulShutdownCode,
   houndPoolTuningCode,
   lowLevelCompositionCode,
   manualWiringCode,
-  runtimeFlowCode,
+  metricsBaselineCode,
   schedulerCleanupCode,
   testingHookCode,
   trustBoundaryCode,
@@ -63,7 +66,15 @@ export default function Advanced() {
             Tracehound runtime follows a deterministic orchestration flow. Threat detection is
             always external; Tracehound consumes the signal and executes bounded processing.
           </DocsContentParagraph>
-          <Code code={runtimeFlowCode} language="plaintext" />
+          <Image
+            width={478}
+            height={449}
+            src="/diagrams/internal-runtime-flow.svg"
+            alt="Internal Runtime Flow"
+            className="select-none object-contain"
+            decoding="async"
+            loading="lazy"
+          />
           <Table
             head={['Stage', 'Primary Component', 'Output']}
             body={[
@@ -169,6 +180,101 @@ export default function Advanced() {
             instead of spawning real processes.
           </DocsContentParagraph>
           <Code code={testingHookCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Lifecycle and Failure Modes">
+          <DocsContentSubtitle>Graceful shutdown</DocsContentSubtitle>
+          <DocsContentParagraph>
+            In low-level integrations, you are responsible for lifecycle cleanup. Stop schedulers
+            and shutdown worker pools during process termination.
+          </DocsContentParagraph>
+          <Code code={gracefulShutdownCode} />
+
+          <DocsContentSubtitle>Pool exhaustion policy trade-offs</DocsContentSubtitle>
+          <Table
+            head={['Mode', 'Behavior', 'Best for', 'Risk']}
+            body={[
+              {
+                row: [
+                  <strong>`drop`</strong>,
+                  'Immediate reject when pool is full',
+                  'Strict latency budgets',
+                  'Forensic loss under pressure',
+                ],
+              },
+              {
+                row: [
+                  <strong>`defer`</strong>,
+                  'Queue until worker becomes available',
+                  'Balanced throughput + evidence retention',
+                  'Queue growth if sustained overload',
+                ],
+              },
+              {
+                row: [
+                  <strong>`escalate`</strong>,
+                  'Emit escalation errors immediately',
+                  'Aggressive incident signaling',
+                  'Higher alert noise during bursts',
+                ],
+              },
+            ]}
+          />
+
+          <DocsContentSubtitle>Error taxonomy handling</DocsContentSubtitle>
+          <DocsContentParagraph>
+            Treat `InterceptResult.error` as structured operational data. Route by error code and
+            recoverability, not by message text.
+          </DocsContentParagraph>
+          <Code code={errorHandlingCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Production Readiness Checklist">
+          <DocsContentSubtitle>Minimum metrics baseline</DocsContentSubtitle>
+          <Code code={metricsBaselineCode} />
+
+          <DocsContentSubtitle>Go-live checklist</DocsContentSubtitle>
+          <DocsList
+            items={[
+              <p key="g1">
+                Intercept handling is exhaustive for all statuses{' '}
+                <strong>
+                  (`clean`, `rate_limited`, `payload_too_large`, `quarantined`, `ignored`, `error`)
+                </strong>
+                .
+              </p>,
+              <p key="g2">
+                Quarantine and payload limits are explicitly configured and load-tested with
+                realistic traffic.
+              </p>,
+              <p key="g3">
+                HoundPool policy <strong>(`drop`/`defer`/`escalate`)</strong> is chosen
+                intentionally and documented.
+              </p>,
+              <p key="g4">
+                Runtime alerts are connected for <strong>`system.panic`</strong>, timeout spikes,
+                and rate-limit rejection anomalies.
+              </p>,
+              <p key="g5">
+                Graceful shutdown path is implemented{' '}
+                <strong>(`scheduler.stop()`, `houndPool.shutdown()`)</strong>.
+              </p>,
+              <p key="g6">
+                Cold storage path (if used) is tested with integrity encode/verify/decode flow.
+              </p>,
+              <p key="g7">
+                <strong>Detector-to-`ThreatSignal`</strong> mapping is type-safe and uses canonical
+                categories only.
+              </p>,
+              <p key="g8">
+                Staging soak test and rollback plan are completed before production rollout.
+              </p>,
+            ]}
+          />
         </DocsContentBlock>
 
         <Separator />

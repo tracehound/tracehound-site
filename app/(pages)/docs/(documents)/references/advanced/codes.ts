@@ -1,17 +1,3 @@
-export const runtimeFlowCode = `
-Request
-  -> External detector (WAF / SIEM / custom rules)
-  -> Scent + ThreatSignal
-  -> agent.intercept(scent)
-      1) rateLimiter.check(source)
-      2) if no threat => clean
-      3) evidenceFactory.create(...) (encode/hash/signature)
-      4) quarantine insert + capacity eviction
-      5) houndPool.activate(evidence) (async, fire-and-forget)
-      6) watcher + notifications updates
-  -> InterceptResult
-`.trimStart()
-
 export const lowLevelCompositionCode = `
 import {
   AuditChain,
@@ -197,5 +183,61 @@ const houndPool = createHoundPool({
 
 houndPool.onResult((result) => {
   console.log(result.status, result.signature)
+})
+`.trimStart()
+
+export const gracefulShutdownCode = `
+import { createScheduler, createTracehound } from '@tracehound/core'
+
+const th = createTracehound()
+const scheduler = createScheduler({
+  tickInterval: 5000,
+  jitterMs: 1000,
+  skipIfBusy: true,
+})
+
+function shutdown(signal: string) {
+  console.log('shutdown signal:', signal)
+
+  scheduler.stop()
+  th.houndPool.shutdown()
+
+  process.exit(0)
+}
+
+process.on('SIGINT', () => shutdown('SIGINT'))
+process.on('SIGTERM', () => shutdown('SIGTERM'))
+`.trimStart()
+
+export const errorHandlingCode = `
+const result = agent.intercept(scent)
+
+if (result.status === 'error') {
+  // TracehoundError shape: { state, code, message, context, recoverable }
+  logger.error({
+    state: result.error.state,
+    code: result.error.code,
+    recoverable: result.error.recoverable,
+    context: result.error.context,
+  })
+
+  // Example policy:
+  // - Recoverable: continue service + raise warning
+  // - Non-recoverable: raise incident alert
+}
+`.trimStart()
+
+export const metricsBaselineCode = `
+const watcher = th.watcher.snapshot()
+const pool = th.houndPool.stats
+const limiter = th.rateLimiter.stats
+
+console.log({
+  totalThreats: watcher.threats.total,
+  quarantineCapacityPercent: watcher.quarantine.capacityPercent,
+  lastAlert: watcher.lastAlert?.type,
+  houndTimeouts: pool.totalTimeouts,
+  houndErrors: pool.totalErrors,
+  rateLimitRejections: limiter.totalRejections,
 })
 `.trimStart()

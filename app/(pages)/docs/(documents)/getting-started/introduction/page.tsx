@@ -24,7 +24,7 @@ export default function Introduction() {
       <DocsContent>
         <DocsContentBlock title="What is Tracehound?">
           <DocsContentParagraph>
-            Tracehound is a <strong>deterministic security</strong> buffer for Node.js applications.
+            Tracehound is a <strong>deterministic security buffer</strong> for Node.js applications.
           </DocsContentParagraph>
           <DocsContentParagraph>
             When your WAF or detection system identifies a threat, Tracehound:
@@ -43,7 +43,7 @@ export default function Introduction() {
             ]}
           />
           <DocsContentParagraph>
-            Think of it as the black box recorder for your security infrastructure.
+            Think of it as the <strong>black box recorder</strong> for your security infrastructure.
           </DocsContentParagraph>
         </DocsContentBlock>
 
