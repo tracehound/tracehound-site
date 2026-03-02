@@ -12,7 +12,7 @@ export function NavLink({
   className,
 }: PropsWithChildren<LinkProps & { activeClass: string; className?: string }>) {
   const pathname = usePathname()
-  const isActive = (path: string) => path === pathname
+  const isActive = (path: string) => pathname.includes(path)
 
   return (
     <Link

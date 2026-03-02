@@ -1,12 +1,29 @@
+import { Code } from '@/app/components/code'
 import { DocsContent } from '@/app/components/docs-content'
+import { DocsContentBlock } from '@/app/components/docs-content-block'
+import { DocsContentParagraph } from '@/app/components/docs-content-paragraph'
+import { DocsContentSubtitle } from '@/app/components/docs-content-subtitle'
 import { DocsHeader } from '@/app/components/docs-header'
+import { DocsList } from '@/app/components/docs-list'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
+import { Separator } from '@/app/components/separator'
+import { Table } from '@/app/components/table'
 import type { Metadata } from 'next/types'
+import {
+  failSafeCode,
+  houndPoolTuningCode,
+  lowLevelCompositionCode,
+  manualWiringCode,
+  runtimeFlowCode,
+  schedulerCleanupCode,
+  testingHookCode,
+  trustBoundaryCode,
+} from './codes'
 
 export const metadata: Metadata = {
   title: 'Advanced',
-  description: 'Advanced configuration for production deployments.',
+  description: 'Low-level APIs and internal runtime mechanics for advanced Tracehound usage.',
 }
 
 export default function Advanced() {
@@ -15,13 +32,184 @@ export default function Advanced() {
       <DocsHeader
         label="REFERENCES"
         title="Advanced"
-        summary="Advanced configuration for production deployments."
+        summary="Low-level APIs and internal runtime mechanics for advanced Tracehound usage."
       />
 
       <DocsContent>
-        <div className="flex flex-col">
-          <h3 className="mb-5 font-heading font-bold text-xl md:text-2xl xl:text-4xl">WIP</h3>
-        </div>
+        <DocsContentBlock title="Audience and Scope">
+          <DocsContentParagraph>
+            This page is for teams that need to tune internals, build custom wiring, or reason about
+            runtime behavior under load. If you are new, start with Quickstart and Examples first.
+          </DocsContentParagraph>
+          <DocsList
+            items={[
+              <p key="a1">
+                Default recommendation: keep using <strong>`createTracehound(options)`</strong>.
+              </p>,
+              <p key="a2">
+                Use low-level APIs when you need explicit component ownership and lifecycle control.
+              </p>,
+              <p key="a3">
+                Treat this page as an operator/developer reference, not a beginner guide.
+              </p>,
+            ]}
+          />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Internal Runtime Flow">
+          <DocsContentParagraph>
+            Tracehound runtime follows a deterministic orchestration flow. Threat detection is
+            always external; Tracehound consumes the signal and executes bounded processing.
+          </DocsContentParagraph>
+          <Code code={runtimeFlowCode} language="plaintext" />
+          <Table
+            head={['Stage', 'Primary Component', 'Output']}
+            body={[
+              { row: ['Rate check', 'RateLimiter', 'allow / reject + retryAfter'] },
+              { row: ['Threat gate', 'Agent', 'clean or continue'] },
+              { row: ['Evidence build', 'EvidenceFactory', 'signature + bytes + hash'] },
+              { row: ['Retention', 'Quarantine + AuditChain', 'stored / evicted records'] },
+              { row: ['Async work', 'HoundPool', 'processed / timeout / error result'] },
+              { row: ['Observability', 'Watcher + Notifications', 'snapshots + events'] },
+            ]}
+          />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Low-level Composition">
+          <DocsContentParagraph>
+            Manual composition gives explicit control over component lifecycle and dependency
+            wiring.
+          </DocsContentParagraph>
+          <Code code={lowLevelCompositionCode} />
+          <DocsContentParagraph>
+            In this model, you own the creation order and can replace components in tests or
+            specialized runtime profiles.
+          </DocsContentParagraph>
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Manual Hound Result Wiring">
+          <DocsContentParagraph>
+            <strong>`createTracehound`</strong> wires HoundPool results automatically. In low-level
+            mode, you can wire timeout/error outcomes into your own operational policy.
+          </DocsContentParagraph>
+          <Code code={manualWiringCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="HoundPool Tuning">
+          <DocsContentParagraph>
+            HoundPool is process-separated and asynchronous. Tune it for your risk and throughput
+            profile.
+          </DocsContentParagraph>
+          <Code code={houndPoolTuningCode} />
+          <DocsContentSubtitle>Tuning guidance</DocsContentSubtitle>
+          <DocsList
+            items={[
+              <p key="h1">
+                <strong>`poolSize`</strong>: higher for concurrency, but increases resource
+                footprint.
+              </p>,
+              <p key="h2">
+                <strong>`timeout`</strong>: lower for stricter fail-open behavior under stuck
+                workers.
+              </p>,
+              <p key="h3">
+                <strong>`onPoolExhausted`</strong>: <strong>`defer`</strong> for best-effort
+                completion, <strong>`drop`</strong> for hard shedding.
+              </p>,
+              <p key="h4">
+                Process constraints are defense-in-depth and platform-dependent, not hard security
+                boundaries by themselves.
+              </p>,
+            ]}
+          />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Fail-Safe Integration">
+          <DocsContentParagraph>
+            Fail-Safe provides threshold-driven panic hooks. Use it to trigger emergency actions
+            when memory, quarantine, or error-rate pressure crosses your limits.
+          </DocsContentParagraph>
+          <Code code={failSafeCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Scheduler for Background Maintenance">
+          <DocsContentParagraph>
+            Scheduler helps run periodic maintenance work with jitter and busy-aware skipping.
+          </DocsContentParagraph>
+          <Code code={schedulerCleanupCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Trust Boundary Modeling">
+          <DocsContentParagraph>
+            Trust Boundary helpers allow you to formalize trust assumptions around detector sources
+            and cold storage endpoints.
+          </DocsContentParagraph>
+          <Code code={trustBoundaryCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Testing and Simulation Hooks">
+          <DocsContentParagraph>
+            For deterministic tests, use <strong>`createMockAdapter()`</strong> with HoundPool
+            instead of spawning real processes.
+          </DocsContentParagraph>
+          <Code code={testingHookCode} />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Operational Guardrails">
+          <Table
+            head={['Area', 'Guardrail']}
+            body={[
+              {
+                row: [
+                  'Rate limiting',
+                  'Always surface 429 + retryAfter explicitly in edge/application responses',
+                ],
+              },
+              {
+                row: [
+                  'Quarantine size',
+                  'Use bounded maxCount/maxBytes and monitor capacityPercent in Watcher snapshots',
+                ],
+              },
+              {
+                row: [
+                  'Async worker failures',
+                  'Alert on hound timeout/error and track totalTimeouts/totalErrors from pool stats',
+                ],
+              },
+              {
+                row: [
+                  'Runtime assumptions',
+                  'Do not rely on declarative process constraints alone for isolation guarantees',
+                ],
+              },
+              {
+                row: [
+                  'Deployment safety',
+                  'Roll out low-level custom wiring behind staging soak tests before production',
+                ],
+              },
+            ]}
+          />
+        </DocsContentBlock>
       </DocsContent>
 
       <DocsNavigation
