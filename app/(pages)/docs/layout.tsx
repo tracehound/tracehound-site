@@ -7,13 +7,13 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <Container>
       <main className="relative w-full h-full flex">
-        <DocumentPageSidebar />
-
-        <section className="relative w-full flex-1 flex flex-col gap-6 min-h-screen lg:border-l border-dashed border-(--border-accent) pb-9 lg:pb-12 xl:pb-24">
+        <section className="relative w-full flex-1 flex flex-col gap-6 min-h-screen lg:border-r border-dashed border-(--border-accent) pb-9 lg:pb-12 xl:pb-24">
           <DocumentPageSelect />
 
           {children}
         </section>
+
+        <DocumentPageSidebar />
       </main>
     </Container>
   )

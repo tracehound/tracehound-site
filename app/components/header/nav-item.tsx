@@ -6,8 +6,8 @@ export function NavItems() {
       <NavLink
         className="py-2 px-3 font-heading font-bold text-base/5 hover:bg-(--accent-primary) transition-colors text-inherit"
         activeClass="bg-(--accent-primary)"
-        href="/ecosystem">
-        ECOSYSTEM
+        href="/services">
+        SERVICES
       </NavLink>
       <NavLink
         className="py-2 px-3 font-heading font-bold text-base/5 hover:bg-(--accent-primary) transition-colors text-inherit"
@@ -19,8 +19,8 @@ export function NavItems() {
       <NavLink
         className="py-2 px-3 font-heading font-bold text-base/5 hover:bg-(--accent-primary) transition-colors text-inherit"
         activeClass="bg-(--accent-primary)"
-        href="/services">
-        SERVICES
+        href="/ecosystem">
+        ECOSYSTEM
       </NavLink>
       <NavLink
         className="py-2 px-3 font-heading font-bold text-base/5 hover:bg-(--accent-primary) transition-colors text-inherit"
