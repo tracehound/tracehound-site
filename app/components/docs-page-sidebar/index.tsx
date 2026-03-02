@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { NavLink } from '../header/link'
 
 export function DocumentPageSidebar() {
-  const grouped = useMemo(() => groupByCategory(navigation), navigation)
+  const grouped = useMemo(() => groupByCategory(navigation), [])
 
   return (
     <aside className="scrollbar -mt-px sticky top-24 flex-col h-full hidden overflow-y-auto max-h-[calc(100vh-156px)] lg:flex lg:w-54 xl:w-96">

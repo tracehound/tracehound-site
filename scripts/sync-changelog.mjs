@@ -161,12 +161,12 @@ async function main() {
   })
 
   await writeFile(path.resolve(OUTPUT_PATH), generated, 'utf8')
-  // eslint-disable-next-line no-console
+   
   console.log(`Synced ${releases.length} releases -> ${OUTPUT_PATH} (recent=${recentReleases.length})`)
 }
 
 main().catch((error) => {
-  // eslint-disable-next-line no-console
+   
   console.error(error instanceof Error ? error.message : String(error))
   process.exit(1)
 })

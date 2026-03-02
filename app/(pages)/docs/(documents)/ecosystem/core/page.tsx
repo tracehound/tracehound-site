@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { DocsContent } from '@/app/components/docs-content'
 import { DocsContentBlock } from '@/app/components/docs-content-block'
 import { DocsContentParagraph } from '@/app/components/docs-content-paragraph'

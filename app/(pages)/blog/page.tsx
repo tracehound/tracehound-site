@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { Row } from '@/app/components/patterns/row'
 import Link from 'next/link'
 

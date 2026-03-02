@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { BiohazardIcon, DetectiveIcon, WarningOctagonIcon } from '@phosphor-icons/react/ssr'
 import { Badge } from '../badge'
 import { Container } from '../container'

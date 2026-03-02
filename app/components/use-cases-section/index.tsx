@@ -34,7 +34,7 @@ export function UseCasesSection() {
               Zero-Trust Microsegmentation
             </strong>
             <p className="xl:max-w-133">
-              Verify every request's source, size, and frequency across microservices. Limit blast
+              Verify every request&apos;s source, size, and frequency across microservices. Limit blast
               radius with independent isolation.
             </p>
           </div>

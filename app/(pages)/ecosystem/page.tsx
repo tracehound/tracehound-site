@@ -261,6 +261,7 @@ export default function EcosystemPage() {
                 {
                   row: [
                     <span
+                      key="status-released"
                       className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RELEASED}`}>
                       RELEASED
                     </span>,
@@ -271,6 +272,7 @@ export default function EcosystemPage() {
                 {
                   row: [
                     <span
+                      key="status-wip"
                       className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.WIP}`}>
                       WIP
                     </span>,
@@ -281,6 +283,7 @@ export default function EcosystemPage() {
                 {
                   row: [
                     <span
+                      key="status-rfc"
                       className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RFC}`}>
                       RFC
                     </span>,

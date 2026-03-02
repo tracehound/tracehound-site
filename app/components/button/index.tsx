@@ -15,21 +15,24 @@ export function Button({
   href,
   children,
 }: PropsWithChildren<ButtonProps>) {
-  return createElement(href ? Link : 'button', {
-    href: href as Url,
-    className: cn(
-      "border-0 bg-clip-padding font-bold gap-2 inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-6 outline-none group/button select-none cursor-pointer font-heading",
-      variant === 'primary' &&
-        'bg-(--accent-primary) text-(--foreground) hover:bg-(--accent-primary-hover)',
-      variant === 'secondary' &&
-        'bg-(--foreground) text-(--background) hover:bg-(--foreground-hover)',
-      variant === 'neutral' && 'bg-(--border) text-(--background) hover:bg-(--foreground)',
-      variant === 'light' &&
-        'bg-(--background) text-(--foreground) hover:text-(--accent-secondary)',
-      size === 'lg' && 'h-13 px-7 text-lg/normal',
-      size === 'md' && 'h-11 px-6 text-lg/normal',
-      size === 'sm' && 'h-9 px-5 text-base/normal',
-    ),
+  return createElement(
+    href ? Link : 'button',
+    {
+      href: href as Url,
+      className: cn(
+        "border-0 bg-clip-padding font-bold gap-2 inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-6 outline-none group/button select-none cursor-pointer font-heading",
+        variant === 'primary' &&
+          'bg-(--accent-primary) text-(--foreground) hover:bg-(--accent-primary-hover)',
+        variant === 'secondary' &&
+          'bg-(--foreground) text-(--background) hover:bg-(--foreground-hover)',
+        variant === 'neutral' && 'bg-(--border) text-(--background) hover:bg-(--foreground)',
+        variant === 'light' &&
+          'bg-(--background) text-(--foreground) hover:text-(--accent-secondary)',
+        size === 'lg' && 'h-13 px-7 text-lg/normal',
+        size === 'md' && 'h-11 px-6 text-lg/normal',
+        size === 'sm' && 'h-9 px-5 text-base/normal',
+      ),
+    },
     children,
-  })
+  )
 }

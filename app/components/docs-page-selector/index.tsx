@@ -8,7 +8,7 @@ import { useMemo, type ChangeEvent } from 'react'
 export function DocumentPageSelect() {
   const router = useRouter()
 
-  const grouped = useMemo(() => groupByCategory(navigation), navigation)
+  const grouped = useMemo(() => groupByCategory(navigation), [])
 
   const onChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     router.push(event.target.value)

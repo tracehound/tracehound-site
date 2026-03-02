@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities, react/jsx-key */
 import { Code } from '@/app/components/code'
 import { DocsContent } from '@/app/components/docs-content'
 import { DocsContentBlock } from '@/app/components/docs-content-block'

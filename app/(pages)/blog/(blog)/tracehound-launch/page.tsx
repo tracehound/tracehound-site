@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities, react/jsx-no-comment-textnodes */
 import { Badge } from '@/app/components/badge'
 import { Row } from '@/app/components/patterns/row'
 
