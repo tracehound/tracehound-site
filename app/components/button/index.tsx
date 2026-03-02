@@ -26,9 +26,9 @@ export function Button({
       variant === 'neutral' && 'bg-(--border) text-(--background) hover:bg-(--foreground)',
       variant === 'light' &&
         'bg-(--background) text-(--foreground) hover:text-(--accent-secondary)',
-      size === 'lg' && 'h-12 px-7 text-xl/normal',
-      size === 'md' && 'h-11 px-6 text-xl/normal',
-      size === 'sm' && 'h-9 px-5 text-lg/normal',
+      size === 'lg' && 'h-13 px-7 text-lg/normal',
+      size === 'md' && 'h-11 px-6 text-lg/normal',
+      size === 'sm' && 'h-9 px-5 text-base/normal',
     ),
     children,
   })

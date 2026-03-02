@@ -23,7 +23,7 @@ export function KeyFeatures() {
         <Row />
 
         <article className="grid grid-cols-1 px-6 gap-8 mt-6 xl:gap-16 xl:grid-cols-2 xl:grid-rows-3 xl:px-12 xl:mt-12">
-          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:p-12">
             <FireIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
@@ -45,7 +45,7 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:p-12">
             <ShippingContainerIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
@@ -65,7 +65,7 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:p-12">
             <NetworkSlashIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
@@ -89,7 +89,7 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:p-12">
             <LinkIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">
@@ -111,7 +111,7 @@ export function KeyFeatures() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-7.5 md:bg-(--background) md:border md:border-(--accent-primary) md:p-12">
+          <div className="flex flex-col gap-7.5 md:bg-(--background) md:p-12">
             <FalloutShelterIcon weight="thin" className="size-12 xl:size-16" />
 
             <div className="flex flex-col">

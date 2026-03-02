@@ -7,7 +7,7 @@ export function DocumentPageSidebar() {
   const grouped = useMemo(() => groupByCategory(navigation), navigation)
 
   return (
-    <aside className="scrollbar -mt-px sticky top-24 flex-col h-full hidden overflow-y-auto border-y border-dashed border-(--border-accent) max-h-[calc(100vh-156px)] lg:flex lg:w-54 xl:w-96">
+    <aside className="scrollbar -mt-px sticky top-24 flex-col h-full hidden overflow-y-auto border-y border-dashed border-(--border-accent) max-h-[calc(100vh-156px)] lg:flex lg:w-54 xl:w-80 bg-(--background)">
       {Object.entries(grouped).map(([label, items]) => (
         <details key={label} className="flex flex-col group" open>
           <summary

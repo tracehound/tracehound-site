@@ -4,7 +4,7 @@ export function Column({ direction }: { direction: 'left' | 'right' }) {
   return (
     <div
       className={cn(
-        'fixed top-0 flex h-full -z-1 pointer-events-none w-12 xl:w-24',
+        'fixed top-0 flex h-full -z-1 pointer-events-none w-(--column-width)',
         direction === 'left' && 'left-0 flex-row',
         direction === 'right' && 'right-0 flex-row-reverse',
       )}>

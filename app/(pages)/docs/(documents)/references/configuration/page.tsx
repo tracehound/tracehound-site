@@ -33,7 +33,8 @@ export default function Configuration() {
       <DocsContent>
         <DocsContentBlock title="Initialization">
           <DocsContentParagraph>
-            Configure Tracehound through a single entry point: <strong>`createTracehound(options)`</strong>.
+            Configure Tracehound through a single entry point:{' '}
+            <strong>`createTracehound(options)`</strong>.
           </DocsContentParagraph>
 
           <Code code={createTracehoundExampleCode} />
@@ -67,7 +68,7 @@ export default function Configuration() {
               { row: [<strong>`houndPool.poolSize`</strong>, <strong>`4`</strong>] },
               { row: [<strong>`houndPool.timeout`</strong>, <strong>`30_000`</strong>] },
               { row: [<strong>`houndPool.rotationJitterMs`</strong>, <strong>`1000`</strong>] },
-              { row: [<strong>`houndPool.onPoolExhausted`</strong>, <strong>`'defer'`</strong>] },
+              { row: [<strong>`houndPool.onPoolExhausted`</strong>, <strong>`defer`</strong>] },
               { row: [<strong>`houndPool.deferQueueLimit`</strong>, <strong>`100`</strong>] },
             ]}
           />
@@ -83,8 +84,7 @@ export default function Configuration() {
                 internally.
               </p>,
               <p key="watcher">
-                Watcher is pull-based. Use <strong>`th.watcher.snapshot()`</strong>, not
-                {' '}
+                Watcher is pull-based. Use <strong>`th.watcher.snapshot()`</strong>, not{' '}
                 <strong>`getSnapshot()`</strong>.
               </p>,
               <p key="env">

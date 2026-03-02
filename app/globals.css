@@ -16,6 +16,16 @@
   --error: oklch(63% 0.2 30);
   --success: oklch(73% 0.2 145);
   --warning: oklch(82% 0.2 97);
+
+  --pattern-column-width: calc(0.25em * 18);
+  --container-max-width: calc(100% - calc(0.25em * 36));
+}
+
+@media (width >=80rem) {
+  :root {
+    --pattern-column-width: calc(0.25em * 36);
+    --container-max-width: calc(100% - calc(0.25em * 72));
+  }
 }
 
 @theme inline {
@@ -37,6 +47,8 @@
   --error: var(--error);
   --success: var(--success);
   --warning: var(--warning);
+  --column-width: var(--pattern-column-width);
+  --container-max-w: var(--container-max-width);
 }
 
 body {

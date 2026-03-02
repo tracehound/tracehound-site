@@ -9,7 +9,7 @@ export function ProblemSection() {
       <Container>
         <header className="w-full flex flex-col p-6 xl:p-12">
           <Badge variant="secondary">PROBLEM</Badge>
-          <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16 xl:max-w-200">
+          <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16 xl:max-w-220">
             Why Security Layers Become the Attack Surface
           </h3>
           <p className="font-sans font-light text-lg md:text-2xl xl:text-[32px] xl:max-w-200">
