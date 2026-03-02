@@ -26,7 +26,7 @@ export default function StaticLayout({ children }: { children: ReactNode }) {
             activeClass="bg-(--accent-primary)"
             className="px-3 py-1.5 hover:bg-(--accent-primary)/20"
             href="/terms-of-services">
-            Teams of Services
+            Terms of Services
           </NavLink>
           <span className="size-1 bg-(--border-accent) rounded-sm" />
           <NavLink

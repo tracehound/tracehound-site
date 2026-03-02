@@ -21,19 +21,37 @@ export function Footer() {
 
         <nav className="flex items-start flex-col xl:flex-row gap-8 lg:gap-24 xl:gap-48 px-6 pt-6 xl:px-12 xl:pt-12 [&_a]:hover:underline">
           <div className="flex flex-col gap-7.5">
-            <h5 className="text-xl font-bold md:text-3xl font-heading">Products</h5>
+            <h5 className="text-xl font-bold md:text-3xl font-heading">Ecosystem</h5>
             <ul className="flex flex-col pl-5 list-disc gap-2">
               <li>
-                <Link href="/platform/overview">Overview</Link>
+                <Link href="/docs/ecosystem/core">Core</Link>
               </li>
               <li>
-                <Link href="/platform/how-it-works">How it works?</Link>
+                <Link href="/docs/ecosystem/argos">Argos</Link>
               </li>
               <li>
-                <Link href="/platform/partnership">Partnership</Link>
+                <Link href="/docs/ecosystem/talos">Talos</Link>
               </li>
               <li>
-                <Link href="/platform/security">Security</Link>
+                <Link href="/docs/ecosystem/muninn">Muninn</Link>
+              </li>
+              <li>
+                <Link href="/docs/ecosystem/huginn">Huginn</Link>
+              </li>
+              <li>
+                <Link href="/docs/ecosystem/heimdall">Heimdall</Link>
+              </li>
+              <li>
+                <Link href="/docs/ecosystem/loki">Loki</Link>
+              </li>
+              <li>
+                <Link href="/docs/ecosystem/norns">Norns</Link>
+              </li>
+              <li>
+                <Link href="/docs/ecosystem/furies">Furies</Link>
+              </li>
+              <li>
+                <Link href="/docs/ecosystem/watchtower">Watchtower</Link>
               </li>
             </ul>
           </div>
@@ -42,16 +60,22 @@ export function Footer() {
             <h5 className="text-xl font-bold md:text-3xl font-heading">Resources</h5>
             <ul className="flex flex-col pl-5 list-disc gap-2">
               <li>
-                <Link href="/services">Services</Link>
+                <Link href="/docs">Documentation</Link>
               </li>
               <li>
-                <Link href="/docs">Documentation</Link>
+                <Link href="/services">Services</Link>
               </li>
               <li>
                 <Link href="/blog">Blog</Link>
               </li>
               <li>
+                <Link href="/faq">FAQ</Link>
+              </li>
+              <li>
                 <Link href="/changelog">Changelog</Link>
+              </li>
+              <li>
+                <Link href="/contact">Contact</Link>
               </li>
             </ul>
           </div>
@@ -63,7 +87,7 @@ export function Footer() {
                 <Link href="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link href="/terms-of-services">Teams of Services</Link>
+                <Link href="/terms-of-services">Terms of Services</Link>
               </li>
               <li>
                 <Link href="/cookie-policy">Cookie Policy</Link>
