@@ -26,9 +26,9 @@ export function Code({ code, language }: { code: string; language?: string }) {
   return (
     <div className="relative border border-dashed border-(--border-accent)">
       <button
-        className="size-8 absolute top-2 right-2 flex items-center justify-center bg-(--accent-primary) rounded-xs cursor-pointer transition-colors hover:bg-(--accent-primary-hover)"
+        className="size-7 absolute top-2 right-2 flex items-center justify-center bg-(--border-accent) rounded-xs cursor-pointer transition-colors hover:bg-(--border-accent)/60"
         onClick={copyHandler}>
-        {status ? <CheckIcon size={16} /> : <CopyIcon size={16} />}
+        {status ? <CheckIcon size={14} weight="bold" /> : <CopyIcon size={14} weight="bold" />}
       </button>
 
       <SyntaxHighlighter

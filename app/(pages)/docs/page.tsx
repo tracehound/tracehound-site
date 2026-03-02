@@ -1,6 +1,8 @@
 import { Code } from '@/app/components/code'
 import { DocsContent } from '@/app/components/docs-content'
 import { DocsContentBlock } from '@/app/components/docs-content-block'
+import { DocsContentParagraph } from '@/app/components/docs-content-paragraph'
+import { DocsContentSubtitle } from '@/app/components/docs-content-subtitle'
 import { DocsHeader } from '@/app/components/docs-header'
 import { DocsList } from '@/app/components/docs-list'
 import { DocsNavigation } from '@/app/components/docs-navigation'
@@ -29,25 +31,25 @@ export default function Docs() {
 
       <DocsContent>
         <DocsContentBlock title="About the project">
-          <p className="font-sans md:text-lg xl:text-xl">
+          <DocsContentParagraph>
             It doesn't use heuristics or "guess" if a request is malicious; instead, it acts as a
             high-integrity buffer for explicit security signals (Scents) from external detectors.
-          </p>
-          <p className="font-sans md:text-lg xl:text-xl">
+          </DocsContentParagraph>
+          <DocsContentParagraph>
             By quarantining suspicious events and preserving them in a tamper-evident AuditChain,
             Tracehound ensures that security events are forever auditable without disrupting
             production traffic.
-          </p>
+          </DocsContentParagraph>
         </DocsContentBlock>
 
         <Separator />
 
         <DocsContentBlock title="Why we built this">
-          <p className="font-sans md:text-lg xl:text-xl">
+          <DocsContentParagraph>
             Modern security architectures often face a trade-off between "blocking and breaking" or
             "logging and losing" forensic details. We built Tracehound to solve the gap between
             real-time traffic and backend security analysis:
-          </p>
+          </DocsContentParagraph>
 
           <DocsList
             items={[
@@ -104,19 +106,15 @@ export default function Docs() {
         <Separator />
 
         <DocsContentBlock title="Quick Start">
-          <h5 className="font-heading font-bold text-base md:text-xl xl:text-2xl">Core Usage</h5>
+          <DocsContentSubtitle>Core Usage</DocsContentSubtitle>
 
           <Code code={coreUsage} />
 
-          <h5 className="font-heading font-bold text-base md:text-xl xl:text-2xl">
-            Express Integration
-          </h5>
+          <DocsContentSubtitle>Express Integration</DocsContentSubtitle>
 
           <Code code={expressIntegration} />
 
-          <h5 className="font-heading font-bold text-base md:text-xl xl:text-2xl">
-            Fastify Integration
-          </h5>
+          <DocsContentSubtitle>Fastify Integration</DocsContentSubtitle>
 
           <Code code={fastifyIntegration} />
         </DocsContentBlock>

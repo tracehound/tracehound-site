@@ -1,11 +1,14 @@
 import { Code } from '@/app/components/code'
 import { DocsContent } from '@/app/components/docs-content'
 import { DocsContentBlock } from '@/app/components/docs-content-block'
+import { DocsContentParagraph } from '@/app/components/docs-content-paragraph'
+import { DocsContentSubtitle } from '@/app/components/docs-content-subtitle'
 import { DocsHeader } from '@/app/components/docs-header'
 import { DocsList } from '@/app/components/docs-list'
 import { DocsNavigation } from '@/app/components/docs-navigation'
 import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import { Separator } from '@/app/components/separator'
+import { Table } from '@/app/components/table'
 import type { Metadata } from 'next/types'
 import {
   coldStorageExport,
@@ -36,7 +39,7 @@ export default function Quickstart() {
 
       <DocsContent>
         <DocsContentBlock title="Prerequisites">
-          <DocsList items={[<p>Node.js 18+</p>, <p>npm, pnpm, or yarn</p>]} />
+          <DocsList items={[<p>Node.js 20+</p>, <p>npm, pnpm, or yarn</p>]} />
         </DocsContentBlock>
 
         <Separator />
@@ -48,94 +51,60 @@ export default function Quickstart() {
         <Separator />
 
         <DocsContentBlock title="Quick Start">
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Step 1: Create Tracehound
-          </h4>
+          <DocsContentSubtitle>Step 1: Create Tracehound</DocsContentSubtitle>
 
           <Code code={quickStartCode} />
 
-          <p className="font-sans md:text-lg xl:text-xl">
+          <DocsContentParagraph>
             That's it. You now have a working Tracehound instance.
-          </p>
+          </DocsContentParagraph>
 
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Step 2: Intercept Requests
-          </h4>
+          <DocsContentSubtitle>Step 2: Intercept Requests</DocsContentSubtitle>
 
           <Code code={interceptRequestCode} />
 
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Step 3: Handle Results
-          </h4>
+          <DocsContentSubtitle>Step 3: Handle Results</DocsContentSubtitle>
 
-          <div className="w-full overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="[&_tr]:border-b [&_tr]:border-(--border-accent)">
-                  <th className="text-foreground h-10 px-4 text-left align-middle font-medium whitespace-nowrap">
-                    Status
-                  </th>
-                  <th className="text-foreground h-10 px-4 text-left align-middle font-medium whitespace-nowrap">
-                    Meaning
-                  </th>
-                  <th className="text-foreground h-10 px-4 text-left align-middle font-medium whitespace-nowrap">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="[&_tr:last-child]:border-0 [&_tr]:border-(--border-accent)">
-                <tr className="hover:bg-(--background) border-b transition-colors">
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
-                    <strong>`clean`</strong>
-                  </td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">No threat detected</td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">Proceed normally</td>
-                </tr>
-                <tr className="hover:bg-(--background) border-b transition-colors">
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
-                    <strong>`quarantined`</strong>
-                  </td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">Threat isolated</td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
-                    Block request, evidence preserved
-                  </td>
-                </tr>
-                <tr className="hover:bg-(--background) border-b transition-colors">
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
-                    <strong>`rate_limited`</strong>
-                  </td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">Too many requests</td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
+          <Table
+            head={['Status', 'Meaning', 'Action']}
+            body={[
+              { row: [<strong>`clean`</strong>, 'No threat detected', 'Proceed normally'] },
+              {
+                row: [
+                  <strong>`quarantined`</strong>,
+                  'Threat isolated',
+                  'Block request, evidence preserved',
+                ],
+              },
+              {
+                row: [
+                  <strong>`rate_limited`</strong>,
+                  'Too many requests',
+                  <>
                     Return 429 with `<strong>retryAfter</strong>`
-                  </td>
-                </tr>
-                <tr className="hover:bg-(--background) border-b transition-colors">
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
-                    <strong>`ignored`</strong>
-                  </td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">Duplicate threat</td>
-                  <td className="py-2 px-4 align-middle whitespace-nowrap">
-                    Already quarantined, block
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  </>,
+                ],
+              },
+              {
+                row: [<strong>`ignored`</strong>, 'Duplicate threat', 'Already quarantined, block'],
+              },
+            ]}
+          />
         </DocsContentBlock>
 
         <Separator />
 
         <DocsContentBlock title="Framework Adapters">
-          <p className="font-sans md:text-lg xl:text-xl">
+          <DocsContentParagraph>
             Use the Express or Fastify adapters (separate packages):
-          </p>
+          </DocsContentParagraph>
 
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">Express</h4>
+          <DocsContentSubtitle>Express</DocsContentSubtitle>
 
           <Code code={expressInstallCode} />
           <Code code={expressSetupCode} />
 
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">Fastify</h4>
+          <DocsContentSubtitle>Fastify</DocsContentSubtitle>
           <Code code={fastifyInstallCode} />
           <Code code={fastifySetupCode} />
         </DocsContentBlock>
@@ -143,31 +112,25 @@ export default function Quickstart() {
         <Separator />
 
         <DocsContentBlock title="Common Patterns">
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Pattern 1: WAF Integration
-          </h4>
+          <DocsContentSubtitle>Pattern 1: WAF Integration</DocsContentSubtitle>
 
-          <p className="font-sans md:text-lg xl:text-xl">
+          <DocsContentParagraph>
             Connect your existing WAF (Cloudflare, AWS WAF) to Tracehound:
-          </p>
+          </DocsContentParagraph>
 
           <Code code={wafIntegrationCode} />
 
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Pattern 2: Custom Rate Limiting
-          </h4>
+          <DocsContentSubtitle>Pattern 2: Custom Rate Limiting</DocsContentSubtitle>
 
-          <p className="font-sans md:text-lg xl:text-xl">Add rate limiting per source IP:</p>
+          <DocsContentParagraph>Add rate limiting per source IP:</DocsContentParagraph>
 
           <Code code={customRateLimiting} />
 
-          <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-            Pattern 3: Cold Storage Export
-          </h4>
+          <DocsContentSubtitle>Pattern 3: Cold Storage Export</DocsContentSubtitle>
 
-          <p className="font-sans md:text-lg xl:text-xl">
+          <DocsContentParagraph>
             Archive evidence to S3-compatible storage (AWS S3, Cloudflare R2, GCS, MinIO):
-          </p>
+          </DocsContentParagraph>
 
           <Code code={coldStorageExport} />
         </DocsContentBlock>
@@ -176,13 +139,11 @@ export default function Quickstart() {
 
         <DocsContentBlock title="Troubleshooting">
           <div className="flex flex-col gap-2">
-            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-              "Quarantine is full" warnings
-            </h4>
+            <DocsContentSubtitle>"Quarantine is full" warnings</DocsContentSubtitle>
 
-            <p className="font-sans md:text-lg xl:text-xl">
+            <DocsContentParagraph>
               Your quarantine has reached `<strong>maxCount</strong>`. Options:
-            </p>
+            </DocsContentParagraph>
 
             <DocsList
               items={[
@@ -203,13 +164,11 @@ export default function Quickstart() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-              High memory usage
-            </h4>
+            <DocsContentSubtitle>High memory usage</DocsContentSubtitle>
 
-            <p className="font-sans md:text-lg xl:text-xl">
+            <DocsContentParagraph>
               Tracehound uses bounded memory by design. If you're seeing high usage:
-            </p>
+            </DocsContentParagraph>
 
             <DocsList
               items={[
@@ -228,13 +187,11 @@ export default function Quickstart() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <h4 className="font-heading font-bold text-lg md:text-xl xl:text-3xl">
-              Requests are slow
-            </h4>
+            <DocsContentSubtitle>Requests are slow</DocsContentSubtitle>
 
-            <p className="font-sans md:text-lg xl:text-xl">
+            <DocsContentParagraph>
               `<strong>agent.intercept()</strong>` is synchronous and should be &lt;1ms. If slow:
-            </p>
+            </DocsContentParagraph>
 
             <DocsList
               items={[

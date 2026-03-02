@@ -1,7 +1,7 @@
 export const instalCode = `npm install @tracehound/core`
 
 export const quickStartCode = `
-import { createTracehound, generateSecureId } from '@tracehound/core'
+import { createTracehound } from '@tracehound/core'
 
 const th = createTracehound({
   quarantine: { maxCount: 1000 },
@@ -22,7 +22,11 @@ app.use((req, res, next) => {
 
   const result = th.agent.intercept(scent)
 
-  if (result.status === 'quarantined') {
+  if (result.status === 'rate_limited') {
+    return res.status(429).json({ error: 'Too many requests', retryAfter: result.retryAfter })
+  }
+
+  if (result.status === 'quarantined' || result.status === 'ignored') {
     return res.status(403).json({ error: 'Blocked' })
   }
 
@@ -74,7 +78,7 @@ export const wafIntegrationCode = `
 const detectThreat = (req) => {
   // Check WAF headers set by your edge provider
   if (req.headers['cf-threat-score'] > 50) {
-    return { category: 'suspicious', severity: 'medium' }
+    return { category: 'unknown', severity: 'medium' }
   }
   return undefined // Clean request
 }
@@ -100,5 +104,5 @@ const coldStorage = createS3ColdStorage({
   prefix: 'prod/evidence/',
 })
 
-// Integrate with Quarantine evacuate for archival
+// Use this adapter in your own evidence archival workflow
 `.trimStart()
