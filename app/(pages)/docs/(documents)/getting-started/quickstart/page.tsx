@@ -88,6 +88,20 @@ export default function Quickstart() {
               {
                 row: [<strong>`ignored`</strong>, 'Duplicate threat', 'Already quarantined, block'],
               },
+              {
+                row: [
+                  <strong>`payload_too_large`</strong>,
+                  'Payload exceeds configured limit',
+                  'Return 413 and reduce/request trim payload',
+                ],
+              },
+              {
+                row: [
+                  <strong>`error`</strong>,
+                  'Internal pipeline error',
+                  'Return 500, log structured error context',
+                ],
+              },
             ]}
           />
         </DocsContentBlock>

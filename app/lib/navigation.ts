@@ -1,5 +1,6 @@
 import { type Icon } from '@phosphor-icons/react'
 import {
+  BarricadeIcon,
   BombIcon,
   BrowsersIcon,
   CastleTurretIcon,
@@ -7,6 +8,7 @@ import {
   HeadCircuitIcon,
   ListChecksIcon,
   ShieldStarIcon,
+  SwapIcon,
   TargetIcon,
 } from '@phosphor-icons/react/dist/ssr'
 
@@ -16,6 +18,7 @@ export type Navigation = {
   summary: string
   category: 'Getting Started' | 'References' | 'Guides' | 'Ecosystem'
   icon?: Icon
+  status?: 'wip' | 'released'
 }
 
 export const navigation: Navigation[] = [
@@ -122,6 +125,7 @@ export const navigation: Navigation[] = [
       'The main Tracehound package. Includes everything you need to quarantine threats and preserve evidence.',
     category: 'Ecosystem',
     icon: CastleTurretIcon,
+    status: 'released',
   },
   {
     slug: 'ecosystem/argos',
@@ -129,6 +133,7 @@ export const navigation: Navigation[] = [
     summary: 'Runtime behavioral observation for threat detection.',
     category: 'Ecosystem',
     icon: TargetIcon,
+    status: 'wip',
   },
   {
     slug: 'ecosystem/talos',
@@ -136,13 +141,7 @@ export const navigation: Navigation[] = [
     summary: 'External policy execution and decision routing.',
     category: 'Ecosystem',
     icon: ShieldStarIcon,
-  },
-  {
-    slug: 'ecosystem/huginn',
-    title: 'Huginn',
-    summary: 'Threat intelligence ingestion and correlation.',
-    category: 'Ecosystem',
-    icon: HeadCircuitIcon,
+    status: 'wip',
   },
   {
     slug: 'ecosystem/muninn',
@@ -150,6 +149,31 @@ export const navigation: Navigation[] = [
     summary: 'Historical ledger and time-series aggregation.',
     category: 'Ecosystem',
     icon: FilmReelIcon,
+    status: 'wip',
+  },
+  {
+    slug: 'ecosystem/huginn',
+    title: 'Huginn',
+    summary: 'Threat intelligence ingestion and correlation.',
+    category: 'Ecosystem',
+    icon: HeadCircuitIcon,
+    status: 'wip',
+  },
+  {
+    slug: 'ecosystem/heimdall',
+    title: 'Heimdall',
+    summary: 'Supply-chain security and dependency integrity checks.',
+    category: 'Ecosystem',
+    icon: BarricadeIcon,
+    status: 'wip',
+  },
+  {
+    slug: 'ecosystem/loki',
+    title: 'Loki',
+    summary: 'Passive deception and tarpit layer.',
+    category: 'Ecosystem',
+    icon: SwapIcon,
+    status: 'wip',
   },
   {
     slug: 'ecosystem/norns',
@@ -157,6 +181,7 @@ export const navigation: Navigation[] = [
     summary: 'Pre-deployment security posture validation.',
     category: 'Ecosystem',
     icon: ListChecksIcon,
+    status: 'wip',
   },
   {
     slug: 'ecosystem/furies',
@@ -164,6 +189,7 @@ export const navigation: Navigation[] = [
     summary: 'Chaos engineering for security infrastructure.',
     category: 'Ecosystem',
     icon: BombIcon,
+    status: 'wip',
   },
   {
     slug: 'ecosystem/watchtower',
@@ -171,5 +197,6 @@ export const navigation: Navigation[] = [
     summary: 'Forensic cockpit and operational dashboards.',
     category: 'Ecosystem',
     icon: BrowsersIcon,
+    status: 'wip',
   },
 ]

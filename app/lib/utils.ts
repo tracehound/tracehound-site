@@ -21,3 +21,7 @@ export function groupByCategory(pages: Navigation[]): Record<Navigation['categor
     {} as Record<Navigation['category'], Navigation[]>,
   )
 }
+
+export function urlNormalizer(url: string) {
+  return encodeURIComponent(url.toLocaleLowerCase().replaceAll(' ', '-'))
+}

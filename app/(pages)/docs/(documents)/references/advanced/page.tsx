@@ -67,7 +67,7 @@ export default function Advanced() {
             always external; Tracehound consumes the signal and executes bounded processing.
           </DocsContentParagraph>
           <Image
-            width={478}
+            width={544}
             height={449}
             src="/diagrams/internal-runtime-flow.svg"
             alt="Internal Runtime Flow"

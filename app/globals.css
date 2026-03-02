@@ -19,9 +19,9 @@
 }
 
 @theme inline {
-  --font-heading: var(--font-darker-grotesque);
+  --font-heading: var(--font-host-grotesk);
   --font-sans: var(--font-space-grotesque);
-  --font-mono: var(--font-space-grotesque);
+  --font-mono: var(--font-jetbrains-mono);
   --foreground: var(--foreground);
   --foreground-hover: var(--foreground-hover);
   --foreground-accent: var(--foreground-accent);
@@ -51,7 +51,20 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-darker-grotesque);
+  font-family: var(--font-host-grotesk);
+}
+
+h3,
+h4,
+h5,
+h6 {
+  scroll-margin-top: 100px;
+}
+
+pre,
+code {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.875rem;
 }
 
 .scrollbar::-webkit-scrollbar {

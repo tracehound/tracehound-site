@@ -184,6 +184,7 @@ th.notifications.on('rate_limit.exceeded', (event) => {
 
 export const coldStorageCode = `
 import { createS3ColdStorage, encodeWithIntegrityAsync } from '@tracehound/core'
+import type { EvidenceHandle } from '@tracehound/core'
 
 const coldStorage = createS3ColdStorage({
   client: myS3LikeClient,
@@ -191,8 +192,8 @@ const coldStorage = createS3ColdStorage({
   prefix: 'prod/evidence/',
 })
 
-async function archiveEvidence(handle: { signature: string; bytes: Uint8Array }) {
-  const encoded = await encodeWithIntegrityAsync(handle.bytes)
+async function archiveEvidence(handle: EvidenceHandle) {
+  const encoded = await encodeWithIntegrityAsync(new Uint8Array(handle.bytes))
   await coldStorage.write(handle.signature, encoded)
 }
 `.trimStart()

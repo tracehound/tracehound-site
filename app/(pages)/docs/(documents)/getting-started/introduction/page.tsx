@@ -67,7 +67,7 @@ export default function Introduction() {
           <DocsContentSubtitle>The Solution</DocsContentSubtitle>
           <DocsContentParagraph>Tracehound fills this gap:</DocsContentParagraph>
           <Image
-            width={945}
+            width={989}
             height={120}
             src="/diagrams/problem-solution.svg"
             alt="Problem and Solution"
@@ -91,7 +91,7 @@ export default function Introduction() {
 
         <DocsContentBlock title="How It Works">
           <Image
-            width={720}
+            width={763}
             height={274}
             src="/diagrams/architecture.svg"
             alt="Architecture"

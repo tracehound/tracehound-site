@@ -1,18 +1,23 @@
 import type { Metadata } from 'next'
-import { Darker_Grotesque, Space_Grotesk } from 'next/font/google'
+import { Host_Grotesk, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { Footer } from './components/footer'
 import { Header } from './components/header'
 import { Column } from './components/patterns/columns'
 import './globals.css'
 import { cn } from './lib/utils'
 
-const darkerGrotesque = Darker_Grotesque({
-  variable: '--font-darker-grotesque',
+const hostGrotesk = Host_Grotesk({
+  variable: '--font-host-grotesk',
   subsets: ['latin-ext'],
 })
 
 const spaceGrotesque = Space_Grotesk({
   variable: '--font-space-grotesque',
+  subsets: ['latin-ext'],
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
   subsets: ['latin-ext'],
 })
 
@@ -42,7 +47,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(darkerGrotesque.variable, spaceGrotesque.variable, 'antialiased')}>
+      <body
+        className={cn(
+          hostGrotesk.variable,
+          spaceGrotesque.variable,
+          jetBrainsMono.variable,
+          'antialiased',
+        )}>
         <Column direction="left" />
         <Header />
         {children}

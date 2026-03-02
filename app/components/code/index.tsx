@@ -24,9 +24,15 @@ export function Code({ code, language }: { code: string; language?: string }) {
   }
 
   return (
-    <div className="relative border border-dashed border-(--border-accent)">
+    <div className="relative border border-dashed border-(--border-accent) rounded-sm overflow-hidden">
+      <div className="w-full px-3 py-2 flex items-center justify-start gap-2 bg-(--border-accent)/50 border-b border-dashed border-(--border-accent)">
+        <span className="size-2.5 rounded-sm bg-(--error)" />
+        <span className="size-2.5 rounded-sm bg-(--warning)" />
+        <span className="size-2.5 rounded-sm bg-(--success)" />
+      </div>
+
       <button
-        className="size-7 absolute top-2 right-2 flex items-center justify-center bg-(--border-accent) rounded-xs cursor-pointer transition-colors hover:bg-(--border-accent)/60"
+        className="size-7 absolute top-8.5 right-2 flex items-center justify-center bg-(--border-accent) rounded-xs cursor-pointer transition-colors hover:bg-(--border-accent)/60"
         onClick={copyHandler}>
         {status ? <CheckIcon size={14} weight="bold" /> : <CopyIcon size={14} weight="bold" />}
       </button>

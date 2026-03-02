@@ -84,7 +84,8 @@ export default function Configuration() {
               </p>,
               <p key="watcher">
                 Watcher is pull-based. Use <strong>`th.watcher.snapshot()`</strong>, not
-                <strong> `getSnapshot()`</strong>.
+                {' '}
+                <strong>`getSnapshot()`</strong>.
               </p>,
               <p key="env">
                 Core does not include an automatic environment loader. Map environment variables in

@@ -63,6 +63,9 @@ th.notifications.on('system.panic', (event) => {
 export const utilitiesCode = `
 import {
   generateSecureId,
+  isClean,
+  isError,
+  isQuarantined,
   isValidSecureId,
   hash,
   serialize,
@@ -80,4 +83,12 @@ const coldStorage = createS3ColdStorage({
   bucket: 'tracehound-evidence',
   prefix: 'prod/evidence/',
 })
+
+if (isQuarantined(result)) {
+  console.log(result.handle.signature)
+} else if (isError(result)) {
+  console.error(result.error.code)
+} else if (isClean(result)) {
+  // continue
+}
 `.trimStart()

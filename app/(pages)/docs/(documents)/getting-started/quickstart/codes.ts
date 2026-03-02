@@ -30,7 +30,15 @@ app.use((req, res, next) => {
     return res.status(403).json({ error: 'Blocked' })
   }
 
-  next()
+  if (result.status === 'payload_too_large') {
+    return res.status(413).json({ error: 'Payload too large', limit: result.limit })
+  }
+
+  if (result.status === 'error') {
+    return res.status(500).json({ error: 'Security pipeline failure' })
+  }
+
+  return next()
 })
 `.trimStart()
 

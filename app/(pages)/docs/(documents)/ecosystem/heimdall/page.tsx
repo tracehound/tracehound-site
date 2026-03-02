@@ -10,41 +10,39 @@ import { Table } from '@/app/components/table'
 import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
-  title: 'Muninn',
-  description: 'Historical ledger and time-series aggregation.',
+  title: 'Heimdall',
+  description: 'WIP summary from RFC-0006: supply-chain security package.',
 }
 
-export default function Muninn() {
+export default function Heimdall() {
   return (
     <DocsPageLayout>
       <DocsHeader
         label="ECOSYSTEM"
-        title="Muninn"
-        summary="WIP summary from RFC-0004: non-authoritative threat metadata substrate."
+        title="Heimdall"
+        summary="WIP summary from RFC-0006: supply-chain security package."
       />
 
       <DocsContent>
         <DocsContentBlock title="RFC Status">
           <DocsContentParagraph>
-            Based on <strong>RFC-0004</strong>, Muninn is in <strong>Draft</strong> status and
-            described as a threat metadata substrate. It is not part of the currently shipped core
-            package surface.
+            Based on <strong>RFC-0006</strong>, Heimdall is in <strong>Draft</strong> state and
+            positioned as a supply-chain security package with optional Tracehound integration.
           </DocsContentParagraph>
         </DocsContentBlock>
 
         <Separator />
 
-        <DocsContentBlock title="Current Position (RFC-0004)">
+        <DocsContentBlock title="Current Position (RFC-0006)">
           <Table
             head={['Item', 'Summary']}
             body={[
-              { row: ['Security impact', 'Low (non-authoritative)'] },
-              { row: ['Decision role', 'None; observation-only metadata layer'] },
-              { row: ['Primary function', 'Record/query/archive threat metadata'] },
+              { row: ['Classification', 'Can run standalone, can be integrated with core'] },
+              { row: ['Main focus', 'Dependency/package integrity and CI workflow checks'] },
               {
                 row: [
-                  'Trust model',
-                  'Metadata must not be treated as authoritative decision input',
+                  'Core components (RFC)',
+                  'Scanner, CI/CD integration, source monitor, reports',
                 ],
               },
             ]}
@@ -57,13 +55,11 @@ export default function Muninn() {
           <DocsList
             items={[
               <p key="w1">
-                This page is intentionally RFC-aligned and does not document production APIs.
+                This page is RFC-level summary only and intentionally avoids speculative API docs.
               </p>,
               <p key="w2">
-                Integration examples in RFC are design direction, not implementation guarantee.
-              </p>,
-              <p key="w3">
-                API-level docs should be added after package implementation and release.
+                Package surface should be documented after implementation lands in canonical
+                sources.
               </p>,
             ]}
           />
@@ -72,14 +68,14 @@ export default function Muninn() {
 
       <DocsNavigation
         prev={{
-          href: '/docs/ecosystem/talos',
-          title: 'Talos',
-          summary: 'External policy execution and decision routing',
-        }}
-        next={{
           href: '/docs/ecosystem/huginn',
           title: 'Huginn',
-          summary: 'External threat feed enrichment layer.',
+          summary: 'External threat feed enrichment layer',
+        }}
+        next={{
+          href: '/docs/ecosystem/loki',
+          title: 'Loki',
+          summary: 'Passive deception and tarpit layer',
         }}
       />
     </DocsPageLayout>

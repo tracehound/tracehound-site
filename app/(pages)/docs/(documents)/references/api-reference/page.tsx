@@ -126,6 +126,20 @@ export default function APIReferences() {
 
         <DocsContentBlock title="Low-level APIs">
           <DocsContentParagraph>
+            Use low-level APIs only when you need explicit component ownership, custom wiring, or
+            deterministic test doubles.
+          </DocsContentParagraph>
+          <Table
+            head={['Need', 'API']}
+            body={[
+              { row: ['Manual retention control', <strong>`new Quarantine(config, auditChain)`</strong>] },
+              { row: ['Custom agent wiring', <strong>`createAgent(...)`</strong>] },
+              { row: ['Independent limiter instance', <strong>`createRateLimiter(...)`</strong>] },
+              { row: ['Pull-only observer state', <strong>`createWatcher(...)`</strong>] },
+              { row: ['Process-separated worker pool', <strong>`createHoundPool(...)`</strong>] },
+            ]}
+          />
+          <DocsContentParagraph>
             Advanced use cases can compose low-level classes/factories directly (for example,
             `Quarantine`, `createRateLimiter`, `createWatcher`, `createHoundPool`). <br />
             For most applications, prefer <strong>`createTracehound`</strong>.

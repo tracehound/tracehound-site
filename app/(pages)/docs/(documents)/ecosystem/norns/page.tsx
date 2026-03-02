@@ -26,9 +26,9 @@ export default function Norns() {
 
       <DocsNavigation
         prev={{
-          href: '/docs/ecosystem/muninn',
-          title: 'Muninn',
-          summary: 'Historical ledger and time-series aggregation',
+          href: '/docs/ecosystem/loki',
+          title: 'Loki',
+          summary: 'Passive deception and tarpit layer',
         }}
         next={{
           href: '/docs/ecosystem/furies',
