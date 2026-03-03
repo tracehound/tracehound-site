@@ -19,12 +19,16 @@
 
   --pattern-column-width: calc(0.25em * 18);
   --container-max-width: calc(100% - calc(0.25em * 36));
+  --sidebar-width: calc(0.25em * 54);
+  --document-content-width: calc(100% - calc(0.25em * 54));
 }
 
 @media (width >=80rem) {
   :root {
     --pattern-column-width: calc(0.25em * 36);
     --container-max-width: calc(100% - calc(0.25em * 72));
+    --sidebar-width: calc(0.25em * 96);
+    --document-content-width: calc(100% - calc(0.25em * 96));
   }
 }
 
@@ -49,6 +53,8 @@
   --warning: var(--warning);
   --column-width: var(--pattern-column-width);
   --container-max-w: var(--container-max-width);
+  --sidebar-w: var(--sidebar-width);
+  --document-content-w: var(--document-content-width);
 }
 
 body {
