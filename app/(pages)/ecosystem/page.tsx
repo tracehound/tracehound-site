@@ -200,7 +200,7 @@ export default function EcosystemPage() {
                 {
                   row: [
                     'Enterprise Visibility',
-                    'Core + Argos + Muninn + Huginn + Watchtower',
+                    'Core + Argos + Muninn + Anubis + Huginn + Watchtower',
                     'SOC teams running cross-system investigations',
                     'Higher integration and operations complexity',
                   ],
@@ -288,7 +288,7 @@ export default function EcosystemPage() {
                       RFC
                     </span>,
                     'Contract direction is defined; implementation is not final.',
-                    'Talos, Muninn, Huginn, Heimdall, Loki, Norns, Furies, Watchtower',
+                    'Talos, Muninn, Huginn, Heimdall, Loki, Anubis, Norns, Furies, Watchtower',
                   ],
                 },
               ]}

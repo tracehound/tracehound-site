@@ -15,7 +15,7 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-04T13:50:27.916Z"
+export const changelogGeneratedAt = "2026-03-04T17:21:43.620Z"
 
 export const recentReleases: ReleaseEntry[] = [
   {
@@ -27,7 +27,11 @@ export const recentReleases: ReleaseEntry[] = [
       "Coordination provider contract types are formalized in public core type surface (CoordinationProvider, CoordinationHealth, CoordinationFeature).",
       "Agent coordination health flow is fail-open: invalid/throwing provider health resolves safely to degraded without interrupting intercept path.",
       "Coordination contract integration paths are covered in unit/integration/regression tests.",
-      "Runtime membrane enforces metadata-only evidence handles and blocks direct payload egress attempts (bytes, transfer, neutralize, evacuate) with typed runtime violations."
+      "Runtime membrane enforces metadata-only evidence handles and blocks direct payload egress attempts (bytes, transfer, neutralize, evacuate) with typed runtime violations.",
+      "Optional adapter trace id signaling (x-tracehound-trace-id) is available behind explicit opt-in configuration.",
+      "CLI inspect workflow supports trace-id based evidence metadata lookup without raw payload leakage defaults.",
+      "Deterministic Drop and Count behavior is enforced under pressure boundaries in quarantine/cold-path workflows.",
+      "MemoryColdStorage runs memory-first buffering by default; disk buffering remains explicit opt-in via diskBuffer.enabled."
     ]
   },
   {
@@ -38,8 +42,7 @@ export const recentReleases: ReleaseEntry[] = [
     "highlights": [
       "Tracehound Inline Protection Validation Harness (TIPVH): Engineered a complete automated adversarial testing suite containing 7 formal validation scenarios.",
       "Enterprise Multi-Target Deployment: Added Metasploitable 3 alongside Metasploitable 2 for extensive \"Vulnerability Agnostic\" proxy validation.",
-      "Zero-Visibility Capability Verified: Deployed an automated GVM (OpenVAS) scanning integration yielding ZERO FINDINGS from thousands of vulnerability probes.",
-      "Alternative 1: Using 3rd-party SaaS penetration testing tools. Why Rejected? Third-party tools introduce external latency variations and CI/CD egress dependency. A local, sandboxed harness (TIPVH) maintains absolute environmental control and perfect timestamp synchronization for forensic AuditChain validation without compromising the 'Single Source of Truth'."
+      "Zero-Visibility Capability Verified: Deployed an automated GVM (OpenVAS) scanning integration yielding ZERO FINDINGS from thousands of vulnerability probes."
     ]
   },
   {
@@ -50,20 +53,23 @@ export const recentReleases: ReleaseEntry[] = [
     "highlights": [
       "Defensive Scent Extraction: Implemented safeClone in Express/Fastify adapters. This ensures the Tracehound process is resilient to circular references or exotic payload shapes (e.g., Stream objects, DOM nodes) that could otherwise trigger runtime crashes during scent extraction.",
       "Privacy Hardening: Standardized the suppression of Tracehound signature in external HTTP 403 responses by default. This reduces the adversarial correlation surface while providing an opt-in emitSignatureInResponse toggle for legitimate tracing needs.",
-      "Workspace Quality Gate: Integrated root pretest and prelint hooks into package.json. These mandatory lifecycle steps enforce that @tracehound/core artifacts are compiled before workspace packages run validation, eliminating cross-package dependency resolution failures in CI.",
-      "Alternative 1: Using structuredClone() for payload extraction. Why Rejected? structuredClone is strictly type-sensitive and throws on non-cloneable objects (functions, symbols). In a middleware context, we cannot trust that third-party plugins haven't attached non-serializable properties to the request. JSON-based sanitization is safer for \"High-Velocity API\" environments."
+      "Workspace Quality Gate: Integrated root pretest and prelint hooks into package.json. These mandatory lifecycle steps enforce that @tracehound/core artifacts are compiled before workspace packages run validation, eliminating cross-package dependency resolution failures in CI."
     ]
   },
   {
     "version": "1.4.2",
     "date": "2026-02-21",
     "title": "Document Updates & Roadmap",
-    "summary": "Covers changes since commit 204b957d85b79f728102f37042541580953a023d. In accordance with tracehound standards, the system-wide evaluation of this release (and the format of these notes) is as follows:",
+    "summary": "Covers changes since commit 204b957d85b79f728102f37042541580953a023d.",
     "highlights": [
       "2026 Pilot Program (PILOT-PROGRAM-2026.md): Added vision containing go-to-market (GTM) and adoption strategies for early-stage integrators.",
       "Enhanced Quarantine Protocol (ENHANCED-QUARANTINE-PROTOCOL.md): Documented the roadmap detailing the multi-phase integration of application-level quarantine mechanisms.",
       "Resilience Edge V2 (RESILIENCE-EDGE-V2.md): Conveyed the next-generation hardware/server architecture focusing on pre-extraction protection, absolute network containment, and zero-overhead logging goals.",
-      "Comprehensive Threat Model (THREAT-MODEL.md): Added an official threat model to guide future architectural decisions and strictly define security boundaries."
+      "Comprehensive Threat Model (THREAT-MODEL.md): Added an official threat model to guide future architectural decisions and strictly define security boundaries.",
+      "Chaos Testing ADR (chaos-testing-architecture-decision.md): Integrated an Architecture Decision Record (ADR) justifying why a custom chaos testing suite was chosen over third-party tools.",
+      "CI/CD Reliability (Semgrep Fix): Stabilized the CI pipeline by masking SemGrep rules that produced false-positive warnings in chaos test scripts via .semgrepignore configuration.",
+      "Main Showcase (README): Added a project banner, sharpened the project description, and modernized heading formats.",
+      "FAQ Addition: Created FAQ documentation to accelerate developer onboarding and clarify project boundaries."
     ]
   },
   {
@@ -75,7 +81,9 @@ export const recentReleases: ReleaseEntry[] = [
       "HoundPool Auto-Activation: Fixed a core design flaw where Agent quarantined evidence but never explicitly activated the HoundPool to process it. Agent now accepts an optional IHoundPool dependency and auto-activates workers on quarantine.",
       "Watcher Observability Wiring: Fixed Watcher remaining perpetually empty. It is now correctly wired to Agent.intercept(), receiving recordThreat(), updateQuarantine(), and setOverloaded() events.",
       "NotificationEmitter Wiring: Fixed dormant NotificationEmitter. It now correctly broadcasts threat.detected, evidence.quarantined, rate_limit.exceeded, and system.panic events.",
-      "HoundPool Execution Results: Wired HoundPool.onResult to intercept worker timeouts and errors, converting them into Watcher alerts and system.panic notifications."
+      "HoundPool Execution Results: Wired HoundPool.onResult to intercept worker timeouts and errors, converting them into Watcher alerts and system.panic notifications.",
+      "Chaos Suite Stabilization: Rewrote the chaos suite (run-chaos-suite.ts) to be PID-free. Repurposed assertions to test deterministic fail-open invariants (pool exhaustion recovery, timeout handling) instead of unreliable process IDs.",
+      "Test Integrity: Updated unit tests to verify full internal wiring (Agent ↔ Watcher ↔ Notifications) and ensure createTracehound factory propagates all dependencies correctly."
     ]
   }
 ]

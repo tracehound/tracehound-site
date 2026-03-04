@@ -68,9 +68,9 @@ export default function Loki() {
           summary: 'Supply-chain security and dependency integrity checks',
         }}
         next={{
-          href: '/docs/ecosystem/norns',
-          title: 'Norns',
-          summary: 'Pre-deployment security posture validation',
+          href: '/docs/ecosystem/anubis',
+          title: 'Anubis',
+          summary: 'Post-mortem forensic control layer',
         }}
       />
     </DocsPageLayout>

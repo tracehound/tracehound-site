@@ -26,9 +26,9 @@ export default function Norns() {
 
       <DocsNavigation
         prev={{
-          href: '/docs/ecosystem/loki',
-          title: 'Loki',
-          summary: 'Passive deception and tarpit layer',
+          href: '/docs/ecosystem/anubis',
+          title: 'Anubis',
+          summary: 'Post-mortem forensic control layer',
         }}
         next={{
           href: '/docs/ecosystem/furies',

@@ -7,6 +7,7 @@ import {
   FilmReelIcon,
   HeadCircuitIcon,
   ListChecksIcon,
+  ScalesIcon,
   ShieldStarIcon,
   SwapIcon,
   TargetIcon,
@@ -173,6 +174,14 @@ export const navigation: Navigation[] = [
     summary: 'Passive deception and tarpit layer.',
     category: 'Ecosystem',
     icon: SwapIcon,
+    status: 'wip',
+  },
+  {
+    slug: 'ecosystem/anubis',
+    title: 'Anubis',
+    summary: 'Post-mortem forensic control layer for reconstructing evidence chains.',
+    category: 'Ecosystem',
+    icon: ScalesIcon,
     status: 'wip',
   },
   {

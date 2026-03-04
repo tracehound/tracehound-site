@@ -83,6 +83,17 @@ export const packages: PackageCard[] = [
     status: 'RFC',
   },
   {
+    name: 'Anubis',
+    slug: 'anubis',
+    layer: 'Post-Mortem Forensic',
+    summary:
+      'Offline forensic control pipeline that normalizes external logs into chain-linked evidence.',
+    whenToUse: 'When incidents require retroactive evidence reconstruction from existing logs.',
+    input: 'WAF, SIEM, RASP, and Tracehound export records.',
+    output: 'Unified TEF evidence chains, manifests, and archive-ready forensic bundles.',
+    status: 'RFC',
+  },
+  {
     name: 'Norns',
     slug: 'norns',
     layer: 'Pre-Deployment Validation',
@@ -129,7 +140,7 @@ export const architectureLayers = [
     title: 'Assurance Plane',
     description:
       'Validates upstream risk through integrity checks, chaos drills, and release gates.',
-    members: ['Heimdall', 'Norns', 'Furies', 'Loki'],
+    members: ['Heimdall', 'Loki', 'Anubis', 'Norns', 'Furies'],
   },
 ]
 
@@ -142,9 +153,10 @@ export const operationalFlows = [
       'Talos evaluates external policy and returns response directives.',
       'Core applies bounded runtime controls and quarantine semantics.',
       'Muninn persists chain-linked evidence with retention policy.',
+      'Anubis reconstructs multi-source post-mortem timelines from historical logs.',
       'Watchtower drives analyst triage and cross-team coordination.',
     ],
-    packages: ['Argos', 'Talos', 'Core', 'Muninn', 'Watchtower'],
+    packages: ['Argos', 'Talos', 'Core', 'Muninn', 'Anubis', 'Watchtower'],
   },
   {
     name: 'Threat Hunting',
@@ -153,9 +165,10 @@ export const operationalFlows = [
       'Huginn ingests and correlates intelligence indicators.',
       'Argos maps runtime behavior against enriched context.',
       'Muninn exposes historical evidence for timeline reconstruction.',
+      'Anubis fuses external log sources into a unified forensic evidence chain.',
       'Watchtower supports pivoting across entities and sessions.',
     ],
-    packages: ['Huginn', 'Argos', 'Muninn', 'Watchtower'],
+    packages: ['Huginn', 'Argos', 'Muninn', 'Anubis', 'Watchtower'],
   },
   {
     name: 'Pre-Release Security Gate',

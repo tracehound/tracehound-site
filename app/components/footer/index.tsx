@@ -45,6 +45,9 @@ export function Footer() {
                 <Link href="/docs/ecosystem/loki">Loki</Link>
               </li>
               <li>
+                <Link href="/docs/ecosystem/anubis">Anubis</Link>
+              </li>
+              <li>
                 <Link href="/docs/ecosystem/norns">Norns</Link>
               </li>
               <li>

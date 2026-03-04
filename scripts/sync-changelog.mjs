@@ -1,8 +1,9 @@
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const OUTPUT_PATH = 'app/(pages)/changelog/data.generated.ts'
 const RECENT_COUNT = Number.parseInt(process.env.CORE_CHANGELOG_RECENT_COUNT ?? '5', 10)
+const HIGHLIGHT_LIMIT = Number.parseInt(process.env.CORE_CHANGELOG_HIGHLIGHT_LIMIT ?? '8', 10)
 
 function cleanInlineMarkdown(value) {
   return value
@@ -60,22 +61,29 @@ function parseReleases(markdown) {
     const sectionLines = lines.slice(start + 1, end)
     const highlights = []
     const paragraphBuffer = []
+    let inRationaleSection = false
 
     for (const rawLine of sectionLines) {
       const line = rawLine.trim()
       if (!line) continue
-      if (line.startsWith('## ')) continue
+      if (line.startsWith('## ')) {
+        const sectionTitle = line.slice(3).toLowerCase()
+        inRationaleSection = sectionTitle.includes('rationale') || sectionTitle.includes('compliance')
+        continue
+      }
       if (line.startsWith('### ')) continue
 
       if (line.startsWith('- ')) {
-        if (/^- \*\*/.test(line) || /^- [A-Z0-9]/.test(line)) {
+        if (inRationaleSection) continue
+        if (/^- \*\*/.test(line) || /^- [`'"]?[A-Z0-9]/.test(line)) {
           const bullet = cleanInlineMarkdown(line.slice(2))
-          if (bullet) highlights.push(bullet)
+          if (!bullet || /^TH-[A-Z0-9-]+$/.test(bullet)) continue
+          highlights.push(bullet)
         }
         continue
       }
 
-      if (!line.match(/^\d+\./)) {
+      if (!line.match(/^\d+\./) && !inRationaleSection) {
         paragraphBuffer.push(cleanInlineMarkdown(line))
       }
     }
@@ -123,17 +131,31 @@ export const timelineRows: TimelineRow[] = ${JSON.stringify(timelineRows, null, 
 
 async function readSource() {
   const explicitUrl = process.env.CORE_CHANGELOG_URL
+  const explicitPath = process.env.CORE_CHANGELOG_PATH
 
-  if (!explicitUrl) {
-    throw new Error('CORE_CHANGELOG_URL is required (raw URL to packages/core/CHANGELOG.md).')
+  if (explicitPath) {
+    const content = await readFile(path.resolve(explicitPath), 'utf8')
+    return { content }
   }
 
-  const response = await fetch(explicitUrl)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch changelog from URL (${response.status} ${response.statusText})`)
+  if (explicitUrl) {
+    const response = await fetch(explicitUrl)
+    if (!response.ok) {
+      throw new Error(`Failed to fetch changelog from URL (${response.status} ${response.statusText})`)
+    }
+    const content = await response.text()
+    return { content }
   }
-  const content = await response.text()
-  return { content }
+
+  const fallbackPath = path.resolve('..', 'tracehound', 'packages', 'core', 'CHANGELOG.md')
+  try {
+    const content = await readFile(fallbackPath, 'utf8')
+    return { content }
+  } catch {
+    throw new Error(
+      'Provide CORE_CHANGELOG_URL or CORE_CHANGELOG_PATH. Fallback ../tracehound/packages/core/CHANGELOG.md not found.',
+    )
+  }
 }
 
 async function main() {
@@ -146,7 +168,7 @@ async function main() {
 
   const recentReleases = releases.slice(0, RECENT_COUNT).map((release) => ({
     ...release,
-    highlights: release.highlights.slice(0, 4),
+    highlights: release.highlights.slice(0, HIGHLIGHT_LIMIT),
   }))
   const timelineRows = releases.slice(RECENT_COUNT).map((release) => ({
     version: release.version,
