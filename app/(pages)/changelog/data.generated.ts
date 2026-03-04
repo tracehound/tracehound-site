@@ -15,9 +15,21 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-03T05:51:37.803Z"
+export const changelogGeneratedAt = "2026-03-04T13:50:27.916Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.5.0",
+    "date": "2026-03-04",
+    "title": "M3 Pressure Containment and Governance Delivery",
+    "summary": "Covers the complete Sprint Bootstrap Governance Pack Post-Sprint Implementation Backlog. Ticket coverage:",
+    "highlights": [
+      "Coordination provider contract types are formalized in public core type surface (CoordinationProvider, CoordinationHealth, CoordinationFeature).",
+      "Agent coordination health flow is fail-open: invalid/throwing provider health resolves safely to degraded without interrupting intercept path.",
+      "Coordination contract integration paths are covered in unit/integration/regression tests.",
+      "Runtime membrane enforces metadata-only evidence handles and blocks direct payload egress attempts (bytes, transfer, neutralize, evacuate) with typed runtime violations."
+    ]
+  },
   {
     "version": "1.4.4",
     "date": "2026-02-26",
@@ -65,22 +77,15 @@ export const recentReleases: ReleaseEntry[] = [
       "NotificationEmitter Wiring: Fixed dormant NotificationEmitter. It now correctly broadcasts threat.detected, evidence.quarantined, rate_limit.exceeded, and system.panic events.",
       "HoundPool Execution Results: Wired HoundPool.onResult to intercept worker timeouts and errors, converting them into Watcher alerts and system.panic notifications."
     ]
-  },
-  {
-    "version": "1.4.0",
-    "date": "2026-02-16",
-    "title": "Deterministic Fuzz Assurance Program",
-    "summary": "This release finalizes the Jazzer-free deterministic fuzz assurance roadmap for Tracehound core. It adds reproducible property-fuzz coverage, adversarial corpus replay, lifecycle governance, and CI gate enforcement for audit-grade security invariants.",
-    "highlights": [
-      "Deterministic Property Fuzz Suite under packages/core/tests/fuzz/ for mandatory invariants:",
-      "IPC logical safety",
-      "Adversarial State-Machine Fuzzing:",
-      "Versioned Adversarial Corpus under security/corpus/ with replayable seed manifest."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.4.0",
+    "date": "2026-02-16",
+    "title": "Deterministic Fuzz Assurance Program"
+  },
   {
     "version": "1.3.0",
     "date": "2026-02-16",
