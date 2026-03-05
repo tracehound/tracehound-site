@@ -24,6 +24,11 @@ const th = createTracehound({
     onPoolExhausted: 'defer',
     deferQueueLimit: 100,
   },
+  snapshot: {
+    path: '/var/run/tracehound/system-snapshot.json',
+    secret: process.env.TRACEHOUND_SNAPSHOT_SECRET,
+    intervalMs: 1000,
+  },
 })
 `.trimStart()
 
@@ -61,6 +66,12 @@ interface TracehoundOptions {
       childSpawn?: false
     }
   }
+
+  snapshot?: {
+    path: string
+    secret?: string
+    intervalMs?: number
+  }
 }
 `.trimStart()
 
@@ -91,5 +102,13 @@ const th = createTracehound({
       (process.env.TRACEHOUND_HOUND_EXHAUSTED as 'drop' | 'escalate' | 'defer') ?? 'defer',
     deferQueueLimit: Number(process.env.TRACEHOUND_HOUND_DEFER_LIMIT ?? 100),
   },
+  snapshot:
+    process.env.TRACEHOUND_SYSTEM_SNAPSHOT_PATH && process.env.TRACEHOUND_SNAPSHOT_SECRET
+      ? {
+          path: process.env.TRACEHOUND_SYSTEM_SNAPSHOT_PATH,
+          secret: process.env.TRACEHOUND_SNAPSHOT_SECRET,
+          intervalMs: Number(process.env.TRACEHOUND_SNAPSHOT_INTERVAL_MS ?? 1000),
+        }
+      : undefined,
 })
 `.trimStart()

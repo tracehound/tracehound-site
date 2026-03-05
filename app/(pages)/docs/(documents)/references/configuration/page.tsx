@@ -32,6 +32,30 @@ export default function Configuration() {
       />
 
       <DocsContent>
+        <DocsContentBlock title="Breaking Changes (v1.6+)">
+          <div className="border border-dashed border-(--warning) bg-(--background) p-4">
+            <p className="font-mono text-xs text-(--warning)">WARNING</p>
+            <DocsList
+              items={[
+                <p key="cfg-secret">
+                  Enabling <strong>`snapshot`</strong> requires a deterministic secret from{' '}
+                  <strong>`snapshot.secret`</strong> or <strong>`TRACEHOUND_SNAPSHOT_SECRET`</strong>.
+                </p>,
+                <p key="cfg-cli">
+                  CLI <strong>`status`</strong>/<strong>`stats`</strong>/<strong>`watch`</strong> commands do
+                  not return fallback healthy/default-zero output.
+                </p>,
+                <p key="cfg-fastify">
+                  <strong>`@tracehound/fastify`</strong> uses named export only:{' '}
+                  <strong>`tracehoundPlugin`</strong>.
+                </p>,
+              ]}
+            />
+          </div>
+        </DocsContentBlock>
+
+        <Separator />
+
         <DocsContentBlock title="Initialization">
           <DocsContentParagraph>
             Configure Tracehound through a single entry point:{' '}
@@ -71,6 +95,7 @@ export default function Configuration() {
               { row: [<strong>`houndPool.rotationJitterMs`</strong>, <strong>`1000`</strong>] },
               { row: [<strong>`houndPool.onPoolExhausted`</strong>, <strong>`defer`</strong>] },
               { row: [<strong>`houndPool.deferQueueLimit`</strong>, <strong>`100`</strong>] },
+              { row: [<strong>`snapshot.intervalMs`</strong>, <strong>`1000`</strong>] },
             ]}
           />
         </DocsContentBlock>
@@ -91,6 +116,10 @@ export default function Configuration() {
               <p key="env">
                 Core does not include an automatic environment loader. Map environment variables in
                 your application layer.
+              </p>,
+              <p key="snapshot">
+                For CLI operational commands, map <strong>`TRACEHOUND_SYSTEM_SNAPSHOT_PATH`</strong>{' '}
+                and <strong>`TRACEHOUND_SNAPSHOT_SECRET`</strong> in the application runtime.
               </p>,
             ]}
           />

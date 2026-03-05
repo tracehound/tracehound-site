@@ -24,6 +24,19 @@ export default function Changelog() {
               This page is generated from <strong>@tracehound/core</strong> changelog notes and
               summarizes major release-level changes for SecOps and platform teams.
             </p>
+            <div className="border border-dashed border-(--warning) bg-(--background) p-4">
+              <p className="font-mono text-xs text-(--warning)">MIGRATION WARNING</p>
+              <ul className="mt-2 list-disc space-y-2 pl-5 text-sm xl:text-base">
+                <li>CLI <strong>status/stats/watch</strong> now requires verified snapshot input.</li>
+                <li>Fastify adapter default export was removed; use <strong>tracehoundPlugin</strong>.</li>
+                <li>Custom <strong>IAgent</strong> adapters must implement <strong>getStats()</strong>.</li>
+              </ul>
+              <p className="mt-3 text-sm">
+                See <a className="underline" href="/docs/references/configuration">Configuration</a>,{' '}
+                <a className="underline" href="/docs/references/api-reference">API Reference</a>, and{' '}
+                <a className="underline" href="/docs/getting-started/quickstart">Quickstart</a> for migration details.
+              </p>
+            </div>
             <p className="text-xs font-mono text-(--border)">
               Last synced: {new Date(changelogGeneratedAt).toISOString()}
             </p>

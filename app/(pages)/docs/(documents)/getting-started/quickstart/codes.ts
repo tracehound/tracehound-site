@@ -114,3 +114,22 @@ const coldStorage = createS3ColdStorage({
 
 // Use this adapter in your own evidence archival workflow
 `.trimStart()
+
+
+export const snapshotRuntimeCode = `
+import { createTracehound } from '@tracehound/core'
+
+const th = createTracehound({
+  quarantine: { maxCount: 1000 },
+  snapshot: {
+    path: process.env.TRACEHOUND_SYSTEM_SNAPSHOT_PATH!,
+    secret: process.env.TRACEHOUND_SNAPSHOT_SECRET!,
+    intervalMs: 1000,
+  },
+})
+`.trimStart()
+
+export const snapshotEnvCode = `
+export TRACEHOUND_SYSTEM_SNAPSHOT_PATH=/var/run/tracehound/system-snapshot.json
+export TRACEHOUND_SNAPSHOT_SECRET=replace-with-shared-secret
+`.trimStart()

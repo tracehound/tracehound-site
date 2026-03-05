@@ -34,6 +34,30 @@ export default function APIReferences() {
       />
 
       <DocsContent>
+        <DocsContentBlock title="Breaking Changes (v1.6+)">
+          <div className="border border-dashed border-(--warning) bg-(--background) p-4">
+            <p className="font-mono text-xs text-(--warning)">WARNING</p>
+            <DocsList
+              items={[
+                <p key="api-agent-stats">
+                  Custom <strong>`IAgent`</strong> implementations must expose{' '}
+                  <strong>`getStats(): Readonly&lt;AgentStats&gt;`</strong>.
+                </p>,
+                <p key="api-cli-snapshot">
+                  CLI <strong>`status`</strong>/<strong>`stats`</strong>/<strong>`watch`</strong>{' '}
+                  commands no longer return fabricated health data and now require a verified snapshot.
+                </p>,
+                <p key="api-fastify">
+                  <strong>`@tracehound/fastify`</strong> default export was removed; use named export{' '}
+                  <strong>`tracehoundPlugin`</strong>.
+                </p>,
+              ]}
+            />
+          </div>
+        </DocsContentBlock>
+
+        <Separator />
+
         <DocsContentBlock title="Primary Entry Point">
           <DocsContentParagraph>
             The recommended public API is <strong>`createTracehound(options)`</strong>. It returns a
@@ -55,6 +79,7 @@ export default function APIReferences() {
               { row: [<strong>`th.auditChain`</strong>, 'Tamper-evident chain records'] },
               { row: [<strong>`th.notifications`</strong>, 'Event emitter for runtime signals'] },
               { row: [<strong>`th.houndPool`</strong>, 'Process-separated async worker pool'] },
+              { row: [<strong>`th.snapshot()`</strong>, 'Immutable runtime snapshot for signed transport'] },
             ]}
           />
         </DocsContentBlock>
