@@ -140,6 +140,19 @@ export default function APIReferences() {
             <strong>`evidence.quarantined`</strong>, <strong>`rate_limit.exceeded`</strong>,{' '}
             <strong>`system.panic`</strong>.
           </DocsContentParagraph>
+
+          <DocsContentSubtitle>system.panic reason patterns</DocsContentSubtitle>
+          <DocsList
+            items={[
+              <p key="panic-timeout">`hound_timeout: signature=&lt;signature&gt;`</p>,
+              <p key="panic-error">`hound_error: &lt;error_code_or_message&gt;`</p>,
+              <p key="panic-snapshot-write">`snapshot_write_failed`</p>,
+              <p key="panic-snapshot-cleanup">`snapshot_cleanup_failed`</p>,
+              <p key="panic-coordination-contract">`coordination.invalid_contract`</p>,
+              <p key="panic-coordination-health">`coordination.health_failure`</p>,
+              <p key="panic-membrane">`membrane.payload_egress_blocked`</p>,
+            ]}
+          />
         </DocsContentBlock>
 
         <Separator />

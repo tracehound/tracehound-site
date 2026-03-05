@@ -1,5 +1,5 @@
 export const createTracehoundExampleCode = `
-import { createTracehound } from '@tracehound/core'
+import { createTracehound, SYSTEM_SNAPSHOT_ENV } from '@tracehound/core'
 
 const th = createTracehound({
   maxPayloadSize: 1_000_000,
@@ -26,7 +26,7 @@ const th = createTracehound({
   },
   snapshot: {
     path: '/var/run/tracehound/system-snapshot.json',
-    secret: process.env.TRACEHOUND_SNAPSHOT_SECRET,
+    secret: process.env[SYSTEM_SNAPSHOT_ENV.SECRET],
     intervalMs: 1000,
   },
 })
@@ -76,7 +76,7 @@ interface TracehoundOptions {
 `.trimStart()
 
 export const envMappingCode = `
-import { createTracehound } from '@tracehound/core'
+import { createTracehound, SYSTEM_SNAPSHOT_ENV } from '@tracehound/core'
 
 const th = createTracehound({
   maxPayloadSize: Number(process.env.TRACEHOUND_MAX_PAYLOAD_SIZE ?? 1_000_000),
@@ -103,12 +103,21 @@ const th = createTracehound({
     deferQueueLimit: Number(process.env.TRACEHOUND_HOUND_DEFER_LIMIT ?? 100),
   },
   snapshot:
-    process.env.TRACEHOUND_SYSTEM_SNAPSHOT_PATH && process.env.TRACEHOUND_SNAPSHOT_SECRET
+    process.env[SYSTEM_SNAPSHOT_ENV.PATH] && process.env[SYSTEM_SNAPSHOT_ENV.SECRET]
       ? {
-          path: process.env.TRACEHOUND_SYSTEM_SNAPSHOT_PATH,
-          secret: process.env.TRACEHOUND_SNAPSHOT_SECRET,
+          path: process.env[SYSTEM_SNAPSHOT_ENV.PATH],
+          secret: process.env[SYSTEM_SNAPSHOT_ENV.SECRET],
           intervalMs: Number(process.env.TRACEHOUND_SNAPSHOT_INTERVAL_MS ?? 1000),
         }
       : undefined,
 })
+`.trimStart()
+
+export const snapshotEnvKeysCode = `
+import { SYSTEM_SNAPSHOT_ENV } from '@tracehound/core'
+
+process.env[SYSTEM_SNAPSHOT_ENV.PATH] = '/var/run/tracehound/system-snapshot.json'
+process.env[SYSTEM_SNAPSHOT_ENV.SECRET] = 'replace-with-shared-secret'
+process.env[SYSTEM_SNAPSHOT_ENV.MAX_AGE_MS] = '5000'
+process.env[SYSTEM_SNAPSHOT_ENV.MAX_FUTURE_SKEW_MS] = '5000'
 `.trimStart()

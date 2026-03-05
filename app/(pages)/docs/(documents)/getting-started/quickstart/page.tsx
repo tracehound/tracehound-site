@@ -144,6 +144,10 @@ export default function Quickstart() {
           <Code code={snapshotRuntimeCode} />
 
           <DocsContentSubtitle>Runtime environment variables</DocsContentSubtitle>
+          <DocsContentParagraph>
+            <strong>@tracehound/core</strong> exports <strong>`SYSTEM_SNAPSHOT_ENV`</strong> for
+            programmatic key access (`PATH`, `SECRET`, `MAX_AGE_MS`, `MAX_FUTURE_SKEW_MS`).
+          </DocsContentParagraph>
           <Code code={snapshotEnvCode} />
         </DocsContentBlock>
 

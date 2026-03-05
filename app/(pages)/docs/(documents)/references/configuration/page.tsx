@@ -14,6 +14,7 @@ import type { Metadata } from 'next/types'
 import {
   createTracehoundExampleCode,
   envMappingCode,
+  snapshotEnvKeysCode,
   tracehoundOptionsInterfaceCode,
 } from './codes'
 
@@ -118,8 +119,9 @@ export default function Configuration() {
                 your application layer.
               </p>,
               <p key="snapshot">
-                For CLI operational commands, map <strong>`TRACEHOUND_SYSTEM_SNAPSHOT_PATH`</strong>{' '}
-                and <strong>`TRACEHOUND_SNAPSHOT_SECRET`</strong> in the application runtime.
+                For CLI operational commands, use <strong>`SYSTEM_SNAPSHOT_ENV`</strong> keys:
+                required <strong>`PATH`</strong>/<strong>`SECRET`</strong>, optional{' '}
+                <strong>`MAX_AGE_MS`</strong>/<strong>`MAX_FUTURE_SKEW_MS`</strong>.
               </p>,
             ]}
           />
@@ -130,6 +132,8 @@ export default function Configuration() {
         <DocsContentBlock title="Environment Mapping Example">
           <DocsContentSubtitle>Application-level env mapping</DocsContentSubtitle>
           <Code code={envMappingCode} />
+          <DocsContentSubtitle>Snapshot env key constants</DocsContentSubtitle>
+          <Code code={snapshotEnvKeysCode} />
         </DocsContentBlock>
       </DocsContent>
 

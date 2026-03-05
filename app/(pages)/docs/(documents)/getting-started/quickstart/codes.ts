@@ -117,13 +117,13 @@ const coldStorage = createS3ColdStorage({
 
 
 export const snapshotRuntimeCode = `
-import { createTracehound } from '@tracehound/core'
+import { createTracehound, SYSTEM_SNAPSHOT_ENV } from '@tracehound/core'
 
 const th = createTracehound({
   quarantine: { maxCount: 1000 },
   snapshot: {
-    path: process.env.TRACEHOUND_SYSTEM_SNAPSHOT_PATH!,
-    secret: process.env.TRACEHOUND_SNAPSHOT_SECRET!,
+    path: process.env[SYSTEM_SNAPSHOT_ENV.PATH]!,
+    secret: process.env[SYSTEM_SNAPSHOT_ENV.SECRET]!,
     intervalMs: 1000,
   },
 })
@@ -132,4 +132,6 @@ const th = createTracehound({
 export const snapshotEnvCode = `
 export TRACEHOUND_SYSTEM_SNAPSHOT_PATH=/var/run/tracehound/system-snapshot.json
 export TRACEHOUND_SNAPSHOT_SECRET=replace-with-shared-secret
+export TRACEHOUND_SNAPSHOT_MAX_AGE_MS=5000
+export TRACEHOUND_SNAPSHOT_MAX_FUTURE_SKEW_MS=5000
 `.trimStart()
