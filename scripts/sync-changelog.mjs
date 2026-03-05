@@ -57,6 +57,7 @@ function parseReleases(markdown) {
     const end = headingIndexes[i + 1] ?? lines.length
     const heading = parseHeading(lines[start])
     if (!heading) continue
+    if (heading.version.toLowerCase() === 'unreleased') continue
 
     const sectionLines = lines.slice(start + 1, end)
     const highlights = []
@@ -192,3 +193,4 @@ main().catch((error) => {
   console.error(error instanceof Error ? error.message : String(error))
   process.exit(1)
 })
+

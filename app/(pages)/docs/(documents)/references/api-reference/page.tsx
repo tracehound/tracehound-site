@@ -46,6 +46,8 @@ export default function APIReferences() {
                 <p key="api-cli-snapshot">
                   CLI <strong>`status`</strong>/<strong>`stats`</strong>/<strong>`watch`</strong>{' '}
                   commands no longer return fabricated health data and now require a verified snapshot.
+                  Operator-facing failures are explicit: <strong>`NO_INSTANCE`</strong> or{' '}
+                  <strong>`INTEGRITY_VIOLATION`</strong>.
                 </p>,
                 <p key="api-fastify">
                   <strong>`@tracehound/fastify`</strong> default export was removed; use named export{' '}
@@ -159,6 +161,13 @@ export default function APIReferences() {
 
         <DocsContentBlock title="Utilities and Cold Storage">
           <Code code={utilitiesCode} />
+          <DocsContentParagraph>
+            <strong>@tracehound/core</strong> also exports canonical operational helpers such as{' '}
+            <strong>`SYSTEM_SNAPSHOT_ENV`</strong>, <strong>`HOUND_PRESSURE_ERRORS`</strong>,{' '}
+            <strong>`HoundPressureErrorCode`</strong>, and{' '}
+            <strong>`isHoundPressureError`</strong> so CLI wiring and pressure matching do not rely
+            on raw string literals.
+          </DocsContentParagraph>
         </DocsContentBlock>
 
         <Separator />
@@ -201,3 +210,4 @@ export default function APIReferences() {
     </DocsPageLayout>
   )
 }
+

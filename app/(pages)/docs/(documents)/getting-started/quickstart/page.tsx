@@ -140,6 +140,11 @@ export default function Quickstart() {
           <DocsContentParagraph>
             Enable signed runtime snapshot export so CLI commands can read verified live state.
           </DocsContentParagraph>
+          <DocsContentParagraph>
+            When runtime snapshot input is missing or invalid, CLI commands fail explicitly with{' '}
+            <strong>`NO_INSTANCE`</strong> or <strong>`INTEGRITY_VIOLATION`</strong> instead of
+            synthesizing healthy output.
+          </DocsContentParagraph>
 
           <Code code={snapshotRuntimeCode} />
 
@@ -280,3 +285,4 @@ export default function Quickstart() {
     </DocsPageLayout>
   )
 }
+

@@ -62,14 +62,16 @@ th.notifications.on('system.panic', (event) => {
 
 export const utilitiesCode = `
 import {
+  HOUND_PRESSURE_ERRORS,
+  createS3ColdStorage,
   generateSecureId,
+  hash,
   isClean,
   isError,
+  isHoundPressureError,
   isQuarantined,
   isValidSecureId,
-  hash,
   serialize,
-  createS3ColdStorage,
 } from '@tracehound/core'
 
 const id = generateSecureId()
@@ -77,12 +79,15 @@ console.log(isValidSecureId(id))
 
 const digest = hash('data')
 const stableJson = serialize({ key: 'value' })
+const pressureError = HOUND_PRESSURE_ERRORS.POOL_EXHAUSTED
 
 const coldStorage = createS3ColdStorage({
   client: myS3LikeClient,
   bucket: 'tracehound-evidence',
   prefix: 'prod/evidence/',
 })
+
+console.log(isHoundPressureError(pressureError))
 
 if (isQuarantined(result)) {
   console.log(result.handle.signature)
@@ -92,3 +97,4 @@ if (isQuarantined(result)) {
   // continue
 }
 `.trimStart()
+

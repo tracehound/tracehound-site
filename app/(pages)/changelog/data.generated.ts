@@ -15,9 +15,25 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-05T05:51:05.700Z"
+export const changelogGeneratedAt = "2026-03-05T22:32:30.649Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.6.0",
+    "date": "2026-03-06",
+    "title": "Operational Truth, Deterministic Analysis, and Release Readiness",
+    "summary": "Covers the complete critical refactor plan delivered after v1.5.0: RFC-0013 operational-truth grounding, signed snapshot integrity, deterministic hound analysis, IPC and lifecycle hardening, typed runtime error cleanup, public API parity, and release-readiness validation.",
+    "highlights": [
+      "CLI operational surfaces (status, stats, watch) no longer fabricate healthy or zero-value state when no verified runtime snapshot exists. Operators now see explicit NO_INSTANCE or INTEGRITY_VIOLATION outcomes instead of false assurance.",
+      "IAgent contract now includes getStats(): Readonly<AgentStats> for interface parity. Custom implementations must provide the method.",
+      "Snapshot export configuration now requires a deterministic secret whenever snapshots are enabled (snapshot.secret or TRACEHOUND_SNAPSHOT_SECRET / SYSTEM_SNAPSHOT_ENV.SECRET).",
+      "Signed system snapshot support centered on SystemSnapshot, ITracehound.snapshot(), and snapshot export options on TracehoundOptions.",
+      "Snapshot read/write utilities with HMAC-SHA256 signing, constant-time verification, atomic file replacement, centralized environment-key helpers, and public path/secret resolution helpers for CLI and external tooling.",
+      "Deterministic hound analysis metadata over IPC analysis messages: hash, entropy, contentType, and sizeBytes.",
+      "Canonical public operational helpers and constants for release-safe integrations, including snapshot helpers and hound pressure matching exports: HOUND_PRESSURE_ERRORS, HoundPressureErrorCode, and isHoundPressureError.",
+      "Operational truth is now grounded in verified runtime snapshots end-to-end. CLI status surfaces, watch dashboard flows, and JSON stats output all consume signed snapshot state instead of inferred defaults."
+    ]
+  },
   {
     "version": "1.5.0",
     "date": "2026-03-04",
@@ -71,24 +87,15 @@ export const recentReleases: ReleaseEntry[] = [
       "Main Showcase (README): Added a project banner, sharpened the project description, and modernized heading formats.",
       "FAQ Addition: Created FAQ documentation to accelerate developer onboarding and clarify project boundaries."
     ]
-  },
-  {
-    "version": "1.4.1",
-    "date": "2026-02-21",
-    "title": "Orphan Wiring & Stability Fixes",
-    "summary": "This patch release resolves critical architectural wiring gaps where observability and background processing components (Watcher, NotificationEmitter, HoundPool) were instantiated but disconnected from the active agent lifecycle. It also stabilizes the chaos testing suite by replacing brittle PID-based assertions with deterministic invariant checks.",
-    "highlights": [
-      "HoundPool Auto-Activation: Fixed a core design flaw where Agent quarantined evidence but never explicitly activated the HoundPool to process it. Agent now accepts an optional IHoundPool dependency and auto-activates workers on quarantine.",
-      "Watcher Observability Wiring: Fixed Watcher remaining perpetually empty. It is now correctly wired to Agent.intercept(), receiving recordThreat(), updateQuarantine(), and setOverloaded() events.",
-      "NotificationEmitter Wiring: Fixed dormant NotificationEmitter. It now correctly broadcasts threat.detected, evidence.quarantined, rate_limit.exceeded, and system.panic events.",
-      "HoundPool Execution Results: Wired HoundPool.onResult to intercept worker timeouts and errors, converting them into Watcher alerts and system.panic notifications.",
-      "Chaos Suite Stabilization: Rewrote the chaos suite (run-chaos-suite.ts) to be PID-free. Repurposed assertions to test deterministic fail-open invariants (pool exhaustion recovery, timeout handling) instead of unreliable process IDs.",
-      "Test Integrity: Updated unit tests to verify full internal wiring (Agent ↔ Watcher ↔ Notifications) and ensure createTracehound factory propagates all dependencies correctly."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.4.1",
+    "date": "2026-02-21",
+    "title": "Orphan Wiring & Stability Fixes"
+  },
   {
     "version": "1.4.0",
     "date": "2026-02-16",
