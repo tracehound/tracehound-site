@@ -16,7 +16,7 @@ export function KeyFeatures() {
       <Container>
         <header className="w-full flex flex-col p-6 xl:p-12">
           <Badge variant="neutral">FEATURES</Badge>
-          <h3 className="mt-3 mb-5 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
+          <h3 className="mt-3 mb-5 font-heading font-bold text-4xl/10 xl:text-[64px]/16">
             Key Features
           </h3>
         </header>

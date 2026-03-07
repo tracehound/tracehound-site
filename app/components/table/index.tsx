@@ -9,7 +9,7 @@ export type TableProps = {
 
 export function Table({ head, body }: TableProps) {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="relative w-full overflow-x-auto">
       <table className="w-full">
         <thead>
           <tr className="[&_tr]:border-b [&_tr]:border-(--border-accent)">

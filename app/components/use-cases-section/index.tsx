@@ -5,16 +5,16 @@ export function UseCasesSection() {
   return (
     <Container>
       <section className="relative w-full py-16 lg:py-24 xl:py-30 bg-(--foreground)">
-        <header className="w-full flex flex-col pt-0! md:p-6 lg:p-12 xl:p-24">
+        <header className="w-full flex flex-col pt-0! p-6 lg:p-12 xl:p-24">
           <Badge variant="primary">EXAMPLES</Badge>
-          <h3 className="mt-3 mb-5 font-heading font-bold text-(--background) text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
+          <h3 className="mt-3 mb-5 font-heading font-bold text-(--background) text-4xl/10 xl:text-[64px]/16">
             Use Cases
           </h3>
         </header>
 
-        <article className="grid grid-cols-1 gap-6 md:px-6 md:gap-12 xl:gap-18 lg:grid-cols-2 xl:px-24">
+        <article className="grid grid-cols-1 gap-6 px-6 md:gap-12 xl:gap-18 lg:grid-cols-2 xl:px-24">
           <div className="flex flex-col text-(--background)">
-            <span className="text-(--border) font-heading font-thin text-8xl leading-6 xl:leading-14 xl:text-9xl">
+            <span className="text-(--border) font-heading font-thin text-2xl lg:text-8xl leading-6 xl:leading-14 xl:text-9xl">
               1.
             </span>
 
@@ -26,7 +26,7 @@ export function UseCasesSection() {
           </div>
 
           <div className="flex flex-col text-(--background)">
-            <span className="text-(--border) font-heading font-thin text-8xl leading-6 xl:leading-14 xl:text-9xl">
+            <span className="text-(--border) font-heading font-thin text-2xl lg:text-8xl leading-6 xl:leading-14 xl:text-9xl">
               2.
             </span>
 
@@ -34,13 +34,13 @@ export function UseCasesSection() {
               Zero-Trust Microsegmentation
             </strong>
             <p className="xl:max-w-133">
-              Verify every request&apos;s source, size, and frequency across microservices. Limit blast
-              radius with independent isolation.
+              Verify every request&apos;s source, size, and frequency across microservices. Limit
+              blast radius with independent isolation.
             </p>
           </div>
 
           <div className="flex flex-col text-(--background)">
-            <span className="text-(--border) font-heading font-thin text-8xl leading-6 xl:leading-14 xl:text-9xl">
+            <span className="text-(--border) font-heading font-thin text-2xl lg:text-8xl leading-6 xl:leading-14 xl:text-9xl">
               3.
             </span>
 
@@ -54,7 +54,7 @@ export function UseCasesSection() {
           </div>
 
           <div className="flex flex-col text-(--background)">
-            <span className="text-(--border) font-heading font-thin text-8xl leading-6 xl:leading-14 xl:text-9xl">
+            <span className="text-(--border) font-heading font-thin text-2xl lg:text-8xl leading-6 xl:leading-14 xl:text-9xl">
               4.
             </span>
 

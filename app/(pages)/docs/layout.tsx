@@ -7,7 +7,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <Container>
       <main className="relative w-full h-full flex">
-        <section className="relative w-full max-w-(--document-content-w) flex-1 flex flex-col gap-6 min-h-screen lg:border-r border-dashed border-(--border-accent) pb-9 lg:pb-12 xl:pb-24">
+        <section className="relative w-full flex-1 flex flex-col gap-6 min-h-screen lg:border-r border-dashed border-(--border-accent) pb-9 lg:max-w-(--document-content-w) lg:pb-12 xl:pb-24">
           <DocumentPageSelect />
 
           {children}

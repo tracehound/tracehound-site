@@ -1,7 +1,6 @@
 import { Badge } from '@/app/components/badge'
 import { Button } from '@/app/components/button'
 import { Container } from '@/app/components/container'
-import { EcosystemCanvas } from '@/app/components/ecosystem-canvas'
 import { Row } from '@/app/components/patterns/row'
 import { Table } from '@/app/components/table'
 import type { Metadata } from 'next/types'
@@ -15,12 +14,11 @@ export const metadata: Metadata = {
 
 export default function EcosystemPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
       <Container>
         <Row />
 
         <header className="relative z-10 w-full bg-(--background) flex flex-col items-center gap-8 mb-px py-16 lg:py-24 px-6 xl:px-12">
-          <EcosystemCanvas />
           <h2 className="font-heading text-center text-3xl/8 md:text-5xl/14 xl:text-7xl/20">
             Package topology for <br className="hidden xl:inline" />
             <strong>runtime security operations.</strong>
@@ -170,44 +168,48 @@ export default function EcosystemPage() {
 
       <section className="relative w-full py-16 lg:py-24">
         <Container>
-          <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="neutral">INTEGRATION PATTERNS</Badge>
-            <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-              Recommended package bundles
-            </h2>
-          </header>
+          <article className="grid grid-cols-1 gap-6">
+            <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
+              <Badge variant="neutral">INTEGRATION PATTERNS</Badge>
+              <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
+                Recommended package bundles
+              </h2>
+            </header>
 
-          <div className="px-6 pt-8 xl:px-12 xl:pt-12">
-            <Table
-              head={['Pattern', 'Packages', 'Best For', 'Tradeoff']}
-              body={[
-                {
-                  row: [
-                    'Minimal Runtime Guard',
-                    'Core + Argos + Muninn',
-                    'Fast adoption with forensic baseline',
-                    'Limited policy orchestration',
-                  ],
-                },
-                {
-                  row: [
-                    'Policy-Driven Response',
-                    'Core + Argos + Talos + Muninn',
-                    'Teams with centralized security policy governance',
-                    'More policy lifecycle overhead',
-                  ],
-                },
-                {
-                  row: [
-                    'Enterprise Visibility',
-                    'Core + Argos + Muninn + Anubis + Huginn + Watchtower',
-                    'SOC teams running cross-system investigations',
-                    'Higher integration and operations complexity',
-                  ],
-                },
-              ]}
-            />
-          </div>
+            <div className="px-6 pt-8 xl:px-12 xl:pt-12">
+              <div className="overflow-x-auto">
+                <Table
+                  head={['Pattern', 'Packages', 'Best For', 'Tradeoff']}
+                  body={[
+                    {
+                      row: [
+                        'Minimal Runtime Guard',
+                        'Core + Argos + Muninn',
+                        'Fast adoption with forensic baseline',
+                        'Limited policy orchestration',
+                      ],
+                    },
+                    {
+                      row: [
+                        'Policy-Driven Response',
+                        'Core + Argos + Talos + Muninn',
+                        'Teams with centralized security policy governance',
+                        'More policy lifecycle overhead',
+                      ],
+                    },
+                    {
+                      row: [
+                        'Enterprise Visibility',
+                        'Core + Argos + Muninn + Anubis + Huginn + Watchtower',
+                        'SOC teams running cross-system investigations',
+                        'Higher integration and operations complexity',
+                      ],
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+          </article>
         </Container>
       </section>
 
@@ -217,22 +219,24 @@ export default function EcosystemPage() {
 
       <section className="relative w-full py-16 lg:py-24">
         <Container>
-          <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="primary">TRUST & GUARANTEES</Badge>
-            <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-              Non-negotiable runtime properties
-            </h2>
-          </header>
+          <article className="grid grid-cols-1 gap-6">
+            <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
+              <Badge variant="primary">TRUST & GUARANTEES</Badge>
+              <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
+                Non-negotiable runtime properties
+              </h2>
+            </header>
 
-          <article className="grid grid-cols-1 gap-6 px-6 pt-8 xl:grid-cols-3 xl:px-12 xl:pt-12">
-            {guarantees.map((guarantee) => (
-              <div
-                key={guarantee.title}
-                className="border border-dashed border-(--border-accent) p-6 bg-(--background)">
-                <h3 className="font-heading font-bold text-xl/6">{guarantee.title}</h3>
-                <p className="mt-3 text-base">{guarantee.description}</p>
-              </div>
-            ))}
+            <article className="grid grid-cols-1 gap-6 px-6 pt-8 xl:grid-cols-3 xl:px-12 xl:pt-12">
+              {guarantees.map((guarantee) => (
+                <div
+                  key={guarantee.title}
+                  className="border border-dashed border-(--border-accent) p-6 bg-(--background)">
+                  <h3 className="font-heading font-bold text-xl/6">{guarantee.title}</h3>
+                  <p className="mt-3 text-base">{guarantee.description}</p>
+                </div>
+              ))}
+            </article>
           </article>
         </Container>
       </section>
@@ -255,44 +259,46 @@ export default function EcosystemPage() {
           </header>
 
           <div className="px-6 pt-8 xl:px-12 xl:pt-12">
-            <Table
-              head={['Status', 'Meaning', 'Packages']}
-              body={[
-                {
-                  row: [
-                    <span
-                      key="status-released"
-                      className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RELEASED}`}>
-                      RELEASED
-                    </span>,
-                    'Ready for production use under documented boundaries.',
-                    'Core',
-                  ],
-                },
-                {
-                  row: [
-                    <span
-                      key="status-wip"
-                      className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.WIP}`}>
-                      WIP
-                    </span>,
-                    'Concept and docs exist; package is under active development.',
-                    'Argos',
-                  ],
-                },
-                {
-                  row: [
-                    <span
-                      key="status-rfc"
-                      className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RFC}`}>
-                      RFC
-                    </span>,
-                    'Contract direction is defined; implementation is not final.',
-                    'Talos, Muninn, Huginn, Heimdall, Loki, Anubis, Norns, Furies, Watchtower',
-                  ],
-                },
-              ]}
-            />
+            <div className="overflow-x-auto">
+              <Table
+                head={['Status', 'Meaning', 'Packages']}
+                body={[
+                  {
+                    row: [
+                      <span
+                        key="status-released"
+                        className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RELEASED}`}>
+                        RELEASED
+                      </span>,
+                      'Ready for production use under documented boundaries.',
+                      'Core',
+                    ],
+                  },
+                  {
+                    row: [
+                      <span
+                        key="status-wip"
+                        className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.WIP}`}>
+                        WIP
+                      </span>,
+                      'Concept and docs exist; package is under active development.',
+                      'Argos',
+                    ],
+                  },
+                  {
+                    row: [
+                      <span
+                        key="status-rfc"
+                        className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RFC}`}>
+                        RFC
+                      </span>,
+                      'Contract direction is defined; implementation is not final.',
+                      'Talos, Muninn, Huginn, Heimdall, Loki, Anubis, Norns, Furies, Watchtower',
+                    ],
+                  },
+                ]}
+              />
+            </div>
           </div>
 
           <div className="px-6 pt-10 xl:px-12 xl:pt-12 flex flex-col w-full items-center gap-4 md:flex-row md:justify-center md:gap-8">
@@ -305,6 +311,6 @@ export default function EcosystemPage() {
           </div>
         </Container>
       </section>
-    </div>
+    </>
   )
 }

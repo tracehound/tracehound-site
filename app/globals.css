@@ -23,6 +23,13 @@
   --document-content-width: calc(100% - calc(0.25em * 54));
 }
 
+@media (width <=30rem) {
+  :root {
+    --pattern-column-width: 0;
+    --container-max-width: 100%;
+  }
+}
+
 @media (width >=80rem) {
   :root {
     --pattern-column-width: calc(0.25em * 36);

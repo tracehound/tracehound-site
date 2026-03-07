@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <Container>
       <section className="flex justify-between flex-col gap-6 px-6 pt-12 xl:gap-12 xl:px-12 xl:pt-24">
-        <h2 className="text-3xl/6 tracking-normal font-normal font-heading flex flex-col md:text-6xl/16 xl:text-7xl/22">
+        <h2 className="text-4xl/10 tracking-normal font-normal font-heading xl:flex xl:flex-col md:text-6xl/16 xl:text-7xl/22">
           Operational security controls <strong>with forensic guarantees.</strong>
         </h2>
         <p className="text-base xl:text-3xl/11 xl:max-w-8/12">

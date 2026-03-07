@@ -20,6 +20,9 @@ importers:
       next:
         specifier: 16.1.6
         version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      page-agent:
+        specifier: ^1.5.1
+        version: 1.5.1(zod@4.3.6)
       postprocessing:
         specifier: ^6.38.3
         version: 6.38.3(three@0.183.2)
@@ -439,6 +442,22 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
+  '@page-agent/core@1.5.1':
+    resolution: {integrity: sha512-G+0Odm08Qz41HDqyfdX9FwK7ZWy9Pgt+KiN/XuzyPCtNedm1MjpY6ASxMsYiviNEt71RD5XtsmAvC62W3rYFgA==}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+
+  '@page-agent/llms@1.5.1':
+    resolution: {integrity: sha512-0MVmPY1voQ3ORNZiyLhJiNwyVMrRW4paxjwNU7m/dD0hht0a0CJSmHsUSEPobrLvZqZVsMsl0uut6WqTmZ0Gvg==}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+
+  '@page-agent/page-controller@1.5.1':
+    resolution: {integrity: sha512-iYIzfbRSacdZpKjDb2WpOOQGHfM3uvb/9ayK1E0o1kdy5pCmTPtqj4SvN2yqvWZzXrnGakdIwmoZvKRMOPi4NA==}
+
+  '@page-agent/ui@1.5.1':
+    resolution: {integrity: sha512-7bHFdmHAvVNDMHCIYMFDePy6wRe5wrCKO0ONZo8aycH/mfw0oZgf4F7Ck5kAymwYYyNGRH8fk7GyKww/OHtHZg==}
+
   '@phosphor-icons/react@2.1.10':
     resolution: {integrity: sha512-vt8Tvq8GLjheAZZYa+YG/pW7HDbov8El/MANW8pOAz4eGxrwhnbfrQZq0Cp4q8zBEu8NIhHdnr+r8thnfRSNYA==}
     engines: {node: '>=10'}
@@ -757,6 +776,9 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  ai-motion@0.4.8:
+    resolution: {integrity: sha512-9nQVjf8lrYQWSW0sZdb9bES4x8Ei1w9C0S62po2KvRbMjslmjm0WMeszyW771SEauDnu4YGWqurLZ/gCkCTosQ==}
+
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
@@ -872,6 +894,10 @@ packages:
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
+
+  chalk@5.6.2:
+    resolution: {integrity: sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   character-entities-legacy@3.0.0:
     resolution: {integrity: sha512-RpPp0asT/6ufRm//AJVwpViZbGM/MkjQFxJccQRHmISF/22NBtsHqAWmL+/pmkPWoIUJdWyeVleTl1wydHATVQ==}
@@ -1727,6 +1753,11 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
+  page-agent@1.5.1:
+    resolution: {integrity: sha512-pUksxcZWtm9vDHxyo9uZCYQ7YM+UoJqIy3EQ9UVbHIqNj3zo326+ZLFgPFPHK5+L7GowFbts8qCabAHx/A58Ig==}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -2450,6 +2481,24 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
+  '@page-agent/core@1.5.1(zod@4.3.6)':
+    dependencies:
+      '@page-agent/llms': 1.5.1(zod@4.3.6)
+      '@page-agent/page-controller': 1.5.1
+      chalk: 5.6.2
+      zod: 4.3.6
+
+  '@page-agent/llms@1.5.1(zod@4.3.6)':
+    dependencies:
+      chalk: 5.6.2
+      zod: 4.3.6
+
+  '@page-agent/page-controller@1.5.1':
+    dependencies:
+      ai-motion: 0.4.8
+
+  '@page-agent/ui@1.5.1': {}
+
   '@phosphor-icons/react@2.1.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       react: 19.2.3
@@ -2741,6 +2790,8 @@ snapshots:
 
   acorn@8.16.0: {}
 
+  ai-motion@0.4.8: {}
+
   ajv@6.14.0:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -2887,6 +2938,8 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  chalk@5.6.2: {}
 
   character-entities-legacy@3.0.0: {}
 
@@ -3869,6 +3922,15 @@ snapshots:
   p-locate@5.0.0:
     dependencies:
       p-limit: 3.1.0
+
+  page-agent@1.5.1(zod@4.3.6):
+    dependencies:
+      '@page-agent/core': 1.5.1(zod@4.3.6)
+      '@page-agent/llms': 1.5.1(zod@4.3.6)
+      '@page-agent/page-controller': 1.5.1
+      '@page-agent/ui': 1.5.1
+      chalk: 5.6.2
+      zod: 4.3.6
 
   parent-module@1.0.1:
     dependencies:
