@@ -15,7 +15,11 @@ app.use((req, res, next) => {
   const scent = {
     id: generateSecureId(),
     timestamp: Date.now(),
-    source: req.ip,
+    source: {
+      ip: req.ip || 'unknown',
+      userAgent:
+        typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
+    },
     payload: { method: req.method, path: req.path },
     threat: detectThreat(req), // Your WAF / Detector logic
   }
@@ -55,7 +59,11 @@ app.use(
     extractScent: (req) => ({
       id: generateSecureId(),
       timestamp: Date.now(),
-      source: req.ip || 'unknown',
+      source: {
+        ip: req.ip || 'unknown',
+        userAgent:
+          typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
+      },
       payload: { method: req.method, path: req.path },
       threat: myWafCheck(req),
     }),
@@ -75,7 +83,11 @@ fastify.register(tracehoundPlugin, {
   extractScent: (req) => ({
     id: generateSecureId(),
     timestamp: Date.now(),
-    source: req.ip || 'unknown',
+    source: {
+      ip: req.ip || 'unknown',
+      userAgent:
+        typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
+    },
     payload: { method: req.method, path: req.url },
     threat: myWafCheck(req),
   }),

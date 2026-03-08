@@ -34,32 +34,6 @@ export default function APIReferences() {
       />
 
       <DocsContent>
-        <DocsContentBlock title="Breaking Changes (v1.6+)">
-          <div className="border border-dashed border-(--warning) bg-(--background) p-4">
-            <p className="font-mono text-xs text-(--warning)">WARNING</p>
-            <DocsList
-              items={[
-                <p key="api-agent-stats">
-                  Custom <strong>`IAgent`</strong> implementations must expose{' '}
-                  <strong>`getStats(): Readonly&lt;AgentStats&gt;`</strong>.
-                </p>,
-                <p key="api-cli-snapshot">
-                  CLI <strong>`status`</strong>/<strong>`stats`</strong>/<strong>`watch`</strong>{' '}
-                  commands no longer return fabricated health data and now require a verified snapshot.
-                  Operator-facing failures are explicit: <strong>`NO_INSTANCE`</strong> or{' '}
-                  <strong>`INTEGRITY_VIOLATION`</strong>.
-                </p>,
-                <p key="api-fastify">
-                  <strong>`@tracehound/fastify`</strong> default export was removed; use named export{' '}
-                  <strong>`tracehoundPlugin`</strong>.
-                </p>,
-              ]}
-            />
-          </div>
-        </DocsContentBlock>
-
-        <Separator />
-
         <DocsContentBlock title="Primary Entry Point">
           <DocsContentParagraph>
             The recommended public API is <strong>`createTracehound(options)`</strong>. It returns a
@@ -117,12 +91,20 @@ export default function APIReferences() {
               <p key="scent">
                 <strong>Scent</strong>: id, timestamp, source, payload, threat (optional)
               </p>,
+              <p key="source-tls">
+                <strong>Scent.source</strong>: `ip` plus optional `userAgent` and TLS metadata
+                (`cipherSuite`, `version`, optional `alpn`) when available from the adapter/runtime.
+              </p>,
               <p key="threat">
                 <strong>ThreatSignal.category</strong>: injection | ddos | flood | spam | malware |
                 unknown
               </p>,
               <p key="severity">
                 <strong>ThreatSignal.severity</strong>: low | medium | high | critical
+              </p>,
+              <p key="limiter-behavior">
+                <strong>Rate limiter behavior</strong>: sliding-window with composite source tracking +
+                IP ceiling enforcement to constrain same-IP fingerprint rotation.
               </p>,
             ]}
           />

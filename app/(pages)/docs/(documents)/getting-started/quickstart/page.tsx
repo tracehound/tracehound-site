@@ -53,31 +53,6 @@ export default function Quickstart() {
 
         <Separator />
 
-        <DocsContentBlock title="Breaking Changes (v1.6+)">
-          <div className="border border-dashed border-(--warning) bg-(--background) p-4">
-            <p className="font-mono text-xs text-(--warning)">WARNING</p>
-            <DocsList
-              items={[
-                <p key="qs-cli">
-                  CLI <strong>`status`</strong>/<strong>`stats`</strong>/<strong>`watch`</strong>{' '}
-                  requires verified snapshot input and no longer fabricates healthy output.
-                </p>,
-                <p key="qs-secret">
-                  If you enable <strong>`snapshot`</strong>, secret is mandatory via{' '}
-                  <strong>`snapshot.secret`</strong> or{' '}
-                  <strong>`TRACEHOUND_SNAPSHOT_SECRET`</strong>.
-                </p>,
-                <p key="qs-fastify">
-                  Fastify adapter import is named export only:{' '}
-                  <strong>`import {`tracehoundPlugin`} from '@tracehound/fastify'`</strong>.
-                </p>,
-              ]}
-            />
-          </div>
-        </DocsContentBlock>
-
-        <Separator />
-
         <DocsContentBlock title="Quick Start">
           <DocsContentSubtitle>Step 1: Create Tracehound</DocsContentSubtitle>
 

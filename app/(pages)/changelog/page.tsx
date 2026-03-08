@@ -25,11 +25,21 @@ export default function Changelog() {
               summarizes major release-level changes for SecOps and platform teams.
             </p>
             <div className="border border-dashed border-(--warning) bg-(--background) p-4">
-              <p className="font-mono text-xs text-(--warning)">MIGRATION WARNING</p>
+              <p className="font-mono text-xs text-(--warning)">RELEASE NOTES</p>
               <ul className="mt-2 list-disc space-y-2 pl-5 text-sm xl:text-base">
-                <li>CLI <strong>status/stats/watch</strong> now requires verified snapshot input.</li>
-                <li>Fastify adapter default export was removed; use <strong>tracehoundPlugin</strong>.</li>
-                <li>Custom <strong>IAgent</strong> adapters must implement <strong>getStats()</strong>.</li>
+                <li>
+                  v1.8.0 introduces TLS source metadata in runtime/adapters (
+                  <strong>cipherSuite</strong>, <strong>version</strong>, optional{' '}
+                  <strong>alpn</strong>).
+                </li>
+                <li>
+                  Rate limiter controls were hardened against same-IP fingerprint rotation and
+                  eviction-based bypass patterns.
+                </li>
+                <li>
+                  v1.8.0 has <strong>no breaking API changes</strong>; security behavior is stricter
+                  on adversarial paths.
+                </li>
               </ul>
               <p className="mt-3 text-sm">
                 See <a className="underline" href="/docs/references/configuration">Configuration</a>,{' '}

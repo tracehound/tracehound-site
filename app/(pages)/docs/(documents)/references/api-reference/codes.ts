@@ -32,7 +32,11 @@ import { generateSecureId } from '@tracehound/core'
 const result = th.agent.intercept({
   id: generateSecureId(),
   timestamp: Date.now(),
-  source: req.ip || 'unknown',
+  source: {
+    ip: req.ip || 'unknown',
+    userAgent:
+      typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
+  },
   payload: {
     method: req.method,
     path: req.path,

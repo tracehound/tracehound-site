@@ -33,30 +33,6 @@ export default function Configuration() {
       />
 
       <DocsContent>
-        <DocsContentBlock title="Breaking Changes (v1.6+)">
-          <div className="border border-dashed border-(--warning) bg-(--background) p-4">
-            <p className="font-mono text-xs text-(--warning)">WARNING</p>
-            <DocsList
-              items={[
-                <p key="cfg-secret">
-                  Enabling <strong>`snapshot`</strong> requires a deterministic secret from{' '}
-                  <strong>`snapshot.secret`</strong> or <strong>`TRACEHOUND_SNAPSHOT_SECRET`</strong>.
-                </p>,
-                <p key="cfg-cli">
-                  CLI <strong>`status`</strong>/<strong>`stats`</strong>/<strong>`watch`</strong> commands do
-                  not return fallback healthy/default-zero output.
-                </p>,
-                <p key="cfg-fastify">
-                  <strong>`@tracehound/fastify`</strong> uses named export only:{' '}
-                  <strong>`tracehoundPlugin`</strong>.
-                </p>,
-              ]}
-            />
-          </div>
-        </DocsContentBlock>
-
-        <Separator />
-
         <DocsContentBlock title="Initialization">
           <DocsContentParagraph>
             Configure Tracehound through a single entry point:{' '}

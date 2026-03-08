@@ -15,9 +15,52 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-07T05:38:37.795Z"
+export const changelogGeneratedAt = "2026-03-08T22:33:14.506Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.0",
+    "date": "2026-03-09",
+    "title": "TLS Source Signals and Runtime Hardening",
+    "summary": "TLS Source Signals and Runtime Hardening",
+    "highlights": [
+      "TLS source metadata support in runtime flow and adapters (cipherSuite, version, optional alpn) for Express and Fastify integrations.",
+      "Coverage-focused regression tests across core and CLI command surfaces to keep release gates green on branch-diff QA.",
+      "Rate limiter now enforces IP-ceiling-first behavior for new fingerprints to prevent composite map pressure under same-IP rotation attacks.",
+      "Source fingerprint key generation now normalizes oversized source components deterministically to reduce CPU amplification from oversized headers.",
+      "API documentation terminology was aligned with implementation semantics (sliding-window behavior clarity for consumers).",
+      "Hardened rate-limiter anti-rotation controls:",
+      "Prevents unnecessary composite entry allocation when the IP ceiling already rejects.",
+      "Keeps active IP-ceiling entries hot on reject paths to reduce eviction-based bypass opportunities."
+    ]
+  },
+  {
+    "version": "1.7.0",
+    "date": "2026-03-05",
+    "title": "Enhanced Quarantine Protocol and Evidence Lifecycle Hardening",
+    "summary": "This release delivers the roadmap scope for the Enhanced Quarantine Protocol, with core focus on deterministic evidence custody, bounded decay, and fail-open adapter behavior.",
+    "highlights": [
+      "Added TTL-driven background decay in Quarantine (ttlMs, decayIntervalMs, decayBatchSize).",
+      "Added cold-storage-backed decay archival with configurable failure policy and timeout controls.",
+      "Added support for raw ingress byte hashing via Scent.ingressBytes.",
+      "Added batched Merkle sealing in AuditChain for stronger lifecycle custody continuity.",
+      "Added AbortSignal support to IColdStorageAdapter.write(id, payload, signal?).",
+      "Quarantine stats now include richer decay/eviction visibility (evictedCount, archive/decay counters, next expiry metadata).",
+      "Express/Fastify ingress byte extraction is now deterministic and rawBody-based.",
+      "Unknown/forward-incompatible intercept statuses in adapters now fail open (no request lifecycle hangs)."
+    ]
+  },
+  {
+    "version": "1.6.1",
+    "date": "2026-03-07",
+    "title": "Memory Safety and Cryptographic RNG Hardening",
+    "summary": "Targeted security hardening pass on two latent vulnerability classes in the core runtime: uninitialized-memory disclosure via Buffer.allocUnsafe in IPC encoding paths, and weak RNG via Math.random() in forensic ID construction. No public API changes. No breaking changes.",
+    "highlights": [
+      "IPC buffer allocation (hound-ipc.ts): Replaced Buffer.allocUnsafe with Buffer.alloc across all four IPC message encoding paths. allocUnsafe can expose stale heap memory to child processes; zero-initialized allocation eliminates the uninitialized-memory disclosure class entirely.",
+      "Forensic RNG (quarantine.ts): Replaced Math.random() with generateSecureId() for PurgeRecord ID construction. All forensic pipeline identifiers now use crypto-strength randomness end-to-end.",
+      "Added security/artifacts/dependency-tree.txt, pnpm-audit.json, sbom.cdx.json. pnpm audit --prod reports 0 vulnerabilities at time of release."
+    ]
+  },
   {
     "version": "1.6.0",
     "date": "2026-03-06",
@@ -49,48 +92,25 @@ export const recentReleases: ReleaseEntry[] = [
       "Deterministic Drop and Count behavior is enforced under pressure boundaries in quarantine/cold-path workflows.",
       "MemoryColdStorage runs memory-first buffering by default; disk buffering remains explicit opt-in via diskBuffer.enabled."
     ]
-  },
-  {
-    "version": "1.4.4",
-    "date": "2026-02-26",
-    "title": "Tracehound Inline Protection Validation Harness (TIPVH) & Enterprise Hardening",
-    "summary": "Covers changes since commit [1.4.3 release].",
-    "highlights": [
-      "Tracehound Inline Protection Validation Harness (TIPVH): Engineered a complete automated adversarial testing suite containing 7 formal validation scenarios.",
-      "Enterprise Multi-Target Deployment: Added Metasploitable 3 alongside Metasploitable 2 for extensive \"Vulnerability Agnostic\" proxy validation.",
-      "Zero-Visibility Capability Verified: Deployed an automated GVM (OpenVAS) scanning integration yielding ZERO FINDINGS from thousands of vulnerability probes."
-    ]
-  },
-  {
-    "version": "1.4.3",
-    "date": "2026-02-25",
-    "title": "Monorepo Security Hardening & Robustness",
-    "summary": "Covers changes since commit [v1.4.2 release].",
-    "highlights": [
-      "Defensive Scent Extraction: Implemented safeClone in Express/Fastify adapters. This ensures the Tracehound process is resilient to circular references or exotic payload shapes (e.g., Stream objects, DOM nodes) that could otherwise trigger runtime crashes during scent extraction.",
-      "Privacy Hardening: Standardized the suppression of Tracehound signature in external HTTP 403 responses by default. This reduces the adversarial correlation surface while providing an opt-in emitSignatureInResponse toggle for legitimate tracing needs.",
-      "Workspace Quality Gate: Integrated root pretest and prelint hooks into package.json. These mandatory lifecycle steps enforce that @tracehound/core artifacts are compiled before workspace packages run validation, eliminating cross-package dependency resolution failures in CI."
-    ]
-  },
-  {
-    "version": "1.4.2",
-    "date": "2026-02-21",
-    "title": "Document Updates & Roadmap",
-    "summary": "Covers changes since commit 204b957d85b79f728102f37042541580953a023d.",
-    "highlights": [
-      "2026 Pilot Program (PILOT-PROGRAM-2026.md): Added vision containing go-to-market (GTM) and adoption strategies for early-stage integrators.",
-      "Enhanced Quarantine Protocol (ENHANCED-QUARANTINE-PROTOCOL.md): Documented the roadmap detailing the multi-phase integration of application-level quarantine mechanisms.",
-      "Resilience Edge V2 (RESILIENCE-EDGE-V2.md): Conveyed the next-generation hardware/server architecture focusing on pre-extraction protection, absolute network containment, and zero-overhead logging goals.",
-      "Comprehensive Threat Model (THREAT-MODEL.md): Added an official threat model to guide future architectural decisions and strictly define security boundaries.",
-      "Chaos Testing ADR (chaos-testing-architecture-decision.md): Integrated an Architecture Decision Record (ADR) justifying why a custom chaos testing suite was chosen over third-party tools.",
-      "CI/CD Reliability (Semgrep Fix): Stabilized the CI pipeline by masking SemGrep rules that produced false-positive warnings in chaos test scripts via .semgrepignore configuration.",
-      "Main Showcase (README): Added a project banner, sharpened the project description, and modernized heading formats.",
-      "FAQ Addition: Created FAQ documentation to accelerate developer onboarding and clarify project boundaries."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.4.4",
+    "date": "2026-02-26",
+    "title": "Tracehound Inline Protection Validation Harness (TIPVH) & Enterprise Hardening"
+  },
+  {
+    "version": "1.4.3",
+    "date": "2026-02-25",
+    "title": "Monorepo Security Hardening & Robustness"
+  },
+  {
+    "version": "1.4.2",
+    "date": "2026-02-21",
+    "title": "Document Updates & Roadmap"
+  },
   {
     "version": "1.4.1",
     "date": "2026-02-21",
