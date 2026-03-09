@@ -15,169 +15,165 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = '2026-03-08T22:33:14.506Z'
+export const changelogGeneratedAt = "2026-03-09T05:59:22.715Z"
 
 export const recentReleases: ReleaseEntry[] = [
   {
-    version: '1.8.0',
-    date: '2026-03-09',
-    title: 'TLS Source Signals and Runtime Hardening',
-    summary: 'TLS Source Signals and Runtime Hardening',
-    highlights: [
-      'TLS source metadata support in runtime flow and adapters (cipherSuite, version, optional alpn) for Express and Fastify integrations.',
-      'Coverage-focused regression tests across core and CLI command surfaces to keep release gates green on branch-diff QA.',
-      'Rate limiter now enforces IP-ceiling-first behavior for new fingerprints to prevent composite map pressure under same-IP rotation attacks.',
-      'Source fingerprint key generation now normalizes oversized source components deterministically to reduce CPU amplification from oversized headers.',
-      'API documentation terminology was aligned with implementation semantics (sliding-window behavior clarity for consumers).',
-      'Hardened rate-limiter anti-rotation controls:',
-      'Prevents unnecessary composite entry allocation when the IP ceiling already rejects.',
-      'Keeps active IP-ceiling entries hot on reject paths to reduce eviction-based bypass opportunities.',
-    ],
+    "version": "1.8.0",
+    "date": "2026-03-09",
+    "title": "TLS Source Signals and Runtime Hardening",
+    "summary": "TLS Source Signals and Runtime Hardening",
+    "highlights": [
+      "TLS source metadata support in runtime flow and adapters (cipherSuite, version, optional alpn) for Express and Fastify integrations.",
+      "Coverage-focused regression tests across core and CLI command surfaces to keep release gates green on branch-diff QA.",
+      "Rate limiter now enforces IP-ceiling-first behavior for new fingerprints to prevent composite map pressure under same-IP rotation attacks.",
+      "Source fingerprint key generation now normalizes oversized source components deterministically to reduce CPU amplification from oversized headers.",
+      "API documentation terminology was aligned with implementation semantics (sliding-window behavior clarity for consumers).",
+      "Hardened rate-limiter anti-rotation controls:",
+      "Prevents unnecessary composite entry allocation when the IP ceiling already rejects.",
+      "Keeps active IP-ceiling entries hot on reject paths to reduce eviction-based bypass opportunities."
+    ]
   },
   {
-    version: '1.7.0',
-    date: '2026-03-05',
-    title: 'Enhanced Quarantine Protocol and Evidence Lifecycle Hardening',
-    summary:
-      'This release delivers the roadmap scope for the Enhanced Quarantine Protocol, with core focus on deterministic evidence custody, bounded decay, and fail-open adapter behavior.',
-    highlights: [
-      'Added TTL-driven background decay in Quarantine (ttlMs, decayIntervalMs, decayBatchSize).',
-      'Added cold-storage-backed decay archival with configurable failure policy and timeout controls.',
-      'Added support for raw ingress byte hashing via Scent.ingressBytes.',
-      'Added batched Merkle sealing in AuditChain for stronger lifecycle custody continuity.',
-      'Added AbortSignal support to IColdStorageAdapter.write(id, payload, signal?).',
-      'Quarantine stats now include richer decay/eviction visibility (evictedCount, archive/decay counters, next expiry metadata).',
-      'Express/Fastify ingress byte extraction is now deterministic and rawBody-based.',
-      'Unknown/forward-incompatible intercept statuses in adapters now fail open (no request lifecycle hangs).',
-    ],
+    "version": "1.7.0",
+    "date": "2026-03-05",
+    "title": "Enhanced Quarantine Protocol and Evidence Lifecycle Hardening",
+    "summary": "This release delivers the roadmap scope for the Enhanced Quarantine Protocol, with core focus on deterministic evidence custody, bounded decay, and fail-open adapter behavior.",
+    "highlights": [
+      "Added TTL-driven background decay in Quarantine (ttlMs, decayIntervalMs, decayBatchSize).",
+      "Added cold-storage-backed decay archival with configurable failure policy and timeout controls.",
+      "Added support for raw ingress byte hashing via Scent.ingressBytes.",
+      "Added batched Merkle sealing in AuditChain for stronger lifecycle custody continuity.",
+      "Added AbortSignal support to IColdStorageAdapter.write(id, payload, signal?).",
+      "Quarantine stats now include richer decay/eviction visibility (evictedCount, archive/decay counters, next expiry metadata).",
+      "Express/Fastify ingress byte extraction is now deterministic and rawBody-based.",
+      "Unknown/forward-incompatible intercept statuses in adapters now fail open (no request lifecycle hangs)."
+    ]
   },
   {
-    version: '1.6.1',
-    date: '2026-03-07',
-    title: 'Memory Safety and Cryptographic RNG Hardening',
-    summary:
-      'Targeted security hardening pass on two latent vulnerability classes in the core runtime: uninitialized-memory disclosure via Buffer.allocUnsafe in IPC encoding paths, and weak RNG via Math.random() in forensic ID construction. No public API changes. No breaking changes.',
-    highlights: [
-      'IPC buffer allocation (hound-ipc.ts): Replaced Buffer.allocUnsafe with Buffer.alloc across all four IPC message encoding paths. allocUnsafe can expose stale heap memory to child processes; zero-initialized allocation eliminates the uninitialized-memory disclosure class entirely.',
-      'Forensic RNG (quarantine.ts): Replaced Math.random() with generateSecureId() for PurgeRecord ID construction. All forensic pipeline identifiers now use crypto-strength randomness end-to-end.',
-      'Added security/artifacts/dependency-tree.txt, pnpm-audit.json, sbom.cdx.json. pnpm audit --prod reports 0 vulnerabilities at time of release.',
-    ],
+    "version": "1.6.1",
+    "date": "2026-03-07",
+    "title": "Memory Safety and Cryptographic RNG Hardening",
+    "summary": "Targeted security hardening pass on two latent vulnerability classes in the core runtime: uninitialized-memory disclosure via Buffer.allocUnsafe in IPC encoding paths, and weak RNG via Math.random() in forensic ID construction. No public API changes. No breaking changes.",
+    "highlights": [
+      "IPC buffer allocation (hound-ipc.ts): Replaced Buffer.allocUnsafe with Buffer.alloc across all four IPC message encoding paths. allocUnsafe can expose stale heap memory to child processes; zero-initialized allocation eliminates the uninitialized-memory disclosure class entirely.",
+      "Forensic RNG (quarantine.ts): Replaced Math.random() with generateSecureId() for PurgeRecord ID construction. All forensic pipeline identifiers now use crypto-strength randomness end-to-end.",
+      "Added security/artifacts/dependency-tree.txt, pnpm-audit.json, sbom.cdx.json. pnpm audit --prod reports 0 vulnerabilities at time of release."
+    ]
   },
   {
-    version: '1.6.0',
-    date: '2026-03-06',
-    title: 'Operational Truth, Deterministic Analysis, and Release Readiness',
-    summary:
-      'Covers the complete critical refactor plan delivered after v1.5.0: RFC-0013 operational-truth grounding, signed snapshot integrity, deterministic hound analysis, IPC and lifecycle hardening, typed runtime error cleanup, public API parity, and release-readiness validation.',
-    highlights: [
-      'CLI operational surfaces (status, stats, watch) no longer fabricate healthy or zero-value state when no verified runtime snapshot exists. Operators now see explicit NO_INSTANCE or INTEGRITY_VIOLATION outcomes instead of false assurance.',
-      'IAgent contract now includes getStats(): Readonly<AgentStats> for interface parity. Custom implementations must provide the method.',
-      'Snapshot export configuration now requires a deterministic secret whenever snapshots are enabled (snapshot.secret or TRACEHOUND_SNAPSHOT_SECRET / SYSTEM_SNAPSHOT_ENV.SECRET).',
-      'Signed system snapshot support centered on SystemSnapshot, ITracehound.snapshot(), and snapshot export options on TracehoundOptions.',
-      'Snapshot read/write utilities with HMAC-SHA256 signing, constant-time verification, atomic file replacement, centralized environment-key helpers, and public path/secret resolution helpers for CLI and external tooling.',
-      'Deterministic hound analysis metadata over IPC analysis messages: hash, entropy, contentType, and sizeBytes.',
-      'Canonical public operational helpers and constants for release-safe integrations, including snapshot helpers and hound pressure matching exports: HOUND_PRESSURE_ERRORS, HoundPressureErrorCode, and isHoundPressureError.',
-      'Operational truth is now grounded in verified runtime snapshots end-to-end. CLI status surfaces, watch dashboard flows, and JSON stats output all consume signed snapshot state instead of inferred defaults.',
-    ],
+    "version": "1.6.0",
+    "date": "2026-03-06",
+    "title": "Operational Truth, Deterministic Analysis, and Release Readiness",
+    "summary": "Covers the complete critical refactor plan delivered after v1.5.0: RFC-0013 operational-truth grounding, signed snapshot integrity, deterministic hound analysis, IPC and lifecycle hardening, typed runtime error cleanup, public API parity, and release-readiness validation.",
+    "highlights": [
+      "CLI operational surfaces (status, stats, watch) no longer fabricate healthy or zero-value state when no verified runtime snapshot exists. Operators now see explicit NO_INSTANCE or INTEGRITY_VIOLATION outcomes instead of false assurance.",
+      "IAgent contract now includes getStats(): Readonly<AgentStats> for interface parity. Custom implementations must provide the method.",
+      "Snapshot export configuration now requires a deterministic secret whenever snapshots are enabled (snapshot.secret or TRACEHOUND_SNAPSHOT_SECRET / SYSTEM_SNAPSHOT_ENV.SECRET).",
+      "Signed system snapshot support centered on SystemSnapshot, ITracehound.snapshot(), and snapshot export options on TracehoundOptions.",
+      "Snapshot read/write utilities with HMAC-SHA256 signing, constant-time verification, atomic file replacement, centralized environment-key helpers, and public path/secret resolution helpers for CLI and external tooling.",
+      "Deterministic hound analysis metadata over IPC analysis messages: hash, entropy, contentType, and sizeBytes.",
+      "Canonical public operational helpers and constants for release-safe integrations, including snapshot helpers and hound pressure matching exports: HOUND_PRESSURE_ERRORS, HoundPressureErrorCode, and isHoundPressureError.",
+      "Operational truth is now grounded in verified runtime snapshots end-to-end. CLI status surfaces, watch dashboard flows, and JSON stats output all consume signed snapshot state instead of inferred defaults."
+    ]
   },
   {
-    version: '1.5.0',
-    date: '2026-03-04',
-    title: 'M3 Pressure Containment and Governance Delivery',
-    summary:
-      'Covers the complete Sprint Bootstrap Governance Pack Post-Sprint Implementation Backlog. Ticket coverage:',
-    highlights: [
-      'Coordination provider contract types are formalized in public core type surface (CoordinationProvider, CoordinationHealth, CoordinationFeature).',
-      'Agent coordination health flow is fail-open: invalid/throwing provider health resolves safely to degraded without interrupting intercept path.',
-      'Coordination contract integration paths are covered in unit/integration/regression tests.',
-      'Runtime membrane enforces metadata-only evidence handles and blocks direct payload egress attempts (bytes, transfer, neutralize, evacuate) with typed runtime violations.',
-      'Optional adapter trace id signaling (x-tracehound-trace-id) is available behind explicit opt-in configuration.',
-      'CLI inspect workflow supports trace-id based evidence metadata lookup without raw payload leakage defaults.',
-      'Deterministic Drop and Count behavior is enforced under pressure boundaries in quarantine/cold-path workflows.',
-      'MemoryColdStorage runs memory-first buffering by default; disk buffering remains explicit opt-in via diskBuffer.enabled.',
-    ],
-  },
+    "version": "1.5.0",
+    "date": "2026-03-04",
+    "title": "M3 Pressure Containment and Governance Delivery",
+    "summary": "Covers the complete Sprint Bootstrap Governance Pack Post-Sprint Implementation Backlog. Ticket coverage:",
+    "highlights": [
+      "Coordination provider contract types are formalized in public core type surface (CoordinationProvider, CoordinationHealth, CoordinationFeature).",
+      "Agent coordination health flow is fail-open: invalid/throwing provider health resolves safely to degraded without interrupting intercept path.",
+      "Coordination contract integration paths are covered in unit/integration/regression tests.",
+      "Runtime membrane enforces metadata-only evidence handles and blocks direct payload egress attempts (bytes, transfer, neutralize, evacuate) with typed runtime violations.",
+      "Optional adapter trace id signaling (x-tracehound-trace-id) is available behind explicit opt-in configuration.",
+      "CLI inspect workflow supports trace-id based evidence metadata lookup without raw payload leakage defaults.",
+      "Deterministic Drop and Count behavior is enforced under pressure boundaries in quarantine/cold-path workflows.",
+      "MemoryColdStorage runs memory-first buffering by default; disk buffering remains explicit opt-in via diskBuffer.enabled."
+    ]
+  }
 ]
 
 export const timelineRows: TimelineRow[] = [
   {
-    version: '1.4.4',
-    date: '2026-02-26',
-    title: 'Tracehound Inline Protection Validation Harness (TIPVH) & Enterprise Hardening',
+    "version": "1.4.4",
+    "date": "2026-02-26",
+    "title": "Tracehound Inline Protection Validation Harness (TIPVH) & Enterprise Hardening"
   },
   {
-    version: '1.4.3',
-    date: '2026-02-25',
-    title: 'Monorepo Security Hardening & Robustness',
+    "version": "1.4.3",
+    "date": "2026-02-25",
+    "title": "Monorepo Security Hardening & Robustness"
   },
   {
-    version: '1.4.2',
-    date: '2026-02-21',
-    title: 'Document Updates & Roadmap',
+    "version": "1.4.2",
+    "date": "2026-02-21",
+    "title": "Document Updates & Roadmap"
   },
   {
-    version: '1.4.1',
-    date: '2026-02-21',
-    title: 'Orphan Wiring & Stability Fixes',
+    "version": "1.4.1",
+    "date": "2026-02-21",
+    "title": "Orphan Wiring & Stability Fixes"
   },
   {
-    version: '1.4.0',
-    date: '2026-02-16',
-    title: 'Deterministic Fuzz Assurance Program',
+    "version": "1.4.0",
+    "date": "2026-02-16",
+    "title": "Deterministic Fuzz Assurance Program"
   },
   {
-    version: '1.3.0',
-    date: '2026-02-16',
-    title: 'Security Model Alignment & Parser Hardening',
+    "version": "1.3.0",
+    "date": "2026-02-16",
+    "title": "Security Model Alignment & Parser Hardening"
   },
   {
-    version: '1.2.0',
-    date: '2026-02-14',
-    title: 'Forensic Hardening & English Audit Prep',
+    "version": "1.2.0",
+    "date": "2026-02-14",
+    "title": "Forensic Hardening & English Audit Prep"
   },
   {
-    version: '1.1.0',
-    date: '2026-02-10',
-    title: 'Production Hardening (Phase 4 P1)',
+    "version": "1.1.0",
+    "date": "2026-02-10",
+    "title": "Production Hardening (Phase 4 P1)"
   },
   {
-    version: '1.0.0',
-    date: '2024-12-27',
-    title: 'Stable Release',
+    "version": "1.0.0",
+    "date": "2024-12-27",
+    "title": "Stable Release"
   },
   {
-    version: '0.7.0',
-    date: 'v1.0.0 P0 Complete',
-    title: 'Release 0.7.0',
+    "version": "0.7.0",
+    "date": "v1.0.0 P0 Complete",
+    "title": "Release 0.7.0"
   },
   {
-    version: '0.6.0',
-    date: 'Production Ready (P0 Complete)',
-    title: 'Release 0.6.0',
+    "version": "0.6.0",
+    "date": "Production Ready (P0 Complete)",
+    "title": "Release 0.6.0"
   },
   {
-    version: '0.5.0',
-    date: 'Hound Process Isolation',
-    title: 'Release 0.5.0',
+    "version": "0.5.0",
+    "date": "Hound Process Isolation",
+    "title": "Release 0.5.0"
   },
   {
-    version: '0.4.0',
-    date: 'Observability & Resilience',
-    title: 'Release 0.4.0',
+    "version": "0.4.0",
+    "date": "Observability & Resilience",
+    "title": "Release 0.4.0"
   },
   {
-    version: '0.3.0',
-    date: 'Core Logic',
-    title: 'Release 0.3.0',
+    "version": "0.3.0",
+    "date": "Core Logic",
+    "title": "Release 0.3.0"
   },
   {
-    version: '0.2.0',
-    date: 'Evidence & Quarantine',
-    title: 'Release 0.2.0',
+    "version": "0.2.0",
+    "date": "Evidence & Quarantine",
+    "title": "Release 0.2.0"
   },
   {
-    version: '0.1.0',
-    date: 'Foundation',
-    title: 'Release 0.1.0',
-  },
+    "version": "0.1.0",
+    "date": "Foundation",
+    "title": "Release 0.1.0"
+  }
 ]
