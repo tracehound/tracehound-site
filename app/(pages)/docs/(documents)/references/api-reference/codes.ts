@@ -62,6 +62,15 @@ th.notifications.on('threat.detected', (event) => {
 th.notifications.on('system.panic', (event) => {
   console.error(event.payload.level, event.payload.reason)
 })
+
+// If you register webhook targets, keep auth in explicit headers.
+// Do not embed credentials in the URL authority section.
+const webhook = {
+  url: 'https://hooks.example.com/tracehound',
+  headers: {
+    Authorization: \`Bearer \${process.env.TRACEHOUND_WEBHOOK_TOKEN}\`,
+  },
+}
 `.trimStart()
 
 export const utilitiesCode = `

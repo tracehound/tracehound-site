@@ -44,7 +44,7 @@ const sections: {
       },
       {
         q: 'What is notifications for?',
-        a: 'It is the event-emission surface for publishing runtime events to downstream systems.',
+        a: 'It is the event-emission surface for publishing runtime events to downstream systems. Async subscribers and webhook delivery are bounded, and webhook targets reject internal/private and credential-in-URL destinations by policy.',
       },
     ],
   },

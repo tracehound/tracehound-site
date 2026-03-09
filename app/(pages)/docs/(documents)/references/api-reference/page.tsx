@@ -125,6 +125,24 @@ export default function APIReferences() {
             <strong>`system.panic`</strong>.
           </DocsContentParagraph>
 
+          <DocsContentSubtitle>Webhook delivery policy</DocsContentSubtitle>
+          <DocsList
+            items={[
+              <p key="webhook-bounded">
+                Webhook delivery is bounded with a fixed inflight worker cap and bounded backlog.
+              </p>,
+              <p key="webhook-ssrf">
+                Loopback, RFC1918, link-local, metadata-service, malformed, and redirecting
+                destinations are rejected.
+              </p>,
+              <p key="webhook-credentials">
+                Embedded URL credentials such as <strong>`https://user:pass@example.com/hook`</strong>{' '}
+                are intentionally rejected. If the receiver needs authentication, send it through
+                explicit headers such as <strong>`Authorization`</strong>.
+              </p>,
+            ]}
+          />
+
           <DocsContentSubtitle>system.panic reason patterns</DocsContentSubtitle>
           <DocsList
             items={[
