@@ -13,9 +13,9 @@ import type { Metadata } from 'next/types'
 import { interceptLatencyHarnessCode, pressureSignalsCode, tuningProfileCode } from './codes'
 
 export const metadata: Metadata = {
-  title: 'Performance SLA Specification',
+  title: 'Performance Characteristics',
   description:
-    'Latency targets, measurement scope, and performance characteristics for Tracehound core operations.',
+    'Current hot-path scope, measurement guidance, and implemented performance characteristics for Tracehound core operations.',
 }
 
 export default function PerformanceSLASpecification() {
@@ -23,37 +23,33 @@ export default function PerformanceSLASpecification() {
     <DocsPageLayout>
       <DocsHeader
         label="GUIDES"
-        title="Performance SLA Specification"
-        summary="Latency targets, measurement scope, and performance characteristics for Tracehound core operations."
+        title="Performance Characteristics"
+        summary="Current hot-path scope, measurement guidance, and implemented performance characteristics for Tracehound core operations."
       />
 
       <DocsContent>
-        <DocsContentBlock title="SLA Scope">
+        <DocsContentBlock title="Scope">
           <DocsContentParagraph>
-            This SLA focuses on the synchronous hot-path behavior of{' '}
-            <strong>`agent.intercept()`</strong> and related core runtime surfaces. Values are
-            targets under controlled conditions, not universal guarantees across all deployments.
+            This page is descriptive, not contractual. It explains the current hot-path model of{' '}
+            <strong>`agent.intercept()`</strong> and how to interpret repository benchmark output.
           </DocsContentParagraph>
         </DocsContentBlock>
 
         <Separator />
 
-        <DocsContentBlock title="Latency Targets (Hot Path)">
-          <Table
-            head={['Percentile', 'Target', 'Scope']}
-            body={[
-              { row: ['p50', '< 0.5ms', 'Normal operation'] },
-              { row: ['p99', '< 2ms', 'Normal operation'] },
-              { row: ['p99.9', '< 10ms', 'Under pressure scenarios'] },
-            ]}
-          />
+        <DocsContentBlock title="Hot-Path Boundary">
           <DocsList
             items={[
               <p key="l1">
-                Measured from <strong>`agent.intercept()`</strong> call to return value.
+                The synchronous hot path is measured from <strong>`agent.intercept()`</strong>{' '}
+                entry to its return value.
               </p>,
-              <p key="l2">Async HoundPool processing time is excluded.</p>,
-              <p key="l3">Cold storage write latency is excluded.</p>,
+              <p key="l2">Async HoundPool analysis is excluded.</p>,
+              <p key="l3">Cold storage archival and notification/webhook delivery are excluded.</p>,
+              <p key="l4">
+                Scenario-test output is environment-dependent and should be read as current
+                measurement, not fixed SLA.
+              </p>,
             ]}
           />
         </DocsContentBlock>
@@ -62,7 +58,7 @@ export default function PerformanceSLASpecification() {
 
         <DocsContentBlock title="What Is Included vs Excluded">
           <Table
-            head={['Included in SLA hot-path', 'Excluded from hot-path SLA']}
+            head={['Included in hot path', 'Excluded from hot path']}
             body={[
               { row: ['Rate limiter check', 'HoundPool async analysis duration'] },
               {
@@ -83,8 +79,7 @@ export default function PerformanceSLASpecification() {
 
         <DocsContentBlock title="Reference Configuration Profile">
           <DocsContentParagraph>
-            Baseline targets should be validated using a stable reference profile before custom
-            tuning.
+            Use a stable reference profile when comparing one run to another.
           </DocsContentParagraph>
           <Code code={tuningProfileCode} />
         </DocsContentBlock>
@@ -109,8 +104,8 @@ export default function PerformanceSLASpecification() {
 
         <DocsContentBlock title="Pressure and Degradation Signals">
           <DocsContentParagraph>
-            SLA tracking should include pressure signals, not only median latency, to detect
-            approaching degradation conditions early.
+            Track pressure signals together with latency so you catch degradation before it turns
+            into tail-latency drift or bounded dropping.
           </DocsContentParagraph>
           <Code code={pressureSignalsCode} />
           <Table
@@ -132,6 +127,11 @@ export default function PerformanceSLASpecification() {
         <Separator />
 
         <DocsContentBlock title="Tuning Guidance">
+          <DocsContentParagraph>
+            Current implementation still has known hot spots in eviction, stats derivation, and
+            rate-limiter pruning. Tune for safe bounds first; do not assume constant-time behavior
+            where the implementation does not yet provide it.
+          </DocsContentParagraph>
           <Table
             head={['Knob', 'Primary effect', 'Trade-off']}
             body={[

@@ -58,33 +58,61 @@ export default function Core() {
 
         <Separator />
 
-        <DocsContentBlock title="Horizon Extension (Current Docs Position)">
+        <DocsContentBlock title="Public Repository Surface">
           <DocsContentParagraph>
-            Canonical docs reference <strong>`@tracehound/horizon`</strong> as an extension for
-            multi-instance coordination and scale-out scenarios (for example shared coordination
-            patterns), while core remains local-first.
+            The public repository surface is the implemented monorepo itself. Coordination and
+            scale-out patterns may exist as external or future work, but they are not part of the
+            public `@tracehound/core` runtime contract unless they are implemented here.
           </DocsContentParagraph>
           <Table
-            head={['Capability area', 'Core default', 'With Horizon']}
+            head={['Capability area', 'Public core position', 'Notes']}
             body={[
-              { row: ['HoundPool processes', '8 max (SLA table)', 'Unlimited (docs claim)'] },
-              { row: ['Multi-instance coordination', 'Not built in', 'Redis/KeyDB coordination pattern'] },
-              { row: ['Shared blocklist', 'Not built in', 'Supported via Horizon coordination'] },
-              { row: ['Global rate limiting', 'Per-instance only', 'Cross-instance sync model'] },
-              { row: ['mTLS enforcement', 'Not in core defaults', 'Documented as Horizon capability'] },
-              { row: ['Policy broker integration', 'External integration by app', 'Documented Horizon feature'] },
+              {
+                row: [
+                  'HoundPool capacity',
+                  'Configured locally per instance',
+                  'No unlimited-worker guarantee is published',
+                ],
+              },
+              {
+                row: [
+                  'Multi-instance coordination',
+                  'Not built in by default',
+                  'Use external coordination boundaries when needed',
+                ],
+              },
+              {
+                row: [
+                  'Shared blocklist/global rate limiting',
+                  'Not built in by default',
+                  'Public core remains local-state first',
+                ],
+              },
+              {
+                row: [
+                  'Policy and transport controls',
+                  'Application-owned integration',
+                  'Do not assume hidden extension behavior in OSS core',
+                ],
+              },
             ]}
           />
           <DocsList
             items={[
-              <p key="h1">Core remains fully functional without Horizon and keeps deterministic local behavior.</p>,
-              <p key="h2">Use Horizon when you need fleet-level shared controls rather than per-instance isolation.</p>,
-              <p key="h3">Evidence aggregation can still be handled in core via async cold-storage export patterns.</p>,
+              <p key="h1">Core remains fully functional with deterministic local behavior.</p>,
+              <p key="h2">
+                Read production truth from implemented packages and public docs, not from legacy
+                extension claims.
+              </p>,
+              <p key="h3">
+                Evidence aggregation can still be handled with documented async cold-storage export
+                patterns.
+              </p>,
             ]}
           />
           <DocsContentParagraph>
-            The `tracehound` monorepo currently exposes packages `core`, `express`, `fastify`, and
-            `cli`; Horizon is documented as an extension track, not a package in this repository.
+            The public monorepo currently exposes packages `core`, `express`, `fastify`, and
+            `cli`.
           </DocsContentParagraph>
         </DocsContentBlock>
       </DocsContent>
@@ -92,8 +120,8 @@ export default function Core() {
       <DocsNavigation
         prev={{
           href: '/docs/guides/performance-sla-specification',
-          title: 'Performance SLA',
-          summary: 'Latency guarantees and performance characteristics',
+          title: 'Performance Characteristics',
+          summary: 'Current hot-path scope and measurement guidance',
         }}
         next={{
           href: '/docs/ecosystem/argos',

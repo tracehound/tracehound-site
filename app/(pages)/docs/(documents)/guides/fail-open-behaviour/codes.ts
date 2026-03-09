@@ -26,26 +26,17 @@ if (result.status === 'error') {
 }
 `.trimStart()
 
-export const failSafeUsageCode = `
-import { createFailSafe } from '@tracehound/core'
-
-const failSafe = createFailSafe({
-  memory: { warning: 0.7, critical: 0.85, emergency: 0.95 },
-  quarantine: { warning: 0.7, critical: 0.85, emergency: 0.95 },
-  errorRate: { warning: 10, critical: 50, emergency: 100 },
+export const operatorSignalsCode = `
+th.notifications.on('system.panic', (event) => {
+  logger.warn('tracehound_panic', {
+    level: event.payload.level,
+    reason: event.payload.reason,
+  })
 })
 
-failSafe.on('warning', (event) => {
-  logger.warn('failsafe_warning', event)
-})
-
-failSafe.on('critical', (event) => {
-  alertOps('failsafe_critical', event)
-})
-
-failSafe.on('emergency', (event) => {
-  alertOps('failsafe_emergency', event)
-  // Optional: emergency containment action
-  // quarantine.flush()
+const watcher = th.watcher.snapshot()
+console.log({
+  overloaded: watcher.overloaded,
+  alertsInWindow: watcher.alertsInWindow,
 })
 `.trimStart()

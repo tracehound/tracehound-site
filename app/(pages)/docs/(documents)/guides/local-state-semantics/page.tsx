@@ -150,8 +150,8 @@ export default function LocalStateSemantics() {
         }}
         next={{
           href: '/docs/guides/performance-sla-specification',
-          title: 'Performance SLA',
-          summary: 'Latency guarantees and performance characteristics',
+          title: 'Performance Characteristics',
+          summary: 'Current hot-path scope and measurement guidance',
         }}
       />
     </DocsPageLayout>

@@ -86,7 +86,7 @@ const sections: {
       },
       {
         q: 'What is the licensing model?',
-        a: 'The repository is Apache-2.0. Docs also describe an open-core model with extension/commercial tracks.',
+        a: 'The public repository is Apache-2.0. Treat implemented public packages and public docs as canonical OSS scope.',
       },
     ],
   },
@@ -243,7 +243,7 @@ const crashAndErrorRows: { row: string[] }[] = [
 
 const performanceRows: { row: string[] }[] = [
   {
-    row: ['Hot path target', 'Sub-millisecond p50, low-millisecond p99 in normative SLA context'],
+    row: ['Hot path model', 'Interpret scenario-test latency as current measurement, not fixed contractual SLA'],
   },
   {
     row: ['What is excluded from hot path', 'Async hound analysis, cold-storage writes, downstream delivery latency'],
@@ -260,13 +260,13 @@ const testAssuranceRows: { row: string[] }[] = [
   {
     row: [
       'Local chaos suite',
-      '`npm run test:chaos` validates fail-open and isolation invariants under induced failures',
+      '`npm run test:chaos` exercises fail-open availability, burst recovery, and audit-path I/O degradation scenarios',
     ],
   },
   {
     row: [
-      'Process isolation verification',
-      'Worker kill/freeze scenarios show host application survival properties',
+      'Process-separation evidence',
+      'Worker pressure and crash scenarios are used to validate reduced blast radius, not absolute OS isolation',
     ],
   },
   {

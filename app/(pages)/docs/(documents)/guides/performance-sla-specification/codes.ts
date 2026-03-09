@@ -6,7 +6,7 @@ const th = createTracehound()
 const scent = {
   id: generateSecureId(),
   timestamp: Date.now(),
-  source: '203.0.113.1',
+  source: { ip: '203.0.113.1' },
   payload: { method: 'GET', path: '/health' },
 }
 

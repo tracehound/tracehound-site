@@ -10,7 +10,7 @@ import { DocsPageLayout } from '@/app/components/docs-page-layout'
 import { Separator } from '@/app/components/separator'
 import { Table } from '@/app/components/table'
 import type { Metadata } from 'next/types'
-import { antiPatternCode, failSafeUsageCode, interceptHandlingCode } from './codes'
+import { antiPatternCode, interceptHandlingCode, operatorSignalsCode } from './codes'
 
 export const metadata: Metadata = {
   title: 'Fail-Open Behaviour',
@@ -101,18 +101,24 @@ export default function FailOpenBehaviour() {
 
         <Separator />
 
-        <DocsContentBlock title="FailSafe Threshold Hooks">
+        <DocsContentBlock title="Operator Signals">
           <DocsContentParagraph>
-            <strong>`createFailSafe`</strong> provides warning/critical/emergency hooks for pressure
-            signals (memory, quarantine, error-rate).
+            Public fail-open handling should rely on operator channels such as{' '}
+            <strong>`th.notifications`</strong> and <strong>`th.watcher.snapshot()`</strong>, not
+            on forced client-visible error responses.
           </DocsContentParagraph>
-          <Code code={failSafeUsageCode} />
+          <Code code={operatorSignalsCode} />
           <DocsList
             items={[
-              <p key="f1">Callbacks are non-blocking and should never become hot-path work.</p>,
-              <p key="f2">Use callbacks to alert and initiate controlled operational responses.</p>,
+              <p key="f1">
+                Keep notification handling non-blocking and outside the request hot path.
+              </p>,
+              <p key="f2">
+                Use these channels for alerting and diagnosis when Tracehound is degraded.
+              </p>,
               <p key="f3">
-                Keep emergency actions explicit and tested in staging before production use.
+                If the application owns the route contract, custom `onIntercept` remains an
+                explicit opt-in choice rather than the default.
               </p>,
             ]}
           />
