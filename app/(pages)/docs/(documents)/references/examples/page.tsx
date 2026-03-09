@@ -87,6 +87,11 @@ export default function Examples() {
             Once baseline behavior is clear, switch to <strong>`@tracehound/express`</strong> for
             cleaner middleware wiring.
           </DocsContentParagraph>
+          <DocsContentParagraph>
+            Use <strong>`onIntercept`</strong> only when your application owns the response
+            contract for the intercepted routes. Otherwise, keep the default fail-open pass-through
+            for <strong>`error`</strong> and surface Tracehound failures through operator channels.
+          </DocsContentParagraph>
           <Code code={expressAdapterCode} />
           <DocsContentSubtitle>When to use adapter mode</DocsContentSubtitle>
           <DocsList

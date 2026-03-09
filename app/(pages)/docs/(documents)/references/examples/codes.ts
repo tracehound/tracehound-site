@@ -46,7 +46,8 @@ app.use((req, res, next) => {
     return res.status(403).json({ error: 'Blocked' })
   }
 
-  return res.status(500).json({ error: 'Security pipeline failure' })
+  // Fail-open: keep host request flow alive and surface the issue via logs/metrics.
+  return next()
 })
 
 app.get('/health', (_req, res) => res.json({ ok: true }))
@@ -81,7 +82,7 @@ app.use(
         ? { category: 'unknown', severity: 'medium' }
         : undefined,
     }),
-    onIntercept: (result, _req, res) => {
+    onIntercept: (result, req, res) => {
       if (result.status === 'rate_limited') {
         return res.status(429).json({ error: 'Too many requests' })
       }
@@ -91,7 +92,15 @@ app.use(
       if (result.status === 'payload_too_large') {
         return res.status(413).json({ error: 'Payload too large' })
       }
-      return res.status(500).json({ error: 'Internal security error' })
+      if (result.status === 'error' && req.accepts('json') && !res.headersSent) {
+        return res.status(200).json({
+          ok: true,
+          tracehound: {
+            degraded: true,
+            code: result.error.code,
+          },
+        })
+      }
     },
   }),
 )
