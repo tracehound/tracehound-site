@@ -3,7 +3,7 @@ name: Sync Core Changelog
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: "0 5 * * *"
 
 jobs:
   sync:
@@ -32,7 +32,7 @@ jobs:
         run: |
           if [ -z "$CORE_CHANGELOG_URL" ]; then
             echo "CORE_CHANGELOG_URL repo variable is not set."
-            echo "Set it to the raw URL of packages/core/CHANGELOG.md."
+            echo "Set it to the raw URL of CHANGELOG.md."
             exit 1
           fi
 
