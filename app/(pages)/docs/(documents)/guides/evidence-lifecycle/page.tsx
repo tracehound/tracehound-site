@@ -36,7 +36,8 @@ export default function EvidenceLifecycle() {
         <DocsContentBlock title="Lifecycle Overview">
           <DocsContentParagraph>
             In current core, evidence is produced by `agent.intercept`, stored in quarantine, and
-            then removed via neutralization, eviction, purge, or flush workflows.
+            then transitions through ignore, neutralize, purge, eviction, or optional TTL decay
+            workflows depending on runtime configuration.
           </DocsContentParagraph>
           <Code code={interceptLifecycleCode} />
           <Table
@@ -46,6 +47,7 @@ export default function EvidenceLifecycle() {
               { row: ['Quarantined', 'Stored in bounded in-memory quarantine', 'Insert accepted'] },
               { row: ['Ignored', 'Duplicate signature not re-stored', 'Duplicate detection'] },
               { row: ['Neutralized', 'Removed with audit record', 'neutralize/flush/eviction'] },
+              { row: ['Decayed', 'Expired by TTL and removed after decay processing', 'ttlMs + scheduler decay cycle'] },
               { row: ['Purged', 'Removed with explicit purge reason', 'purge(timeout/error/abort/panic)'] },
             ]}
           />
@@ -64,8 +66,13 @@ export default function EvidenceLifecycle() {
               { row: ['Capacity bounds', '`maxCount` and `maxBytes` are enforced'] },
               { row: ['Eviction policy', 'Priority-based (lower severity first, then oldest)'] },
               { row: ['Default policy in createTracehound', '`priority`'] },
-              { row: ['Built-in TTL retention', 'Not provided by default in current core'] },
-              { row: ['Automatic cold storage evacuation', 'Not automatic in current core'] },
+              { row: ['Built-in TTL retention', 'Available when `quarantine.ttlMs` is configured'] },
+              {
+                row: [
+                  'Automatic cold storage evacuation',
+                  'Available on TTL decay when archiving is enabled and a cold storage adapter is present or auto-provisioned',
+                ],
+              },
             ]}
           />
         </DocsContentBlock>
@@ -103,15 +110,16 @@ export default function EvidenceLifecycle() {
 
         <DocsContentBlock title="Cold Storage Archival Pattern">
           <DocsContentParagraph>
-            S3-compatible storage is available through adapter APIs. In current core, archival is an
-            explicit application workflow, not an automatic quarantine policy.
+            S3-compatible storage is available through adapter APIs. In current core, archival can
+            run automatically during TTL decay, or be invoked explicitly by application workflows
+            when you need controlled export patterns.
           </DocsContentParagraph>
           <Code code={archivePatternCode} />
           <DocsList
             items={[
               <p key="c1">Encode payload with integrity before storage write.</p>,
               <p key="c2">Use write failures as observable operational signals.</p>,
-              <p key="c3">Validate retrieval path in staging before production enablement.</p>,
+                <p key="c3">Validate retrieval path and archive timeout behavior in staging before production enablement.</p>,
             ]}
           />
         </DocsContentBlock>
@@ -137,7 +145,7 @@ export default function EvidenceLifecycle() {
               {
                 row: [
                   'Support incident forensics',
-                  'Export selected evidence to cold storage and verify integrity path regularly',
+                  'Enable TTL archival where retention policy requires it, and verify integrity and retrieval paths regularly',
                 ],
               },
               {
