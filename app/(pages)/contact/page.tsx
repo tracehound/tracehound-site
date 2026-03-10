@@ -1,11 +1,10 @@
 import { Badge } from '@/app/components/badge'
 import { Button } from '@/app/components/button'
-import { ContactForm } from '@/app/components/contact-form'
 import { Container } from '@/app/components/container'
 import { Row } from '@/app/components/patterns/row'
 import { Table } from '@/app/components/table'
-import Link from 'next/link'
 import type { Metadata } from 'next/types'
+import { ContactForm } from './contact-form'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -109,6 +108,25 @@ export default function Contact() {
         <Row />
       </Container>
 
+      <section id="contact-form" className="relative w-full py-16 lg:py-24">
+        <Container>
+          <header className="flex flex-col gap-3 px-6 xl:px-12">
+            <Badge variant="neutral">CONTACT FORM</Badge>
+            <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
+              Send a message
+            </h2>
+          </header>
+
+          <div className="px-6 pt-8 xl:px-12 xl:pt-12 xl:max-w-8/12">
+            <ContactForm />
+          </div>
+        </Container>
+      </section>
+
+      <Container>
+        <Row />
+      </Container>
+
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="flex flex-col gap-3 px-6 xl:px-12">
@@ -124,71 +142,6 @@ export default function Contact() {
               body={responseMatrix}
             />
           </div>
-        </Container>
-      </section>
-
-      <Container>
-        <Row />
-      </Container>
-
-      <section className="relative w-full py-16 lg:py-24">
-        <Container>
-          <header className="flex flex-col gap-3 px-6 xl:px-12" id="contact-form">
-            <Badge variant="secondary">SITE CONTACT FORM</Badge>
-            <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
-              Submit directly from this page
-            </h2>
-            <p className="text-sm md:text-base xl:text-lg xl:max-w-5/12">
-              This form routes architecture, technical, and partnership inquiries through the
-              site-managed contact workflow. No external business portal is required.
-            </p>
-          </header>
-
-          <article className="px-6 pt-8 xl:px-12 xl:pt-12">
-            <ContactForm />
-          </article>
-        </Container>
-      </section>
-
-      <Container>
-        <Row />
-      </Container>
-
-      <section className="relative w-full py-16 lg:py-24">
-        <Container>
-          <header className="flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="secondary">MESSAGE TEMPLATE</Badge>
-            <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
-              Include these fields for faster triage
-            </h2>
-          </header>
-
-          <article className="px-6 pt-8 xl:px-12 xl:pt-12">
-            <div className="border border-dashed border-(--border-accent) p-6 font-mono text-xs md:text-sm whitespace-pre-wrap">
-              Request Type: Architecture | Technical | Partnership{`\n`}
-              Organization / Team: {`<name>`}
-              {`\n`}
-              Environment: Cloud / On-Prem / Hybrid{`\n`}
-              Current Stage: Evaluation / Pilot / Production{`\n`}
-              Target Packages: @tracehound/core | @tracehound/express | @tracehound/fastify | @tracehound/cli{`\n`}
-              Main Constraint: Latency / Compliance / Integration / Cost{`\n`}
-              Expected Timeline: {`<date range>`}
-              {`\n`}
-              Notes: {`<context + objective>`}
-            </div>
-
-            <p className="mt-6 text-sm md:text-base xl:text-lg">
-              For navigation: see{' '}
-              <Link href="/faq" className="underline">
-                FAQ
-              </Link>{' '}
-              and{' '}
-              <Link href="/changelog" className="underline">
-                Changelog
-              </Link>{' '}
-              before submitting deep technical questions.
-            </p>
-          </article>
         </Container>
       </section>
     </div>
