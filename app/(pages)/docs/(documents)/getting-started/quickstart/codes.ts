@@ -4,7 +4,9 @@ export const quickStartCode = `
 import { createTracehound } from '@tracehound/core'
 
 const th = createTracehound({
-  quarantine: { maxCount: 1000 },
+  maxPayloadSize: 1_000_000,
+  quarantine: { maxCount: 1000, maxBytes: 100_000_000 },
+  rateLimit: { windowMs: 60_000, maxRequests: 100 },
 })
 `.trimStart()
 
@@ -21,7 +23,7 @@ app.use((req, res, next) => {
         typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
     },
     payload: { method: req.method, path: req.path },
-    threat: detectThreat(req), // Your WAF / Detector logic
+    threat: mapThreatSignal(req),
   }
 
   const result = th.agent.intercept(scent)
@@ -30,16 +32,16 @@ app.use((req, res, next) => {
     return res.status(429).json({ error: 'Too many requests', retryAfter: result.retryAfter })
   }
 
-  if (result.status === 'quarantined' || result.status === 'ignored') {
-    return res.status(403).json({ error: 'Blocked' })
+  if (result.status === 'quarantined') {
+    return res.status(403).json({ error: 'Blocked', signature: result.handle.signature })
   }
 
   if (result.status === 'payload_too_large') {
     return res.status(413).json({ error: 'Payload too large', limit: result.limit })
   }
 
-  if (result.status === 'error') {
-    return res.status(500).json({ error: 'Security pipeline failure' })
+  if (result.status === 'ignored' || result.status === 'error') {
+    return next()
   }
 
   return next()
@@ -48,10 +50,21 @@ app.use((req, res, next) => {
 
 export const expressInstallCode = `npm install @tracehound/core @tracehound/express`
 export const expressSetupCode = `
+import { Buffer } from 'node:buffer'
+import express from 'express'
 import { tracehound } from '@tracehound/express'
 import { createTracehound, generateSecureId } from '@tracehound/core'
 
+const app = express()
 const th = createTracehound()
+
+app.use(
+  express.json({
+    verify: (req, _res, buf) => {
+      Reflect.set(req, 'rawBody', Buffer.from(buf))
+    },
+  }),
+)
 
 app.use(
   tracehound({
@@ -65,7 +78,7 @@ app.use(
           typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
       },
       payload: { method: req.method, path: req.path },
-      threat: myWafCheck(req),
+      threat: mapThreatSignal(req),
     }),
   }),
 )
@@ -73,12 +86,14 @@ app.use(
 
 export const fastifyInstallCode = `npm install @tracehound/core @tracehound/fastify`
 export const fastifySetupCode = `
+import fastify from 'fastify'
 import { tracehoundPlugin } from '@tracehound/fastify'
 import { createTracehound, generateSecureId } from '@tracehound/core'
 
+const app = fastify()
 const th = createTracehound()
 
-fastify.register(tracehoundPlugin, {
+app.register(tracehoundPlugin, {
   agent: th.agent,
   extractScent: (req) => ({
     id: generateSecureId(),
@@ -89,18 +104,22 @@ fastify.register(tracehoundPlugin, {
         typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
     },
     payload: { method: req.method, path: req.url },
-    threat: myWafCheck(req),
+    threat: mapThreatSignal(req),
   }),
 })
 `.trimStart()
 
-export const wafIntegrationCode = `
-const detectThreat = (req) => {
-  // Check WAF headers set by your edge provider
-  if (req.headers['cf-threat-score'] > 50) {
+export const externalSignalMappingCode = `
+const mapThreatSignal = (req) => {
+  if (req.headers['x-risk-score'] === 'critical') {
+    return { category: 'unknown', severity: 'critical' }
+  }
+
+  if (Number(req.headers['cf-threat-score'] ?? 0) > 50) {
     return { category: 'unknown', severity: 'medium' }
   }
-  return undefined // Clean request
+
+  return undefined
 }
 `.trimStart()
 
@@ -116,17 +135,22 @@ const th = createTracehound({
 `.trimStart()
 
 export const coldStorageExport = `
-import { createS3ColdStorage } from '@tracehound/core'
+import { createS3ColdStorage, encodeWithIntegrityAsync } from '@tracehound/core'
 
 const coldStorage = createS3ColdStorage({
-  client: myS3Client, // S3LikeClient interface
+  client: myS3Client,
   bucket: 'my-evidence-bucket',
   prefix: 'prod/evidence/',
 })
 
-// Use this adapter in your own evidence archival workflow
-`.trimStart()
+async function archiveQuarantined(signature) {
+  const evidence = th.quarantine.get(signature)
+  if (!evidence) return
 
+  const encoded = await encodeWithIntegrityAsync(new Uint8Array(evidence.bytes))
+  await coldStorage.write(signature, encoded)
+}
+`.trimStart()
 
 export const snapshotRuntimeCode = `
 import { createTracehound, SYSTEM_SNAPSHOT_ENV } from '@tracehound/core'

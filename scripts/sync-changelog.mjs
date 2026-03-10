@@ -37,6 +37,15 @@ function parseHeading(line) {
     }
   }
 
+  if (chunks.length === 1) {
+    const onlyChunk = chunks[0] ?? ''
+    if (/^\d{4}-\d{2}-\d{2}$/.test(onlyChunk)) {
+      return { version, date: onlyChunk, title: '' }
+    }
+
+    return { version, date: 'N/A', title: onlyChunk }
+  }
+
   return { version, date: chunks[0] ?? '', title: '' }
 }
 
@@ -148,13 +157,13 @@ async function readSource() {
     return { content }
   }
 
-  const fallbackPath = path.resolve('..', 'tracehound', 'packages', 'core', 'CHANGELOG.md')
+  const fallbackPath = path.resolve('..', 'tracehound', 'CHANGELOG.md')
   try {
     const content = await readFile(fallbackPath, 'utf8')
     return { content }
   } catch {
     throw new Error(
-      'Provide CORE_CHANGELOG_URL or CORE_CHANGELOG_PATH. Fallback ../tracehound/packages/core/CHANGELOG.md not found.',
+      'Provide CORE_CHANGELOG_URL or CORE_CHANGELOG_PATH. Fallback ../tracehound/CHANGELOG.md not found.',
     )
   }
 }

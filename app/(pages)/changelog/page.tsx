@@ -28,17 +28,18 @@ export default function Changelog() {
               <p className="font-mono text-xs text-(--warning)">RELEASE NOTES</p>
               <ul className="mt-2 list-disc space-y-2 pl-5 text-sm xl:text-base">
                 <li>
-                  v1.8.0 introduces TLS source metadata in runtime/adapters (
+                  v1.8.x introduces structured source hardening in runtime/adapters, including TLS
+                  metadata support (
                   <strong>cipherSuite</strong>, <strong>version</strong>, optional{' '}
                   <strong>alpn</strong>).
                 </li>
                 <li>
-                  Rate limiter controls were hardened against same-IP fingerprint rotation and
-                  eviction-based bypass patterns.
+                  Signed snapshot workflows, evidence lifecycle hardening, and rate-limiter
+                  anti-rotation controls all land in the current public release train.
                 </li>
                 <li>
-                  v1.8.0 has <strong>no breaking API changes</strong>; security behavior is stricter
-                  on adversarial paths.
+                  Current public version is <strong>v1.8.2</strong>; review the generated entries
+                  below for exact per-release deltas and migration-relevant notes.
                 </li>
               </ul>
               <p className="mt-3 text-sm">

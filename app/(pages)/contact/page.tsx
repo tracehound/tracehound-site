@@ -1,5 +1,6 @@
 import { Badge } from '@/app/components/badge'
 import { Button } from '@/app/components/button'
+import { ContactForm } from '@/app/components/contact-form'
 import { Container } from '@/app/components/container'
 import { Row } from '@/app/components/patterns/row'
 import { Table } from '@/app/components/table'
@@ -30,8 +31,8 @@ const contactTracks = [
     title: 'Business & Partnership',
     description:
       'For commercial collaborations, consulting scopes, and strategic security programs.',
-    ctaLabel: 'Visit Cluster 127',
-    ctaHref: 'https://www.cluster127.com/contact',
+    ctaLabel: 'Open Contact Form',
+    ctaHref: '#contact-form',
   },
 ]
 
@@ -43,7 +44,7 @@ const responseMatrix = [
     row: ['Technical clarification', 'Documentation channel', 'Best effort, async'],
   },
   {
-    row: ['Partnership inquiry', 'Business channel', '2-3 business days'],
+    row: ['Partnership inquiry', 'Site contact form', '2-3 business days'],
   },
 ]
 
@@ -58,7 +59,8 @@ export default function Contact() {
             </h1>
             <p className="font-sans text-base md:text-2xl xl:text-3xl/11 xl:max-w-8/12">
               Tracehound uses focused communication tracks so SecOps teams can get faster and more
-              actionable responses. Pick your path below based on request type.
+              actionable responses. Pick your path below based on request type, or use the form on
+              this page when you want the business/contact flow to stay inside the site.
             </p>
           </header>
         </Container>
@@ -131,6 +133,29 @@ export default function Contact() {
 
       <section className="relative w-full py-16 lg:py-24">
         <Container>
+          <header className="flex flex-col gap-3 px-6 xl:px-12" id="contact-form">
+            <Badge variant="secondary">SITE CONTACT FORM</Badge>
+            <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
+              Submit directly from this page
+            </h2>
+            <p className="text-sm md:text-base xl:text-lg xl:max-w-5/12">
+              This form routes architecture, technical, and partnership inquiries through the
+              site-managed contact workflow. No external business portal is required.
+            </p>
+          </header>
+
+          <article className="px-6 pt-8 xl:px-12 xl:pt-12">
+            <ContactForm />
+          </article>
+        </Container>
+      </section>
+
+      <Container>
+        <Row />
+      </Container>
+
+      <section className="relative w-full py-16 lg:py-24">
+        <Container>
           <header className="flex flex-col gap-3 px-6 xl:px-12">
             <Badge variant="secondary">MESSAGE TEMPLATE</Badge>
             <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
@@ -145,7 +170,7 @@ export default function Contact() {
               {`\n`}
               Environment: Cloud / On-Prem / Hybrid{`\n`}
               Current Stage: Evaluation / Pilot / Production{`\n`}
-              Target Packages: Core, Argos, Talos, etc.{`\n`}
+              Target Packages: @tracehound/core | @tracehound/express | @tracehound/fastify | @tracehound/cli{`\n`}
               Main Constraint: Latency / Compliance / Integration / Cost{`\n`}
               Expected Timeline: {`<date range>`}
               {`\n`}

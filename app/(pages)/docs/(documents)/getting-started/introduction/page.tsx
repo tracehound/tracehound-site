@@ -14,7 +14,7 @@ import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
   title: 'Introduction',
-  description: 'Deterministic Runtime Security Buffer for Modern Applications.',
+  description: 'Deterministic runtime security buffer for high-velocity APIs.',
 }
 
 export default function Introduction() {
@@ -28,7 +28,7 @@ export default function Introduction() {
             Tracehound is a <strong>deterministic security buffer</strong> for Node.js applications.
           </DocsContentParagraph>
           <DocsContentParagraph>
-            When your WAF or detection system identifies a threat, Tracehound:
+            When an upstream detector or risk service identifies a threat, Tracehound:
           </DocsContentParagraph>
           <DocsList
             items={[
@@ -130,16 +130,16 @@ export default function Introduction() {
           <div className="flex flex-col gap-2">
             <DocsContentSubtitle>Security-Conscious Teams</DocsContentSubtitle>
             <DocsContentParagraph>
-              If you need to prove what happened during an incident, Tracehound provides court-grade
-              evidence.
+              If you need to reconstruct what happened during an incident, Tracehound preserves
+              verifiable evidence and runtime custody records.
             </DocsContentParagraph>
           </div>
 
           <div className="flex flex-col gap-2">
             <DocsContentSubtitle>Compliance Requirements</DocsContentSubtitle>
             <DocsContentParagraph>
-              GDPR, SOC2, PCI-DSS all require evidence retention. Tracehound's audit chain is
-              designed for compliance.
+              Tracehound provides retention, audit, and evidence-handling primitives that can feed
+              your compliance controls and review workflows.
             </DocsContentParagraph>
           </div>
 
@@ -173,7 +173,7 @@ export default function Introduction() {
           <div className="flex flex-col gap-2">
             <DocsContentSubtitle>2. Decision-Free</DocsContentSubtitle>
             <DocsContentParagraph>
-              Tracehound <strong>does not make security decisions.</strong> Your WAF/detector
+              Tracehound <strong>does not make security decisions.</strong> Your upstream detector
               decides what's a threat. Tracehound quarantines and records.
             </DocsContentParagraph>
           </div>
@@ -186,10 +186,10 @@ export default function Introduction() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <DocsContentSubtitle>4. Open Core</DocsContentSubtitle>
+            <DocsContentSubtitle>4. Bounded</DocsContentSubtitle>
             <DocsContentParagraph>
-              Core security features are <strong>free and open source.</strong> Commercial packages
-              extend capability, not safety.
+              Quarantine, payload size, notification delivery, and worker pressure are bounded by
+              explicit limits rather than undefined growth.
             </DocsContentParagraph>
           </div>
         </DocsContentBlock>

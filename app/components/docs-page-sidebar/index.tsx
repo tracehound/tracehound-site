@@ -40,19 +40,7 @@ export function DocumentPageSidebar() {
                 activeClass="bg-(--accent-secondary)/5 text-(--accent-secondary) font-medium"
                 href={`/docs/${item.slug}`}>
                 <span className="inline-flex size-1 rounded-sm bg-(--border-accent) group-data-[active=true]/link:bg-(--accent-secondary)" />
-                {item.icon && <item.icon size={18} />}
                 <span className="flex-1">{item.title}</span>
-
-                {item.status && (
-                  <span
-                    className={cn(
-                      'ml-auto px-1 text-xs font-mono text-(--foreground) border-dashed border',
-                      item.status === 'wip' && 'border-(--warning) text-(--warning)',
-                      item.status === 'released' && 'border-(--success) text-(--success)',
-                    )}>
-                    {item.status}
-                  </span>
-                )}
               </NavLink>
             ))}
           </nav>

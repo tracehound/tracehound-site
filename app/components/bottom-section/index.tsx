@@ -10,13 +10,13 @@ export function BottomSection() {
             Ready to Secure Your Runtime?
           </h3>
           <p className="text-center text-lg xl:text-2xl">
-            Start with the open-core. <br />
-            Upgrade when you need more capabilities.
+            Start with the OSS runtime. <br />
+            Expand with services when deployment needs deeper support.
           </p>
         </header>
 
-        <nav className="flex items-center gap-4 flex-col w-10/12 xl:gap-10 xl:flex-row [&_a]:w-full sm:[&_a]:w-fit sm:w-full">
-          <Button variant="secondary" href="/service">
+        <nav className="flex items-center justify-center gap-4 flex-col w-10/12 xl:gap-10 xl:flex-row [&_a]:w-full sm:[&_a]:w-fit sm:w-full">
+          <Button variant="secondary" href="/services">
             INITIALIZE RUNTIME
           </Button>
           <Button variant="neutral" href="/docs">

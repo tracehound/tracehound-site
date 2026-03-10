@@ -15,7 +15,7 @@ export function Footer() {
             Runtime security buffer
           </h4>
           <p className="text-xl md:text-2xl">
-            Trusted by leading Security Teams and MSSP environments
+            Built for Security Teams and MSSP environments
           </p>
         </header>
 
@@ -24,37 +24,16 @@ export function Footer() {
             <h5 className="text-xl font-bold md:text-3xl font-heading">Ecosystem</h5>
             <ul className="flex flex-col pl-5 list-disc gap-2">
               <li>
-                <Link href="/docs/ecosystem/core">Core</Link>
+                <Link href="/ecosystem#core">@tracehound/core</Link>
               </li>
               <li>
-                <Link href="/docs/ecosystem/argos">Argos</Link>
+                <Link href="/ecosystem#express">@tracehound/express</Link>
               </li>
               <li>
-                <Link href="/docs/ecosystem/talos">Talos</Link>
+                <Link href="/ecosystem#fastify">@tracehound/fastify</Link>
               </li>
               <li>
-                <Link href="/docs/ecosystem/muninn">Muninn</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/huginn">Huginn</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/heimdall">Heimdall</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/loki">Loki</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/anubis">Anubis</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/norns">Norns</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/furies">Furies</Link>
-              </li>
-              <li>
-                <Link href="/docs/ecosystem/watchtower">Watchtower</Link>
+                <Link href="/ecosystem#cli">@tracehound/cli</Link>
               </li>
             </ul>
           </div>

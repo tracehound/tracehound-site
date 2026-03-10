@@ -1,33 +1,15 @@
-import { type Icon } from '@phosphor-icons/react'
-import {
-  BarricadeIcon,
-  BombIcon,
-  BrowsersIcon,
-  CastleTurretIcon,
-  FilmReelIcon,
-  HeadCircuitIcon,
-  ListChecksIcon,
-  ScalesIcon,
-  ShieldStarIcon,
-  SwapIcon,
-  TargetIcon,
-} from '@phosphor-icons/react/dist/ssr'
-
 export type Navigation = {
   slug: string
   title: string
   summary: string
-  category: 'Getting Started' | 'References' | 'Guides' | 'Ecosystem'
-  icon?: Icon
-  status?: 'wip' | 'released'
+  category: 'Getting Started' | 'References' | 'Guides'
 }
 
 export const navigation: Navigation[] = [
-  // Getting Started
   {
     slug: 'getting-started/introduction',
     title: 'Introduction',
-    summary: 'Deterministic Runtime Security Buffer for Modern Applications.',
+    summary: 'Deterministic runtime security buffer for high-velocity APIs.',
     category: 'Getting Started',
   },
   {
@@ -36,8 +18,6 @@ export const navigation: Navigation[] = [
     summary: 'Get Tracehound running in your Node.js application in under 5 minutes.',
     category: 'Getting Started',
   },
-
-  // References
   {
     slug: 'references/configuration',
     title: 'Configuration',
@@ -62,8 +42,6 @@ export const navigation: Navigation[] = [
     summary: 'Advanced configuration for production deployments.',
     category: 'References',
   },
-
-  // Guides
   {
     slug: 'guides/concepts',
     title: 'Concepts',
@@ -116,96 +94,5 @@ export const navigation: Navigation[] = [
     summary:
       'This document specifies latency guarantees and performance characteristics for Tracehound core operations.',
     category: 'Guides',
-  },
-
-  // Ecosystem
-  {
-    slug: 'ecosystem/core',
-    title: 'Core',
-    summary:
-      'The main Tracehound package. Includes everything you need to quarantine threats and preserve evidence.',
-    category: 'Ecosystem',
-    icon: CastleTurretIcon,
-    status: 'released',
-  },
-  {
-    slug: 'ecosystem/argos',
-    title: 'Argos',
-    summary: 'Runtime behavioral observation for threat detection.',
-    category: 'Ecosystem',
-    icon: TargetIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/talos',
-    title: 'Talos',
-    summary: 'External policy execution and decision routing.',
-    category: 'Ecosystem',
-    icon: ShieldStarIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/muninn',
-    title: 'Muninn',
-    summary: 'Historical ledger and time-series aggregation.',
-    category: 'Ecosystem',
-    icon: FilmReelIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/huginn',
-    title: 'Huginn',
-    summary: 'Threat intelligence ingestion and correlation.',
-    category: 'Ecosystem',
-    icon: HeadCircuitIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/heimdall',
-    title: 'Heimdall',
-    summary: 'Supply-chain security and dependency integrity checks.',
-    category: 'Ecosystem',
-    icon: BarricadeIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/loki',
-    title: 'Loki',
-    summary: 'Passive deception and tarpit layer.',
-    category: 'Ecosystem',
-    icon: SwapIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/anubis',
-    title: 'Anubis',
-    summary: 'Post-mortem forensic control layer for reconstructing evidence chains.',
-    category: 'Ecosystem',
-    icon: ScalesIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/norns',
-    title: 'Norns',
-    summary: 'Pre-deployment security posture validation.',
-    category: 'Ecosystem',
-    icon: ListChecksIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/furies',
-    title: 'Furies',
-    summary: 'Chaos engineering for security infrastructure.',
-    category: 'Ecosystem',
-    icon: BombIcon,
-    status: 'wip',
-  },
-  {
-    slug: 'ecosystem/watchtower',
-    title: 'Watchtower',
-    summary: 'Forensic cockpit and operational dashboards.',
-    category: 'Ecosystem',
-    icon: BrowsersIcon,
-    status: 'wip',
   },
 ]

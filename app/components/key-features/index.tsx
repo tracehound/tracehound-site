@@ -29,20 +29,18 @@ export function KeyFeatures() {
 
             <div className="flex flex-col">
               <h4 className="font-bold text-xl/5 xl:text-3xl/8">Zero-Hot-Path Overhead</h4>
-              <p className="font-medium">p50 &lt; 0.5ms, p99 &lt; 2ms</p>
+              <p className="font-medium">
+                Synchronous intercept path. Background work stays off the hot path.
+              </p>
             </div>
 
             <ul className="space-y-2 pl-4 list-disc">
               <li>
                 <strong>.intercept() call:</strong> non-blocking, O(1) map lookup
               </li>
-              <li>
-                <strong>Rate limiting:</strong> ~10μs
-              </li>
-              <li>
-                <strong>Evidence creation:</strong> ~100μs
-              </li>
-              <li>No measurable latency in production traffic</li>
+              <li>Cold storage, snapshots, notifications, and hound analysis stay off-path</li>
+              <li>Deterministic synchronous work in the request path</li>
+              <li>No fixed p50/p99 promise is claimed at the landing layer</li>
             </ul>
           </div>
 
@@ -59,7 +57,7 @@ export function KeyFeatures() {
               <li>
                 <strong>SIGKILL test:</strong> host app stays alive, worker respawns
               </li>
-              <li>Host app mathematically isolated</li>
+              <li>Worker crash does not collapse the host process</li>
               <li>
                 <strong>"Poison Pill Resilience"</strong>
               </li>
@@ -79,7 +77,7 @@ export function KeyFeatures() {
                 <strong>Fail-Open:</strong> System stays stable, traffic allowed
               </li>
               <li>
-                <strong>Fail-Closed:</strong> Rejected in critical conditions
+                <strong>Explicit outcomes:</strong> 429 / 413 / 403 under bounded conditions
               </li>
               <li>
                 <strong>Hard Shedding:</strong> On memory full, quarantine drops — no OOM
@@ -106,7 +104,7 @@ export function KeyFeatures() {
                 <strong>Tamper-evident audit log</strong>
               </li>
               <li>
-                <strong>GDPR-compliant</strong> retention policies
+                <strong>GDPR/KVKK-oriented</strong> retention and erasure workflows
               </li>
               <li>Automatic archiving to cold storage</li>
             </ul>

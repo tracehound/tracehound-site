@@ -36,8 +36,8 @@ export function SolutionSection() {
             <p className="flex flex-col xl:items-center">
               <strong className="mb-1">SCENT</strong>
               <span className="text-center text-xs xl:h-12">
-                WAF signals <br className="hidden xl:inline" />
-                headers
+                external threat <br className="hidden xl:inline" />
+                signals
               </span>
             </p>
           </div>
@@ -56,8 +56,8 @@ export function SolutionSection() {
               <strong className="mb-1">CONTROL</strong>
               <span className="text-center text-xs xl:h-12">
                 rate-limit <br className="hidden xl:inline" />
-                payload <br className="hidden xl:inline" />
-                patterns
+                payload size <br className="hidden xl:inline" />
+                abuse bounds
               </span>
             </p>
           </div>
@@ -75,8 +75,8 @@ export function SolutionSection() {
             <p className="flex flex-col xl:items-center">
               <strong className="mb-1">SIGNATURE</strong>
               <span className="text-center xl:h-12 text-xs">
-                SHA-256 HEX <br className="hidden xl:inline" />
-                UUID V7
+                SHA-256 <br className="hidden xl:inline" />
+                deterministic
               </span>
             </p>
           </div>
@@ -95,8 +95,8 @@ export function SolutionSection() {
               <strong className="mb-1">AGENT</strong>
               <span className="text-center xl:h-12 text-xs">
                 .intercept() <br className="hidden xl:inline" />
-                child_process <br className="hidden xl:inline" />
-                os-level
+                bounded <br className="hidden xl:inline" />
+                fail-open
               </span>
             </p>
           </div>
@@ -111,7 +111,7 @@ export function SolutionSection() {
 
               <div className="flex-1 flex flex-col items-star gap-2.5">
                 <strong>PASS</strong>
-                <p className="text-xs">Request proceed normally</p>
+                <p className="text-xs">Request proceeds normally</p>
               </div>
             </div>
 
@@ -129,11 +129,11 @@ export function SolutionSection() {
         </article>
 
         <blockquote className="text-(--border-accent) xl:border-l-4 border-(--border-accent) p-6 mt-12 lg:mt-16 xl:mt-25 xl:pl-12 xl:ml-24">
-          <strong>Tracehound</strong> takes decisions from your existing security systems and
+          <strong>Tracehound</strong> takes explicit decisions from upstream security systems and
           applies them through a deterministic containment layer. <br />
-          Payload sizes are bounded. Memory usage is hard-coded limited. Disk saturation gracefully
-          degrades. <br />
-          Even in fail-open mode, the attacker cannot win — because the system fails predictably.
+          Native guardrails remain active for rate abuse, payload-size rejection, and bounded
+          resource handling. <br />
+          Internal failure stays fail-open so the host does not inherit security-path instability.
         </blockquote>
       </section>
     </Container>

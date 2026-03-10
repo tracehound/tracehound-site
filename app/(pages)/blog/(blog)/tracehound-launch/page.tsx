@@ -8,11 +8,11 @@ export default function BlogPost() {
       <header className="w-full flex flex-col p-6 max-w-6xl mx-auto xl:p-12">
         <Badge variant="neutral">BLOG POST</Badge>
         <h3 className="my-3 font-heading font-bold text-2xl/6 md:text-4xl/9 xl:text-[64px]/16">
-          Introducing Tracehound: Deterministic Security Runtime for NodeJS
+          Introducing Tracehound: Deterministic Security Buffer for Node.js
         </h3>
         <p className="font-sans font-light text-base mb-4 md:text-xl xl:text-2xl">
-          Why we built Tracehound, and how it solves the runtime security problem for modern
-          applications.
+          Why we built Tracehound, and how deterministic containment and tamper-evident evidence
+          fit modern Node.js security operations.
         </p>
 
         <div className="flex items-center gap-4 mb-2 xl:mb-4">
@@ -28,7 +28,7 @@ export default function BlogPost() {
             #security
           </span>
           <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
-            #nodejs
+            #node.js
           </span>
         </nav>
       </header>
@@ -40,7 +40,7 @@ export default function BlogPost() {
           Tracehound: The Deterministic Security Buffer for Modern Runtimes.
         </h3>
         <p className="font-sans md:text-lg xl:text-xl">
-          Moving beyond detection—why we built a decision-free immune system for Node.js.
+          Why we built a decision-free containment layer for Node.js applications.
         </p>
 
         <hr className="shrink-0 h-px w-full border-b border-(--border-accent) border-dashed" />
@@ -52,15 +52,16 @@ export default function BlogPost() {
         </p>
 
         <p className="font-sans md:text-lg xl:text-xl">
-          When a threat is detected inside a running application, the response is often chaotic:
-          loose logs, uncoordinated blocking, and lost evidence.
+          When upstream controls flag a request reaching a running application, the response is
+          often chaotic: loose logs, uncoordinated blocking, and lost evidence.
         </p>
 
         <p className="font-sans md:text-lg xl:text-xl">
           We built <strong>Tracehound</strong> to solve this. Tracehound is not an observability
           tool, and it is not a detection engine. It is a{' '}
-          <strong>deterministic security buffer</strong> — an immune system designed to isolate,
-          quarantine, and neutralize threats with zero tolerance.
+          <strong>deterministic security buffer</strong> designed to quarantine evidence, apply
+          bounded native controls, and preserve threat-linked artifacts under explicit runtime
+          boundaries.
         </p>
 
         <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">
@@ -75,27 +76,28 @@ export default function BlogPost() {
 
         <p className="font-sans md:text-lg xl:text-xl">
           Instead, Tracehound acts as a rigorous substrate that enforces the decisions made by your
-          detection layers (WAFs, ML models, or custom rules). When a signal arrives, Tracehound
-          executes a deterministic lifecycle:
+          detection layers and upstream controls. External signals activate the evidence path;
+          native guardrails still apply deterministic limits for rate abuse and payload
+          amplification. When a signal arrives, Tracehound executes a bounded lifecycle:
         </p>
 
         <ul className="pl-2 space-y-2 xl:list-disc xl:pl-6 text-lg">
           <li>
-            <strong>Intercept</strong> the "Scent" (Request).
+            <strong>Intercept</strong> the Scent.
           </li>
           <li>
-            <strong>Quarantine</strong> the Threat.
+            <strong>Quarantine</strong> the evidence path.
           </li>
           <li>
-            <strong>Preserve</strong> the Evidence (Atomic Ownership).
+            <strong>Preserve</strong> tamper-evident evidence custody.
           </li>
           <li>
-            <strong>Neutralize</strong> or <strong>Evacuate</strong>.
+            <strong>Bound</strong> resource cost and downstream handling.
           </li>
         </ul>
 
         <p className="font-sans md:text-lg xl:text-xl">
-          This ensures that security operations are synchronous, predictable, and audit-proof.
+          This keeps security-path behavior synchronous, predictable, and tamper-evident.
         </p>
 
         <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">
@@ -109,18 +111,18 @@ export default function BlogPost() {
         <ul className="pl-2 space-y-2 xl:list-disc xl:pl-6 text-lg">
           <li>
             <strong>The Quarantine:</strong> Unlike a standard cache, the Quarantine utilizes a
-            priority-based eviction policy. It holds “Evidence Handles”—cryptographically hashed
-            snapshots of the threat payload.
+            priority-based eviction policy. It stores bounded, cryptographically linked evidence
+            artifacts under explicit retention limits.
           </li>
           <li>
             <strong>Hound Pool Isolation:</strong> Processing suspicious payloads is dangerous.
-            Tracehound offloads this work to the “Hound Pool”—a set of pre-spawned, sandboxed child
-            processes. If a payload causes a crash, only the disposable Hound dies; the core
-            application remains unaffected.
+            Tracehound offloads this work to the “Hound Pool” through process-separated child
+            workers. If a payload causes a crash, only the disposable Hound dies; the host process
+            remains available.
           </li>
           <li>
             <strong>Sync Hot-Path:</strong> Critical operations are synchronous to prevent the
-            “event loop lag” often introduced by async-heavy security tools.
+            request path from inheriting async sink and analysis latency.
           </li>
         </ul>
 
@@ -129,35 +131,22 @@ export default function BlogPost() {
         </h3>
 
         <p className="font-sans md:text-lg xl:text-xl">
-          While Tracehound Core handles the immediate isolation of threats, a complete security
-          posture requires observation, memory, and intelligence. We are proud to introduce the
-          complete module suite:
-        </p>
-
-        <p className="font-sans md:text-lg xl:text-xl">
           Tracehound is built for production realities.
         </p>
 
         <ul className="pl-2 space-y-2 xl:list-disc xl:pl-6 text-lg">
           <li>
-            <strong>Audit Chains:</strong> Every neutralization event is recorded in a cryptographic
-            hash chain to prevent evidence tampering.
+            <strong>Audit Chains:</strong> Evidence lifecycle events are appended to a cryptographic
+            hash chain for tamper-evident custody.
           </li>
           <li>
-            <strong>Fail-Open / Fail-Safe:</strong> We understand that availability is paramount.
-            Tracehound includes robust panic thresholds and fail-safe mechanisms to ensure it
-            degrades gracefully under extreme pressure.
+            <strong>Fail-Open Runtime:</strong> Availability remains paramount. Internal failure
+            degrades predictably instead of turning the security path into a denial-of-service
+            vector.
           </li>
         </ul>
 
         <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">What's Next?</h3>
-
-        <p className="font-sans md:text-lg xl:text-xl">
-          We are currently rolling out our <strong>Production Hardening</strong> phase. This
-          includes finalized async codecs for cold storage evacuation, formalized local state
-          semantics for rolling deployments, and a streamlined “Per Service” pricing model designed
-          for growing SaaS platforms.
-        </p>
 
         <p className="font-sans md:text-lg xl:text-xl">
           Security shouldn't be a guessing game. It should be a deterministic science.
@@ -168,7 +157,8 @@ export default function BlogPost() {
         </strong>
 
         <p className="font-sans md:text-lg xl:text-xl">
-          We're just getting started. Stay tuned to find out what's next.
+          The current direction is straightforward: stricter runtime truth, sharper evidence
+          custody, and safer external threat-signal integration.
         </p>
       </article>
     </section>

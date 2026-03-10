@@ -11,7 +11,6 @@ const th = createTracehound({
 })
 
 function detectThreat(req: express.Request) {
-  // Replace this with your WAF, SIEM, or custom detector output.
   if (typeof req.body?.query === 'string' && req.body.query.includes('DROP TABLE')) {
     return { category: 'injection' as const, severity: 'high' as const }
   }
@@ -42,11 +41,10 @@ app.use((req, res, next) => {
   if (result.status === 'payload_too_large') {
     return res.status(413).json({ error: 'Payload too large', limit: result.limit })
   }
-  if (result.status === 'quarantined' || result.status === 'ignored') {
-    return res.status(403).json({ error: 'Blocked' })
+  if (result.status === 'quarantined') {
+    return res.status(403).json({ error: 'Blocked', signature: result.handle.signature })
   }
 
-  // Fail-open: keep host request flow alive and surface the issue via logs/metrics.
   return next()
 })
 
@@ -78,15 +76,16 @@ app.use(
         path: req.path,
         headers: req.headers,
       },
-      threat: req.headers['x-waf-blocked'] === '1'
-        ? { category: 'unknown', severity: 'medium' }
-        : undefined,
+      threat:
+        req.headers['x-risk-score'] === 'critical'
+          ? { category: 'unknown', severity: 'critical' }
+          : undefined,
     }),
     onIntercept: (result, req, res) => {
       if (result.status === 'rate_limited') {
         return res.status(429).json({ error: 'Too many requests' })
       }
-      if (result.status === 'quarantined' || result.status === 'ignored') {
+      if (result.status === 'quarantined') {
         return res.status(403).json({ error: 'Forbidden' })
       }
       if (result.status === 'payload_too_large') {
@@ -184,7 +183,6 @@ const th = createTracehound({
 `.trimStart()
 
 export const observabilityCode = `
-// 1) Pull current observability state
 const snapshot = th.watcher.snapshot()
 console.log({
   threats: snapshot.threats.total,
@@ -193,7 +191,6 @@ console.log({
   quarantineCapacity: snapshot.quarantine.capacityPercent,
 })
 
-// 2) Listen to event stream
 th.notifications.on('threat.detected', (event) => {
   console.log('[threat.detected]', event.payload.category, event.payload.severity)
 })
@@ -205,7 +202,6 @@ th.notifications.on('rate_limit.exceeded', (event) => {
 
 export const coldStorageCode = `
 import { createS3ColdStorage, encodeWithIntegrityAsync } from '@tracehound/core'
-import type { EvidenceHandle } from '@tracehound/core'
 
 const coldStorage = createS3ColdStorage({
   client: myS3LikeClient,
@@ -213,8 +209,11 @@ const coldStorage = createS3ColdStorage({
   prefix: 'prod/evidence/',
 })
 
-async function archiveEvidence(handle: EvidenceHandle) {
-  const encoded = await encodeWithIntegrityAsync(new Uint8Array(handle.bytes))
-  await coldStorage.write(handle.signature, encoded)
+async function archiveQuarantined(signature: string) {
+  const evidence = th.quarantine.get(signature)
+  if (!evidence) return
+
+  const encoded = await encodeWithIntegrityAsync(new Uint8Array(evidence.bytes))
+  await coldStorage.write(signature, encoded)
 }
 `.trimStart()

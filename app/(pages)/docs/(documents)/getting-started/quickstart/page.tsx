@@ -14,6 +14,7 @@ import type { Metadata } from 'next/types'
 import {
   coldStorageExport,
   customRateLimiting,
+  externalSignalMappingCode,
   expressInstallCode,
   expressSetupCode,
   fastifyInstallCode,
@@ -23,7 +24,6 @@ import {
   quickStartCode,
   snapshotEnvCode,
   snapshotRuntimeCode,
-  wafIntegrationCode,
 } from './codes'
 
 export const metadata: Metadata = {
@@ -89,7 +89,11 @@ export default function Quickstart() {
                 ],
               },
               {
-                row: [<strong>`ignored`</strong>, 'Duplicate threat', 'Already quarantined, block'],
+                row: [
+                  <strong>`ignored`</strong>,
+                  'Duplicate threat signature',
+                  'Evidence already exists; continue with explicit local policy',
+                ],
               },
               {
                 row: [
@@ -102,7 +106,7 @@ export default function Quickstart() {
                 row: [
                   <strong>`error`</strong>,
                   'Internal pipeline error',
-                  'Return 500, log structured error context',
+                  'Fail open, continue request flow, and alert operators',
                 ],
               },
             ]}
@@ -151,13 +155,15 @@ export default function Quickstart() {
         <Separator />
 
         <DocsContentBlock title="Common Patterns">
-          <DocsContentSubtitle>Pattern 1: WAF Integration</DocsContentSubtitle>
+          <DocsContentSubtitle>Pattern 1: External Threat Signal Mapping</DocsContentSubtitle>
 
           <DocsContentParagraph>
-            Connect your existing WAF (Cloudflare, AWS WAF) to Tracehound:
+            Map upstream detector output into canonical `ThreatSignal`. WAF headers are only one
+            possible source among reverse proxies, bot-management layers, and internal risk
+            services:
           </DocsContentParagraph>
 
-          <Code code={wafIntegrationCode} />
+          <Code code={externalSignalMappingCode} />
 
           <DocsContentSubtitle>Pattern 2: Custom Rate Limiting</DocsContentSubtitle>
 

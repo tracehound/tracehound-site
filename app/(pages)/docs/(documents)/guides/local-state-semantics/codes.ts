@@ -3,10 +3,11 @@ import { createTracehound } from '@tracehound/core'
 
 const a = createTracehound()
 const b = createTracehound()
+const source = { ip: '198.51.100.10', userAgent: 'curl/8.7.1' }
 
 // Same source evaluated independently on each instance
-a.rateLimiter.check('198.51.100.10')
-b.rateLimiter.check('198.51.100.10')
+a.rateLimiter.check(source)
+b.rateLimiter.check(source)
 `.trimStart()
 
 export const duplicateScopeCode = `
@@ -27,7 +28,10 @@ const archive = createS3ColdStorage({
 })
 
 if (result.status === 'quarantined') {
-  const encoded = await encodeWithIntegrityAsync(new Uint8Array(result.handle.bytes))
+  const evidence = a.quarantine.get(result.handle.signature)
+  if (!evidence) throw new Error('Quarantine lookup failed')
+
+  const encoded = await encodeWithIntegrityAsync(new Uint8Array(evidence.bytes))
   await archive.write(result.handle.signature, encoded)
 }
 `.trimStart()

@@ -15,9 +15,41 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-09T05:59:22.715Z"
+export const changelogGeneratedAt = "2026-03-10T16:03:12.095Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.2",
+    "date": "2026-03-10",
+    "title": "Security Hardening and Remediation Closure Wave",
+    "summary": "This patch release packages the fix/security-hardening branch and closes the high-priority remediation items tracked for runtime fail-open integrity, bounded control-plane behavior, webhook SSRF hardening, constant-time evidence checks, and documentation truth alignment.",
+    "highlights": [
+      "Restored fail-open default behavior in Express and Fastify adapters for internal status: 'error' outcomes, preserving host-app request survivability when Tracehound encounters runtime faults.",
+      "Hardened webhook delivery policy in the notification plane:",
+      "DNS-based private/special-use address rejection,",
+      "Completed constant-time comparison compliance for security-sensitive evidence hash verification paths.",
+      "Hardened async subscriber lifecycle handling in NotificationEmitter.subscribe() so iterator shutdown resolves pending consumers deterministically.",
+      "Added CI-safe chaos snapshot verification/readback behavior and richer diagnostics for snapshot export race/permission failures in GitHub runner environments.",
+      "Optimized hot paths in quarantine and rate-limiter flows to reduce avoidable pressure amplification and align runtime behavior with documented boundedness intent.",
+      "Updated fail-open, API, threat-model, performance-SLA, security-assurance, and roadmap/security docs to remove overclaims and align all normative statements with tested runtime behavior."
+    ]
+  },
+  {
+    "version": "1.8.1",
+    "date": "N/A",
+    "title": "Security QA & Docs Alignment",
+    "summary": "This patch release packages the post-v1.8.0 correctness fixes, release-gate coverage recovery, and documentation alignment work needed before the next remediation branch begins. No breaking changes are intended in this patch.",
+    "highlights": [
+      "FailSafe.lastPanic now always reflects the most recently triggered panic event, even when severity-weighted history eviction removes an older lower-severity entry.",
+      "Scheduler capacity handling now permits rescheduling an existing task ID at the hard task cap, while still dropping the 257th unique task deterministically with a warning.",
+      "Scheduler jitter input is clamped before randomInt() so non-integer jitter configuration cannot exceed the declared bound.",
+      "EvidenceHandle.scentId remains optional for downstream/custom handle implementations, preventing an accidental patch-level type break.",
+      "Quarantine purge audit records now fall back to signature when scentId is absent, preserving traceability for legacy or custom evidence handles.",
+      "LaneQueue.onAlert() and HoundPool.onResult() remain void-returning APIs; internal drop-and-warn behavior is preserved without changing the public contract.",
+      "Added regression coverage for scheduler task-capacity boundaries, including explicit assertions for unique-task drop behavior and same-ID rescheduling at capacity.",
+      "Added regression coverage for fail-safe severity-weighted history eviction and lastPanic correctness immediately after eviction pressure."
+    ]
+  },
   {
     "version": "1.8.0",
     "date": "2026-03-09",
@@ -60,42 +92,20 @@ export const recentReleases: ReleaseEntry[] = [
       "Forensic RNG (quarantine.ts): Replaced Math.random() with generateSecureId() for PurgeRecord ID construction. All forensic pipeline identifiers now use crypto-strength randomness end-to-end.",
       "Added security/artifacts/dependency-tree.txt, pnpm-audit.json, sbom.cdx.json. pnpm audit --prod reports 0 vulnerabilities at time of release."
     ]
-  },
-  {
-    "version": "1.6.0",
-    "date": "2026-03-06",
-    "title": "Operational Truth, Deterministic Analysis, and Release Readiness",
-    "summary": "Covers the complete critical refactor plan delivered after v1.5.0: RFC-0013 operational-truth grounding, signed snapshot integrity, deterministic hound analysis, IPC and lifecycle hardening, typed runtime error cleanup, public API parity, and release-readiness validation.",
-    "highlights": [
-      "CLI operational surfaces (status, stats, watch) no longer fabricate healthy or zero-value state when no verified runtime snapshot exists. Operators now see explicit NO_INSTANCE or INTEGRITY_VIOLATION outcomes instead of false assurance.",
-      "IAgent contract now includes getStats(): Readonly<AgentStats> for interface parity. Custom implementations must provide the method.",
-      "Snapshot export configuration now requires a deterministic secret whenever snapshots are enabled (snapshot.secret or TRACEHOUND_SNAPSHOT_SECRET / SYSTEM_SNAPSHOT_ENV.SECRET).",
-      "Signed system snapshot support centered on SystemSnapshot, ITracehound.snapshot(), and snapshot export options on TracehoundOptions.",
-      "Snapshot read/write utilities with HMAC-SHA256 signing, constant-time verification, atomic file replacement, centralized environment-key helpers, and public path/secret resolution helpers for CLI and external tooling.",
-      "Deterministic hound analysis metadata over IPC analysis messages: hash, entropy, contentType, and sizeBytes.",
-      "Canonical public operational helpers and constants for release-safe integrations, including snapshot helpers and hound pressure matching exports: HOUND_PRESSURE_ERRORS, HoundPressureErrorCode, and isHoundPressureError.",
-      "Operational truth is now grounded in verified runtime snapshots end-to-end. CLI status surfaces, watch dashboard flows, and JSON stats output all consume signed snapshot state instead of inferred defaults."
-    ]
-  },
-  {
-    "version": "1.5.0",
-    "date": "2026-03-04",
-    "title": "M3 Pressure Containment and Governance Delivery",
-    "summary": "Covers the complete Sprint Bootstrap Governance Pack Post-Sprint Implementation Backlog. Ticket coverage:",
-    "highlights": [
-      "Coordination provider contract types are formalized in public core type surface (CoordinationProvider, CoordinationHealth, CoordinationFeature).",
-      "Agent coordination health flow is fail-open: invalid/throwing provider health resolves safely to degraded without interrupting intercept path.",
-      "Coordination contract integration paths are covered in unit/integration/regression tests.",
-      "Runtime membrane enforces metadata-only evidence handles and blocks direct payload egress attempts (bytes, transfer, neutralize, evacuate) with typed runtime violations.",
-      "Optional adapter trace id signaling (x-tracehound-trace-id) is available behind explicit opt-in configuration.",
-      "CLI inspect workflow supports trace-id based evidence metadata lookup without raw payload leakage defaults.",
-      "Deterministic Drop and Count behavior is enforced under pressure boundaries in quarantine/cold-path workflows.",
-      "MemoryColdStorage runs memory-first buffering by default; disk buffering remains explicit opt-in via diskBuffer.enabled."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.6.0",
+    "date": "2026-03-06",
+    "title": "Operational Truth, Deterministic Analysis, and Release Readiness"
+  },
+  {
+    "version": "1.5.0",
+    "date": "2026-03-04",
+    "title": "M3 Pressure Containment and Governance Delivery"
+  },
   {
     "version": "1.4.4",
     "date": "2026-02-26",
@@ -143,37 +153,37 @@ export const timelineRows: TimelineRow[] = [
   },
   {
     "version": "0.7.0",
-    "date": "v1.0.0 P0 Complete",
-    "title": "Release 0.7.0"
+    "date": "N/A",
+    "title": "v1.0.0 P0 Complete"
   },
   {
     "version": "0.6.0",
-    "date": "Production Ready (P0 Complete)",
-    "title": "Release 0.6.0"
+    "date": "N/A",
+    "title": "Production Ready (P0 Complete)"
   },
   {
     "version": "0.5.0",
-    "date": "Hound Process Isolation",
-    "title": "Release 0.5.0"
+    "date": "N/A",
+    "title": "Hound Process Isolation"
   },
   {
     "version": "0.4.0",
-    "date": "Observability & Resilience",
-    "title": "Release 0.4.0"
+    "date": "N/A",
+    "title": "Observability & Resilience"
   },
   {
     "version": "0.3.0",
-    "date": "Core Logic",
-    "title": "Release 0.3.0"
+    "date": "N/A",
+    "title": "Core Logic"
   },
   {
     "version": "0.2.0",
-    "date": "Evidence & Quarantine",
-    "title": "Release 0.2.0"
+    "date": "N/A",
+    "title": "Evidence & Quarantine"
   },
   {
     "version": "0.1.0",
-    "date": "Foundation",
-    "title": "Release 0.1.0"
+    "date": "N/A",
+    "title": "Foundation"
   }
 ]

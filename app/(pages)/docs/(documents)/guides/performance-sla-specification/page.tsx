@@ -183,9 +183,9 @@ export default function PerformanceSLASpecification() {
           summary: 'General behaviour of the instances.',
         }}
         next={{
-          href: '/docs/ecosystem/core',
-          title: 'Tracehound Core',
-          summary: 'The main Tracehound package',
+          href: '/ecosystem',
+          title: 'Ecosystem',
+          summary: 'Current public package topology',
         }}
       />
     </DocsPageLayout>

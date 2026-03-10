@@ -45,7 +45,7 @@ export function SecurityCompliance() {
             </h4>
 
             <ul className="flex flex-col gap-4">
-              <li>Semantic exploit detection (WAFs do this)</li>
+              <li>Semantic exploit classification and policy decisioning</li>
               <li>Business logic flaws (IDOR, Broken Access Control)</li>
               <li>Kernel-level escalation</li>
               <li>OS-level container escape</li>
@@ -58,21 +58,22 @@ export function SecurityCompliance() {
             </figure>
 
             <h4 className="font-heading font-bold text-xl md:text-2xl xl:text-[32px]">
-              Blast Radius Uncertainty
+              Compliance Surfaces
             </h4>
 
             <ul className="flex flex-col gap-4">
               <li>
-                <strong>GDPR:</strong> Custom PII redaction configurable
+                <strong>GDPR/KVKK:</strong> retention, erasure, and redaction control surfaces
               </li>
               <li>
-                <strong>SOC 2:</strong> Audit chain, immutable logs
+                <strong>SOC 2:</strong> tamper-evident operational records and signed runtime
+                snapshots
               </li>
               <li>
-                <strong>PCI-DSS:</strong> Evidence retention policies
+                <strong>PCI-DSS:</strong> evidence custody and bounded retention paths
               </li>
               <li>
-                <strong>ISO 27001:</strong> Risk assessment framework
+                <strong>ISO 27001:</strong> auditable runtime control boundaries
               </li>
             </ul>
           </div>

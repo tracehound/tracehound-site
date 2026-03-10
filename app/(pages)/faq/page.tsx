@@ -11,11 +11,15 @@ const sections: {
     items: [
       {
         q: 'What is Tracehound, exactly?',
-        a: 'A deterministic, decision-free runtime security buffer. It consumes externally produced threat signals, quarantines evidence, and preserves forensic integrity.',
+        a: 'A deterministic, decision-free runtime security buffer. It consumes explicit external threat signals for the evidence path, applies native guardrails for bounded runtime control, and preserves forensic integrity.',
       },
       {
         q: 'Is it a WAF replacement?',
-        a: 'No. WAF/detector layers classify threats; Tracehound does not classify. It provides containment and evidence integrity after detection.',
+        a: 'No. WAF/detector layers classify threats; Tracehound does not classify. It provides deterministic containment, native guardrails, and evidence integrity around that detection boundary.',
+      },
+      {
+        q: 'Do native guardrails require external threat signals?',
+        a: 'No. Rate limiting and payload-size controls operate locally. Explicit external signals activate the evidence/quarantine path; they are not required for basic bounded controls.',
       },
       {
         q: 'What does it explicitly not do?',
@@ -44,7 +48,7 @@ const sections: {
       },
       {
         q: 'What is notifications for?',
-        a: 'It is the event-emission surface for publishing runtime events to downstream systems. Async subscribers and webhook delivery are bounded, and webhook targets reject internal/private and credential-in-URL destinations by policy.',
+        a: 'It is the event-emission surface for publishing runtime events to downstream systems. Async subscribers and webhook delivery are bounded, and webhook targets reject loopback, RFC1918, link-local, metadata-service, malformed, redirecting, and credential-in-URL destinations by policy.',
       },
     ],
   },
@@ -74,7 +78,7 @@ const sections: {
     items: [
       {
         q: 'How does evidence lifecycle work?',
-        a: 'Bounded quarantine, priority eviction, optional cold-storage archival, and audit-trail continuity.',
+        a: 'Through bounded quarantine, priority eviction, optional TTL decay and cold-storage archival, and audit-trail continuity.',
       },
       {
         q: 'How is cold-storage security addressed?',
@@ -86,7 +90,7 @@ const sections: {
       },
       {
         q: 'What is the licensing model?',
-        a: 'The public repository is Apache-2.0. Treat implemented public packages and public docs as canonical OSS scope.',
+        a: 'The public repository is Apache-2.0. Judge the shipped OSS runtime surface from implemented packages, changelog entries, and current docs together.',
       },
     ],
   },
@@ -98,12 +102,12 @@ const sections: {
         a: '`@tracehound/core`, `@tracehound/express`, `@tracehound/fastify`, `@tracehound/cli`.',
       },
       {
-        q: 'Are Argos/Talos/Huginn/Muninn/Heimdall/Loki production-ready here?',
-        a: 'Most are RFC/planned in current canonical sources. Production truth should be taken from implemented package code, not roadmap text.',
+        q: 'Do roadmap or RFC package names count as current OSS runtime surface?',
+        a: 'No. The shipped OSS runtime surface is the implemented package set in this repository, not draft or roadmap naming.',
       },
       {
-        q: 'What about Norns/Furies/Watchtower?',
-        a: 'They are WIP-positioned in ecosystem docs and should be evaluated against both RFC maturity and actual implementation status.',
+        q: 'Where should I verify feature maturity?',
+        a: 'Use package code, release changelog, and current docs together. Roadmap and RFC text describe direction, not shipped capability by themselves.',
       },
     ],
   },
@@ -128,7 +132,7 @@ const opsRunbook: { signal: string; check: string; action: string }[] = [
   {
     signal: 'Cold-storage write failures',
     check: 'Verify IAM/credentials/network and integrity pipeline',
-    action: 'Preserve hot-path stability, queue/retry with bounded policy',
+    action: 'Preserve hot-path stability, inspect archival sink health, and reconcile evidence flow after recovery',
   },
   {
     signal: 'Missing downstream notifications',
@@ -173,20 +177,20 @@ const boundaryRows: { row: string[] }[] = [
 const versionedRows: { row: string[] }[] = [
   {
     row: [
-      'v1.0 Core baseline',
-      'createTracehound, local-state model, fail-open, quarantine/audit pipeline',
+      'v1.6.0 operational truth',
+      'Signed runtime snapshots, CLI integrity verification, named fastify export, shutdown/runtime snapshot surface',
     ],
   },
   {
     row: [
-      'v1.1 codec/storage additions',
-      'Async codec and S3-compatible cold-storage integration in docs and exports',
+      'v1.7.0 evidence lifecycle',
+      'TTL decay, bounded archival flow, raw ingress-byte hashing, stronger custody continuity',
     ],
   },
   {
     row: [
-      'RFC planned track',
-      'Argos/Talos/Muninn/Huginn/Heimdall/Loki positioned as draft/planned surfaces',
+      'v1.8.x runtime hardening',
+      'TLS source metadata, anti-rotation rate-limiter hardening, remediation closure wave',
     ],
   },
 ]
@@ -260,7 +264,7 @@ const testAssuranceRows: { row: string[] }[] = [
   {
     row: [
       'Local chaos suite',
-      '`npm run test:chaos` exercises fail-open availability, burst recovery, and audit-path I/O degradation scenarios',
+      '`pnpm test:chaos` exercises fail-open availability, burst recovery, and audit-path I/O degradation scenarios',
     ],
   },
   {
@@ -329,9 +333,6 @@ const packageRequirementRows: { row: string[] }[] = [
   {
     row: ['`@tracehound/cli`', 'No (runtime)', 'Inspection/evaluation tooling, used separately'],
   },
-  {
-    row: ['Argos/Talos/Muninn/Huginn/Heimdall/Loki', 'N/A (planned)', 'RFC/planned tracks; not canonical implemented core runtime'],
-  },
 ]
 
 export default function FAQ() {
@@ -358,7 +359,18 @@ export default function FAQ() {
                 { row: ['Watcher method', '`watcher.snapshot()`'] },
                 { row: ['Core state model', 'Per-instance local state'] },
                 { row: ['Fail behavior', 'Fail-open on internal security-path failures'] },
-                { row: ['Canonical runtime source', 'Current `tracehound` monorepo code + docs'] },
+                {
+                  row: [
+                    'Native guardrails',
+                    'Rate limiting + payload-size controls operate without external threat signals',
+                  ],
+                },
+                {
+                  row: [
+                    'Canonical runtime source',
+                    'Current `tracehound` monorepo code + changelog + docs',
+                  ],
+                },
               ]}
             />
           </div>

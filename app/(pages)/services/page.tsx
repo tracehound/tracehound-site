@@ -89,7 +89,8 @@ export default function Services() {
             </h1>
             <p className="font-sans text-base md:text-2xl xl:text-3xl/11 xl:max-w-8/12">
               Services are designed for SecOps, platform security teams, and MSSP environments that
-              need deterministic runtime controls with forensic-grade evidence handling.
+              need deterministic containment controls, external signal integration, and
+              forensic-grade evidence handling.
             </p>
           </header>
         </Container>

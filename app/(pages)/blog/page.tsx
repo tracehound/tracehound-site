@@ -48,46 +48,17 @@ export default function Blog() {
 
         <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
           <div className="flex items-center gap-4">
-            <time dateTime="December 28, 2025">December 29, 2025</time>
-            <strong>// Tracehound Team</strong>
-          </div>
-
-          <Link href="/blog/meet-argos" className="group">
-            <h3 className="mb-3 font-heading font-bold text-xl md:text-2xl xl:text-4xl group-hover:pl-2.5 group-hover:bg-(--accent-primary)/50 transition-all">
-              Meet Argos: The Eye That Never Sleeps
-            </h3>
-            <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-              Why we built a separate behavioral observer for the Node.js runtime, and what it sees
-              that APMs miss.
-            </p>
-          </Link>
-
-          <nav className="flex items-center gap-4">
-            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
-              #argos
-            </span>
-            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
-              #observability
-            </span>
-            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
-              #nodejs
-            </span>
-          </nav>
-        </div>
-
-        <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
-          <div className="flex items-center gap-4">
             <time dateTime="December 28, 2025">December 28, 2025</time>
             <strong>// Tracehound Team</strong>
           </div>
 
           <Link href="/blog/tracehound-launch" className="group">
             <h3 className="mb-3 font-heading font-bold text-xl md:text-2xl xl:text-4xl group-hover:pl-2.5 group-hover:bg-(--accent-primary)/50 transition-all">
-              Introducing Tracehound: Deterministic Security Runtime for NodeJS
+              Introducing Tracehound: Deterministic Security Buffer for Node.js
             </h3>
             <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-              Why we built Tracehound, and how it solves the runtime security problem for modern
-              applications.
+              Why we built Tracehound, and how deterministic containment and tamper-evident
+              evidence fit modern Node.js security operations.
             </p>
           </Link>
 
@@ -99,7 +70,7 @@ export default function Blog() {
               #security
             </span>
             <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
-              #nodejs
+              #node.js
             </span>
           </nav>
         </div>

@@ -1,8 +1,9 @@
-export type PackageStatus = 'WIP' | 'RELEASED' | 'RFC'
+export type PackageStatus = 'RELEASED'
 
 export type PackageCard = {
   name: string
   slug: string
+  href: string
   layer: string
   summary: string
   whenToUse: string
@@ -13,193 +14,123 @@ export type PackageCard = {
 
 export const packages: PackageCard[] = [
   {
-    name: 'Core',
+    name: '@tracehound/core',
     slug: 'core',
-    layer: 'Runtime Control Plane',
-    summary: 'Deterministic runtime buffer that enforces bounded intake and fail-open behavior.',
-    whenToUse: 'Always; this is the foundation for all ecosystem packages.',
-    input: 'External decisions and security signals.',
-    output: 'Quarantined events and canonical runtime controls.',
+    href: '/docs/references/api-reference',
+    layer: 'Runtime Engine',
+    summary:
+      'Decision-free forensic runtime that owns intercept flow, quarantine, AuditChain, watcher, notifications, and cold-storage integrations.',
+    whenToUse: 'Always; this is the canonical runtime surface and package root.',
+    input: 'Canonical Scent objects, optional ingress bytes, explicit ThreatSignal metadata.',
+    output: 'Typed InterceptResult outcomes, metadata-only runtime handles, and bounded runtime subsystems.',
     status: 'RELEASED',
   },
   {
-    name: 'Argos',
-    slug: 'argos',
-    layer: 'Detection',
-    summary: 'Runtime behavioral observation for threat detection and anomaly surfacing.',
-    whenToUse: 'When you need live runtime detection telemetry.',
-    input: 'Runtime metrics, behavior traces, request context.',
-    output: 'Scored findings and suspicion signals.',
-    status: 'WIP',
-  },
-  {
-    name: 'Talos',
-    slug: 'talos',
-    layer: 'Policy & Decision Routing',
-    summary: 'External policy execution boundary and decision routing orchestration.',
-    whenToUse: 'When decision logic must remain outside the app runtime.',
-    input: 'Policy bundles and Argos/Intel outcomes.',
-    output: 'Action directives for runtime response.',
-    status: 'RFC',
-  },
-  {
-    name: 'Muninn',
-    slug: 'muninn',
-    layer: 'Evidence Pipeline',
-    summary: 'Historical ledger and time-series aggregation for security evidence.',
-    whenToUse: 'When evidence retention and queryability are mandatory.',
-    input: 'Quarantine records and event streams.',
-    output: 'Chain-linked evidence history and retention views.',
-    status: 'RFC',
-  },
-  {
-    name: 'Huginn',
-    slug: 'huginn',
-    layer: 'Threat Intel',
-    summary: 'Threat intelligence ingestion and correlation enrichment.',
-    whenToUse: 'When detections must be enriched with external intel context.',
-    input: 'Threat feeds and indicators.',
-    output: 'Correlated enrichment signals.',
-    status: 'RFC',
-  },
-  {
-    name: 'Heimdall',
-    slug: 'heimdall',
-    layer: 'Supply Chain Security',
-    summary: 'Dependency integrity and supply-chain posture verification.',
-    whenToUse: 'When build and deploy integrity checks are required.',
-    input: 'Package manifests, lockfiles, artifact metadata.',
-    output: 'Integrity findings and remediation signals.',
-    status: 'RFC',
-  },
-  {
-    name: 'Loki',
-    slug: 'loki',
-    layer: 'Deception & Friction',
-    summary: 'Passive deception and tarpit controls for cost asymmetry against attackers.',
-    whenToUse: 'When you need low-cost friction on hostile automation.',
-    input: 'Suspicion scores and policy directives.',
-    output: 'Controlled delay/deception actions.',
-    status: 'RFC',
-  },
-  {
-    name: 'Anubis',
-    slug: 'anubis',
-    layer: 'Post-Mortem Forensic',
+    name: '@tracehound/express',
+    slug: 'express',
+    href: '/docs/getting-started/quickstart',
+    layer: 'Ingress Adapter',
     summary:
-      'Offline forensic control pipeline that normalizes external logs into chain-linked evidence.',
-    whenToUse: 'When incidents require retroactive evidence reconstruction from existing logs.',
-    input: 'WAF, SIEM, RASP, and Tracehound export records.',
-    output: 'Unified TEF evidence chains, manifests, and archive-ready forensic bundles.',
-    status: 'RFC',
+      'Thin Express middleware adapter that maps HTTP request state into Scent and preserves fail-open adapter semantics.',
+    whenToUse: 'When your service stack is Express and you want standard request interception wiring.',
+    input: 'Express Request/Response flow plus optional req.rawBody for deterministic ingress-byte hashing.',
+    output: 'Framework-native pass-through, 403, 413, and 429 behavior driven by core intercept outcomes.',
+    status: 'RELEASED',
   },
   {
-    name: 'Norns',
-    slug: 'norns',
-    layer: 'Pre-Deployment Validation',
-    summary: 'Pre-release security posture verification before changes hit production.',
-    whenToUse: 'When release gates require deterministic security checks.',
-    input: 'Build artifacts and environment policies.',
-    output: 'Gate outcomes and release readiness score.',
-    status: 'RFC',
+    name: '@tracehound/fastify',
+    slug: 'fastify',
+    href: '/docs/getting-started/quickstart',
+    layer: 'Ingress Adapter',
+    summary:
+      'Thin Fastify plugin adapter built around tracehoundPlugin, with the same core runtime contract as Express.',
+    whenToUse: 'When your service stack is Fastify and you want native plugin-based interception.',
+    input: 'Fastify request lifecycle plus optional req.rawBody for deterministic ingress-byte hashing.',
+    output: 'Framework-native reply behavior driven by core intercept outcomes and optional custom extractScent.',
+    status: 'RELEASED',
   },
   {
-    name: 'Furies',
-    slug: 'furies',
-    layer: 'Chaos & Resilience Testing',
-    summary: 'Chaos engineering workflows focused on security infrastructure.',
-    whenToUse: 'When validating failure semantics and resilience boundaries.',
-    input: 'Fault scenarios and runtime stress plans.',
-    output: 'Resilience reports and boundary validation.',
-    status: 'RFC',
-  },
-  {
-    name: 'Watchtower',
-    slug: 'watchtower',
-    layer: 'Ops Cockpit',
-    summary: 'Operational dashboard and forensic cockpit for analyst workflows.',
-    whenToUse: 'When SecOps needs shared visibility and incident triage control.',
-    input: 'Evidence streams, detection timelines, policy outcomes.',
-    output: 'Analyst workflows, dashboards, and incident context.',
-    status: 'RFC',
+    name: '@tracehound/cli',
+    slug: 'cli',
+    href: '/docs/getting-started/quickstart',
+    layer: 'Operator Surface',
+    summary:
+      'CLI and TUI operator tooling for status, stats, watch, and trace inspection backed by signed runtime snapshots.',
+    whenToUse: 'When operators need local inspection workflows without inventing runtime state.',
+    input: 'Verified system snapshot file plus explicit snapshot freshness and secret controls.',
+    output: 'Operational status, stats, watch dashboards, and trace-oriented inspection workflows.',
+    status: 'RELEASED',
   },
 ]
 
 export const architectureLayers = [
   {
-    title: 'Runtime Control Plane',
-    description: 'Keeps request handling stable while security logic executes off the hot path.',
-    members: ['Core', 'Argos', 'Talos'],
+    title: 'Runtime Engine',
+    description: 'Core deterministic intercept, evidence custody, and bounded subsystem ownership.',
+    members: ['@tracehound/core'],
   },
   {
-    title: 'Evidence & Intelligence Plane',
-    description: 'Preserves and enriches event history for investigation and correlation.',
-    members: ['Muninn', 'Huginn', 'Watchtower'],
-  },
-  {
-    title: 'Assurance Plane',
+    title: 'Ingress Adapters',
     description:
-      'Validates upstream risk through integrity checks, chaos drills, and release gates.',
-    members: ['Heimdall', 'Loki', 'Anubis', 'Norns', 'Furies'],
+      'Framework bindings that translate HTTP request context into Scent without adding detector or policy logic.',
+    members: ['@tracehound/express', '@tracehound/fastify'],
+  },
+  {
+    title: 'Operator Surface',
+    description:
+      'Snapshot-backed tooling for inspecting live runtime state without fabricating healthy defaults.',
+    members: ['@tracehound/cli'],
   },
 ]
 
 export const operationalFlows = [
   {
-    name: 'Incident Response',
-    objective: 'Contain impact while preserving verifiable evidence for post-incident analysis.',
+    name: 'Embedded Runtime',
+    objective: 'Accept explicit threat signals and return deterministic intercept outcomes in-process.',
     sequence: [
-      'Argos surfaces runtime anomalies and suspicion signals.',
-      'Talos evaluates external policy and returns response directives.',
-      'Core applies bounded runtime controls and quarantine semantics.',
-      'Muninn persists chain-linked evidence with retention policy.',
-      'Anubis reconstructs multi-source post-mortem timelines from historical logs.',
-      'Watchtower drives analyst triage and cross-team coordination.',
+      'Application or adapter maps request state into a canonical Scent.',
+      'Core runs rate limiting, payload bounds, and threat-bearing evidence flow.',
+      'Quarantine and AuditChain preserve evidence custody under bounded policy.',
     ],
-    packages: ['Argos', 'Talos', 'Core', 'Muninn', 'Anubis', 'Watchtower'],
+    packages: ['@tracehound/core'],
   },
   {
-    name: 'Threat Hunting',
-    objective: 'Correlate weak signals into actionable hypotheses without production disruption.',
+    name: 'Framework Ingress',
+    objective: 'Bind Tracehound to HTTP frameworks without leaking business logic into adapters.',
     sequence: [
-      'Huginn ingests and correlates intelligence indicators.',
-      'Argos maps runtime behavior against enriched context.',
-      'Muninn exposes historical evidence for timeline reconstruction.',
-      'Anubis fuses external log sources into a unified forensic evidence chain.',
-      'Watchtower supports pivoting across entities and sessions.',
+      'Express or Fastify adapter extracts request metadata and optional rawBody.',
+      'Adapter invokes core agent.intercept() and maps result to framework-native behavior.',
+      'Custom extractScent remains the only place where upstream detector metadata is translated.',
     ],
-    packages: ['Huginn', 'Argos', 'Muninn', 'Anubis', 'Watchtower'],
+    packages: ['@tracehound/core', '@tracehound/express', '@tracehound/fastify'],
   },
   {
-    name: 'Pre-Release Security Gate',
-    objective: 'Prevent risky deployments from entering production under unknown conditions.',
+    name: 'Operator Inspection',
+    objective: 'Expose truthful runtime state to operators through verified snapshot input.',
     sequence: [
-      'Heimdall verifies dependencies and supply-chain integrity.',
-      'Norns evaluates release posture against security policies.',
-      'Talos applies environment-specific policy routing.',
-      'Furies runs resilience experiments for failure-mode confidence.',
+      'Core exports a signed runtime snapshot with explicit freshness bounds.',
+      'CLI verifies signature and timestamp before reading runtime state.',
+      'Operators use status, stats, watch, and inspect flows without fabricated fallback output.',
     ],
-    packages: ['Heimdall', 'Norns', 'Talos', 'Furies'],
+    packages: ['@tracehound/core', '@tracehound/cli'],
   },
 ]
 
 export const guarantees = [
   {
     title: 'Deterministic Failure Semantics',
-    description: 'Failure outcomes are explicit and bounded, not emergent or heuristic.',
+    description: 'Failure outcomes are typed, bounded, and observable rather than heuristic or emergent.',
   },
   {
-    title: 'Bounded Resource Behavior',
-    description: 'Queue, buffer, and retention pressure degrade predictably under load.',
+    title: 'Metadata-Only Runtime Membrane',
+    description: 'Runtime code receives metadata handles; forensic byte access remains quarantine-local.',
   },
   {
-    title: 'Tamper-Evident Evidence Chain',
-    description: 'Evidence records remain auditable with chain-linked integrity guarantees.',
+    title: 'Snapshot-Backed Operator Truth',
+    description: 'CLI surfaces depend on verified runtime snapshots instead of guessed healthy state.',
   },
 ]
 
 export const statusClass: Record<PackageStatus, string> = {
-  WIP: 'border-(--warning) text-(--warning)',
   RELEASED: 'border-(--success) text-(--success)',
-  RFC: 'border-(--foreground) text-(--foreground)',
 }

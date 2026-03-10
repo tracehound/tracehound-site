@@ -14,8 +14,8 @@ export function ProblemSection() {
             Why Security Layers Become the Attack Surface
           </h3>
           <p className="font-sans font-light text-lg md:text-2xl xl:text-[32px] xl:max-w-200">
-            Traditional WAFs and RASP solutions stop threats — but often stop your application in
-            the process.
+            Traditional inline security controls and in-process defenses often widen the blast
+            radius when they fail under pressure.
           </p>
         </header>
 
@@ -31,7 +31,7 @@ export function ProblemSection() {
 
             <ul className="flex flex-col gap-4 [&_li]:flex [&_li]:flex-col">
               <li>
-                <strong>WAF failure</strong>
+                <strong>Inline control failure</strong>
                 <span>Entire application inaccessible</span>
               </li>
               <li>

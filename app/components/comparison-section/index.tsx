@@ -72,17 +72,18 @@ export function ComparisonSection() {
                 </td>
                 <td className="py-2 px-4 align-middle whitespace-nowrap">
                   <p className="inline-flex items-center gap-2">
-                    <CheckCircleIcon size={16} className="text-(--success)" weight="fill" /> &lt;
-                    0.5ms p50
+                    <CheckCircleIcon size={16} className="text-(--success)" weight="fill" />
+                    Synchronous bounded path
                   </p>
                 </td>
                 <td className="py-2 px-4 align-middle whitespace-nowrap">
                   <p className="inline-flex items-center gap-2">
-                    <ProhibitInsetIcon size={16} className="text-(--error)" weight="fill" /> 5-50ms
+                    <ProhibitInsetIcon size={16} className="text-(--error)" weight="fill" />
+                    Inspection-dependent
                   </p>
                 </td>
                 <td className="py-2 px-4 align-middle whitespace-nowrap">
-                  <p className="inline-flex items-center gap-2">10-100ms</p>
+                  <p className="inline-flex items-center gap-2">Same-process overhead</p>
                 </td>
               </tr>
               <tr className="hover:bg-(--background) border-b transition-colors">
@@ -92,7 +93,7 @@ export function ComparisonSection() {
                 <td className="py-2 px-4 align-middle whitespace-nowrap">
                   <p className="inline-flex items-center gap-2">
                     <CheckCircleIcon size={16} className="text-(--success)" weight="fill" />
-                    Predictable <small>(fail-open/closed)</small>
+                    Predictable <small>(fail-open on internal error)</small>
                   </p>
                 </td>
                 <td className="py-2 px-4 align-middle whitespace-nowrap">
@@ -160,8 +161,8 @@ export function ComparisonSection() {
                 </td>
                 <td className="py-2 px-4 align-middle whitespace-nowrap">
                   <p className="inline-flex items-center gap-2">
-                    <CheckCircleIcon size={16} className="text-(--success)" weight="fill" /> Child
-                    process sandbox
+                    <CheckCircleIcon size={16} className="text-(--success)" weight="fill" />
+                    Out-of-process analysis workers
                   </p>
                 </td>
                 <td className="py-2 px-4 align-middle whitespace-nowrap">

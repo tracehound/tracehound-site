@@ -20,8 +20,8 @@ export function UseCasesSection() {
 
             <strong className="mb-3 text-xl xl:mb-6 xl:text-3xl">API Abuse Prevention</strong>
             <p className="xl:max-w-133">
-              Protect your third-party APIs with rate limits and payload size constraints. Stop
-              anomalous amplification and resource exhaustion.
+              For fintech and payment APIs, bound request frequency, payload amplification, and
+              origin-side resource pressure without turning the runtime into a semantic detector.
             </p>
           </div>
 
@@ -31,11 +31,11 @@ export function UseCasesSection() {
             </span>
 
             <strong className="mb-3 text-xl xl:mb-6 xl:text-3xl">
-              Zero-Trust Microsegmentation
+              Trusted Proxy Boundaries
             </strong>
             <p className="xl:max-w-133">
-              Verify every request&apos;s source, size, and frequency across microservices. Limit
-              blast radius with independent isolation.
+              For edge-routed platforms and service gateways, preserve trusted upstream verdicts at
+              the origin and keep containment local to the runtime instance.
             </p>
           </div>
 
@@ -48,8 +48,8 @@ export function UseCasesSection() {
               Incident Response & Forensics
             </strong>
             <p className="xl:max-w-133">
-              Automatically quarantine evidence when threats are detected. Support forensic
-              investigation with tamper-evident audit chain.
+              For SecOps and DFIR workflows, quarantine evidence only when explicit threat signals
+              are present and preserve a tamper-evident operational trail.
             </p>
           </div>
 
@@ -58,10 +58,10 @@ export function UseCasesSection() {
               4.
             </span>
 
-            <strong className="mb-3 text-xl xl:mb-6 xl:text-3xl">Compliance & Audit</strong>
+            <strong className="mb-3 text-xl xl:mb-6 xl:text-3xl">Evidence Retention & Audit</strong>
             <p className="xl:max-w-133">
-              Immutable audit trail for PCI-DSS, SOC 2, GDPR requirements. Configurable retention
-              policies.
+              For regulated environments, map runtime evidence custody to retention, erasure, and
+              audit review workflows without claiming policy ownership.
             </p>
           </div>
         </article>

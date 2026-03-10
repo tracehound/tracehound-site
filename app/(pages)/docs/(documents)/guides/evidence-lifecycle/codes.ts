@@ -2,7 +2,6 @@ export const interceptLifecycleCode = `
 const result = th.agent.intercept(scent)
 
 if (result.status === 'quarantined') {
-  // Evidence is now in quarantine and tracked by signature
   console.log(result.handle.signature)
 }
 `.trimStart()
@@ -19,9 +18,9 @@ const found = q.get('signature-value')
 const exists = q.has('signature-value')
 
 // Lifecycle actions
-q.neutralize('signature-value') // remove + append neutralization record
-q.purge('signature-value', 'abort') // explicit purge reason
-q.flush() // neutralize all stored evidence
+q.neutralize('signature-value')
+q.purge('signature-value', 'abort')
+q.flush()
 `.trimStart()
 
 export const purgeReasonsCode = `
@@ -42,9 +41,10 @@ const storage = createS3ColdStorage({
 })
 
 if (result.status === 'quarantined') {
-  // Copy bytes without transferring ownership from quarantine
-  const bytes = new Uint8Array(result.handle.bytes)
-  const encoded = await encodeWithIntegrityAsync(bytes)
+  const evidence = th.quarantine.get(result.handle.signature)
+  if (!evidence) throw new Error('Quarantine lookup failed')
+
+  const encoded = await encodeWithIntegrityAsync(new Uint8Array(evidence.bytes))
   await storage.write(result.handle.signature, encoded)
 }
 `.trimStart()

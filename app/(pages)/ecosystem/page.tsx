@@ -9,7 +9,7 @@ import { architectureLayers, guarantees, operationalFlows, packages, statusClass
 export const metadata: Metadata = {
   title: 'Ecosystem',
   description:
-    'Tracehound ecosystem overview: package roles, operational flows, integration patterns, and roadmap status for SecOps teams.',
+    'Public Tracehound package overview: shipped OSS package roles, operational flows, and current implementation status.',
 }
 
 export default function EcosystemPage() {
@@ -20,21 +20,20 @@ export default function EcosystemPage() {
 
         <header className="relative z-10 w-full bg-(--background) flex flex-col items-center gap-8 mb-px py-16 lg:py-24 px-6 xl:px-12">
           <h2 className="font-heading text-center text-3xl/8 md:text-5xl/14 xl:text-7xl/20">
-            Package topology for <br className="hidden xl:inline" />
+            Public package topology for <br className="hidden xl:inline" />
             <strong>runtime security operations.</strong>
           </h2>
           <p className="font-sans text-base text-center md:text-xl xl:text-3xl/10 xl:max-w-7/12">
-            The Tracehound ecosystem is organized as composable packages for detection,
-            decision-routing, evidence durability, and operational assurance. Each package has a
-            narrow contract so SecOps teams can adopt capabilities incrementally without changing
-            core runtime guarantees.
+            Current OSS surface is intentionally narrow: one runtime engine, two framework adapters,
+            and one snapshot-backed operator toolchain. This page tracks shipped package truth, not
+            draft ecosystem direction.
           </p>
           <div className="flex flex-col gap-4 items-center md:flex-row md:gap-8 md:justify-center-safe">
             <Button variant="primary" href="/docs" size="lg">
               READ DOCUMENTATION
             </Button>
-            <Button variant="secondary" href="/services" size="lg">
-              INITIALIZE RUNTIME
+            <Button variant="secondary" href="/changelog" size="lg">
+              REVIEW CHANGELOG
             </Button>
           </div>
         </header>
@@ -47,7 +46,7 @@ export default function EcosystemPage() {
           <header className="w-full flex flex-col items-center gap-3 px-6 xl:px-12">
             <Badge variant="neutral">ARCHITECTURE MAP</Badge>
             <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-              Three operational planes
+              Three current operational planes
             </h2>
           </header>
 
@@ -82,13 +81,13 @@ export default function EcosystemPage() {
           <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
             <Badge variant="primary">PACKAGE CATALOG</Badge>
             <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-              Responsibilities, boundaries, and status
+              Responsibilities, boundaries, and current docs
             </h2>
           </header>
 
           <article className="grid grid-cols-1 gap-6 px-6 pt-8 xl:grid-cols-2 xl:px-12 xl:pt-12">
             {packages.map((pkg) => (
-              <div key={pkg.name} className="p-6 bg-(--background)">
+              <div key={pkg.name} id={pkg.slug} className="p-6 bg-(--background)">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-heading font-bold text-xl/6 xl:text-3xl/8">{pkg.name}</h3>
                   <span
@@ -112,11 +111,8 @@ export default function EcosystemPage() {
                     <dd>{pkg.output}</dd>
                   </div>
                 </dl>
-                <p className="mb-5 text-xs font-mono text-(--border)">
-                  Standalone by default. Can form native bonds with other packages when needed.
-                </p>
-                <Button href={`/docs/ecosystem/${pkg.slug}`} variant="light" size="sm">
-                  Open {pkg.name} docs
+                <Button href={pkg.href} variant="light" size="sm">
+                  Open relevant docs
                 </Button>
               </div>
             ))}
@@ -133,7 +129,7 @@ export default function EcosystemPage() {
           <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
             <Badge variant="secondary">OPERATIONAL FLOWS</Badge>
             <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-              How packages compose in real operations
+              How shipped packages compose in real operations
             </h2>
           </header>
 
@@ -172,7 +168,7 @@ export default function EcosystemPage() {
             <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
               <Badge variant="neutral">INTEGRATION PATTERNS</Badge>
               <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-                Recommended package bundles
+                Recommended public package bundles
               </h2>
             </header>
 
@@ -183,26 +179,26 @@ export default function EcosystemPage() {
                   body={[
                     {
                       row: [
-                        'Minimal Runtime Guard',
-                        'Core + Argos + Muninn',
-                        'Fast adoption with forensic baseline',
-                        'Limited policy orchestration',
+                        'Core Only',
+                        '@tracehound/core',
+                        'Custom application wiring and explicit intercept ownership',
+                        'You own all framework integration details',
                       ],
                     },
                     {
                       row: [
-                        'Policy-Driven Response',
-                        'Core + Argos + Talos + Muninn',
-                        'Teams with centralized security policy governance',
-                        'More policy lifecycle overhead',
+                        'Express Runtime',
+                        '@tracehound/core + @tracehound/express',
+                        'Express services that want standard middleware semantics',
+                        'Adapter behavior stays intentionally thin and opinionated',
                       ],
                     },
                     {
                       row: [
-                        'Enterprise Visibility',
-                        'Core + Argos + Muninn + Anubis + Huginn + Watchtower',
-                        'SOC teams running cross-system investigations',
-                        'Higher integration and operations complexity',
+                        'Fastify Runtime + CLI',
+                        '@tracehound/core + @tracehound/fastify + @tracehound/cli',
+                        'Fastify services with operator watch/status workflows',
+                        'Requires signed snapshot export for truthful CLI reads',
                       ],
                     },
                   ]}
@@ -223,7 +219,7 @@ export default function EcosystemPage() {
             <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
               <Badge variant="primary">TRUST & GUARANTEES</Badge>
               <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-                Non-negotiable runtime properties
+                Runtime properties exposed by current OSS packages
               </h2>
             </header>
 
@@ -248,13 +244,13 @@ export default function EcosystemPage() {
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="secondary">ROADMAP STATE</Badge>
+            <Badge variant="secondary">CURRENT STATUS</Badge>
             <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
-              Current implementation maturity
+              Public implementation maturity
             </h2>
             <p className="text-center text-base md:text-lg xl:text-2xl xl:max-w-8/12">
-              Status labels are intentionally explicit so teams can distinguish production-ready
-              surfaces from RFC-level interfaces before making rollout decisions.
+              This page intentionally tracks shipped OSS packages only. Draft package names,
+              internal tracks, and RFC-only concepts are excluded from this status view.
             </p>
           </header>
 
@@ -270,30 +266,8 @@ export default function EcosystemPage() {
                         className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RELEASED}`}>
                         RELEASED
                       </span>,
-                      'Ready for production use under documented boundaries.',
-                      'Core',
-                    ],
-                  },
-                  {
-                    row: [
-                      <span
-                        key="status-wip"
-                        className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.WIP}`}>
-                        WIP
-                      </span>,
-                      'Concept and docs exist; package is under active development.',
-                      'Argos',
-                    ],
-                  },
-                  {
-                    row: [
-                      <span
-                        key="status-rfc"
-                        className={`border px-2 py-0.5 text-xs font-bold font-heading ${statusClass.RFC}`}>
-                        RFC
-                      </span>,
-                      'Contract direction is defined; implementation is not final.',
-                      'Talos, Muninn, Huginn, Heimdall, Loki, Anubis, Norns, Furies, Watchtower',
+                      'Implemented in the repository and represented in current docs/changelog.',
+                      '@tracehound/core, @tracehound/express, @tracehound/fastify, @tracehound/cli',
                     ],
                   },
                 ]}
@@ -302,11 +276,11 @@ export default function EcosystemPage() {
           </div>
 
           <div className="px-6 pt-10 xl:px-12 xl:pt-12 flex flex-col w-full items-center gap-4 md:flex-row md:justify-center md:gap-8">
-            <Button variant="primary" href="/docs/ecosystem/core" size="lg">
+            <Button variant="primary" href="/docs/references/api-reference" size="lg">
               START WITH CORE
             </Button>
-            <Button variant="secondary" href="/docs/ecosystem/argos" size="lg">
-              EXPLORE ARGOS
+            <Button variant="secondary" href="/docs/getting-started/quickstart" size="lg">
+              REVIEW ADAPTER SETUP
             </Button>
           </div>
         </Container>

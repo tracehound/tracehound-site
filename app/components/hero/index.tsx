@@ -10,9 +10,9 @@ export function Hero() {
         </h2>
         <p className="text-base xl:text-3xl/11 xl:max-w-8/12">
           <strong>Tracehound</strong> separates security execution from the application process,
-          quarantines high-risk events, and writes tamper-evident evidence for post-incident
-          investigation. Deterministic failure behavior keeps services available under attack
-          conditions.
+          consumes explicit threat signals from upstream controls, applies native guardrails for
+          rate abuse and payload amplification, and preserves tamper-evident evidence for
+          post-incident analysis.
         </p>
         <div className="flex flex-col gap-4 md:gap-10 md:flex-row md:items-center">
           <Button variant="primary" href="/services" size="lg">

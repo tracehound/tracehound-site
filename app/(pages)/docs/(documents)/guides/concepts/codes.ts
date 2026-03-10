@@ -2,7 +2,6 @@ export const scentModelCode = `
 import { generateSecureId, type Scent, type ThreatSignal } from '@tracehound/core'
 
 function detectorToThreat(req: Request): ThreatSignal | undefined {
-  // External detector logic (WAF / SIEM / custom rules)
   if (req.headers.get('x-waf-blocked') === '1') {
     return { category: 'unknown', severity: 'medium' }
   }
@@ -12,7 +11,10 @@ function detectorToThreat(req: Request): ThreatSignal | undefined {
 const scent: Scent = {
   id: generateSecureId(),
   timestamp: Date.now(),
-  source: '203.0.113.10',
+  source: {
+    ip: '203.0.113.10',
+    userAgent: 'curl/8.7.1',
+  },
   payload: { method: 'POST', path: '/login' },
   threat: detectorToThreat(request),
 }
@@ -23,22 +25,20 @@ const result = th.agent.intercept(scent)
 
 switch (result.status) {
   case 'clean':
-    // No threat signal
     break
   case 'rate_limited':
-    // Sliding window or block penalty
     break
   case 'payload_too_large':
-    // Payload exceeded maxPayloadSize
     break
   case 'ignored':
-    // Duplicate signature already quarantined
+    // Duplicate signature already quarantined; adapters pass through by default.
     break
   case 'quarantined':
-    // Evidence is in quarantine and linked into runtime pipeline
+    // Runtime handle is metadata-only; forensic bytes stay in quarantine.
+    console.log(result.handle.signature, result.handle.membrane)
     break
   case 'error':
-    // Structured TracehoundError payload
+    // Internal Tracehound failure; host app should stay fail-open.
     break
 }
 `.trimStart()
@@ -48,21 +48,21 @@ import { createTracehound } from '@tracehound/core'
 
 const instanceA = createTracehound()
 const instanceB = createTracehound()
+const source = { ip: '198.51.100.7', userAgent: 'curl/8.7.1' }
 
 // State is local per instance:
 // - separate rate limiter maps
 // - separate quarantine store
 // - separate watcher counters
 
-instanceA.rateLimiter.check('198.51.100.7')
-instanceB.rateLimiter.check('198.51.100.7')
+instanceA.rateLimiter.check(source)
+instanceB.rateLimiter.check(source)
 `.trimStart()
 
 export const auditIntegrityCode = `
 const ok = th.auditChain.verify()
 
 if (!ok) {
-  // Integrity chain mismatch means historical tampering or corruption
   alertSecurityTeam()
 }
 `.trimStart()
