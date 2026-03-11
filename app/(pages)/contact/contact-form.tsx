@@ -30,8 +30,14 @@ export function ContactForm() {
       })
 
       if (!res.ok) {
-        const body = await res.json()
-        throw new Error(body.error ?? 'Something went wrong.')
+        let errorMsg = 'Something went wrong.'
+        try {
+          const body = await res.json()
+          errorMsg = body.error ?? errorMsg
+        } catch {
+          errorMsg = `Server error (${res.status}). Please try again later.`
+        }
+        throw new Error(errorMsg)
       }
 
       setStatus('success')
