@@ -1,37 +1,46 @@
+import { createClient } from '@libsql/client'
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const LIMITS = {
+  name: 100,
+  email: 254,
+  company: 200,
+  message: 5000,
+}
+
+function sanitize(value: unknown, maxLength: number): string {
+  if (typeof value !== 'string') return ''
+  return value.trim().slice(0, maxLength)
+}
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, company, message } = await req.json()
+    const body = await req.json()
+
+    const name = sanitize(body.name, LIMITS.name)
+    const email = sanitize(body.email, LIMITS.email)
+    const company = sanitize(body.company, LIMITS.company)
+    const message = sanitize(body.message, LIMITS.message)
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT ?? 587),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 })
+    }
+
+    const db = createClient({
+      url: process.env.TURSO_DATABASE_URL!,
+      authToken: process.env.TURSO_AUTH_TOKEN!,
     })
 
-    await transporter.sendMail({
-      from: `"Tracehound Contact" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_TO,
-      replyTo: email,
-      subject: `[Contact] ${name}${company ? ` — ${company}` : ''}`,
-      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company || '—'}\n\n${message}`,
-      html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p><strong>Company:</strong> ${company || '—'}</p>
-        <hr />
-        <p style="white-space:pre-wrap">${message}</p>
-      `,
+    await db.execute({
+      sql: `INSERT INTO contact_submissions (name, email, company, message, created_at)
+            VALUES (?, ?, ?, ?, ?)`,
+      args: [name, email, company || null, message, new Date().toISOString()],
     })
 
     return NextResponse.json({ ok: true })
