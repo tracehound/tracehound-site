@@ -19,6 +19,35 @@ export default function Blog() {
       <article className="grid grid-cols-1 xl:grid-cols-2">
         <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
           <div className="flex items-center gap-4">
+            <time dateTime="March 16, 2026">March 16, 2026</time>
+            <strong>// Tracehound Team</strong>
+          </div>
+
+          <Link href="/blog/launch-day-hello-world" className="group">
+            <h3 className="mb-3 font-heading font-bold text-xl md:text-2xl xl:text-4xl group-hover:pl-2.5 group-hover:bg-(--accent-primary)/50 transition-all">
+              Hello, world. Tracehound is live.
+            </h3>
+            <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+              A launch-day note on what Tracehound already does, why we built it, and where we want
+              to take deterministic runtime security next.
+            </p>
+          </Link>
+
+          <nav className="flex items-center gap-4">
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #launch
+            </span>
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #oss
+            </span>
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #runtime-security
+            </span>
+          </nav>
+        </div>
+
+        <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
+          <div className="flex items-center gap-4">
             <time dateTime="March 9, 2026">March 9, 2026</time>
             <strong>// Tracehound Team</strong>
           </div>
