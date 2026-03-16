@@ -72,7 +72,7 @@ export default function Contact() {
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="neutral">CONTACT TRACKS</Badge>
+            <Badge variant="secondary">CONTACT TRACKS</Badge>
             <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
               Choose a channel
             </h2>
@@ -111,7 +111,7 @@ export default function Contact() {
       <section id="contact-form" className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="neutral">CONTACT FORM</Badge>
+            <Badge variant="secondary">CONTACT FORM</Badge>
             <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
               Send a message
             </h2>
@@ -130,7 +130,7 @@ export default function Contact() {
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="primary">RESPONSE TARGETS</Badge>
+            <Badge variant="neutral">RESPONSE TARGETS</Badge>
             <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
               Expected response windows
             </h2>

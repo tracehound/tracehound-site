@@ -41,8 +41,8 @@ export default function PerformanceSLASpecification() {
           <DocsList
             items={[
               <p key="l1">
-                The synchronous hot path is measured from <strong>`agent.intercept()`</strong>{' '}
-                entry to its return value.
+                The synchronous hot path is measured from <strong>`agent.intercept()`</strong> entry
+                to its return value.
               </p>,
               <p key="l2">Async HoundPool analysis is excluded.</p>,
               <p key="l3">Cold storage archival and notification/webhook delivery are excluded.</p>,
@@ -183,8 +183,8 @@ export default function PerformanceSLASpecification() {
           summary: 'General behaviour of the instances.',
         }}
         next={{
-          href: '/ecosystem',
-          title: 'Ecosystem',
+          href: '/packages',
+          title: 'Packages',
           summary: 'Current public package topology',
         }}
       />

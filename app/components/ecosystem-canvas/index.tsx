@@ -1,6 +1,6 @@
 import Waves from './waves'
 
-export function EcosystemCanvas() {
+export function PackagesCanvas() {
   return (
     <div className="absolute inset-0 w-full h-full -z-1">
       <Waves

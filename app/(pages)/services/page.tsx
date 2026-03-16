@@ -132,7 +132,7 @@ export default function Services() {
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="primary">DELIVERABLES</Badge>
+            <Badge variant="secondary">DELIVERABLES</Badge>
             <h2 className="font-heading font-bold text-2xl/6 md:text-4xl/11 xl:text-6xl/16">
               What you get
             </h2>

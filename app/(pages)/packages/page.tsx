@@ -7,12 +7,12 @@ import type { Metadata } from 'next/types'
 import { architectureLayers, guarantees, operationalFlows, packages, statusClass } from './data'
 
 export const metadata: Metadata = {
-  title: 'Ecosystem',
+  title: 'Packages',
   description:
     'Public Tracehound package overview: shipped OSS package roles, operational flows, and current implementation status.',
 }
 
-export default function EcosystemPage() {
+export default function PackagesPage() {
   return (
     <>
       <Container>
@@ -44,7 +44,7 @@ export default function EcosystemPage() {
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="w-full flex flex-col items-center gap-3 px-6 xl:px-12">
-            <Badge variant="neutral">ARCHITECTURE MAP</Badge>
+            <Badge variant="secondary">ARCHITECTURE MAP</Badge>
             <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
               Three current operational planes
             </h2>
@@ -79,7 +79,7 @@ export default function EcosystemPage() {
       <section className="relative w-full py-16 lg:py-24">
         <Container>
           <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
-            <Badge variant="primary">PACKAGE CATALOG</Badge>
+            <Badge variant="secondary">PACKAGE CATALOG</Badge>
             <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
               Responsibilities, boundaries, and current docs
             </h2>
@@ -166,7 +166,7 @@ export default function EcosystemPage() {
         <Container>
           <article className="grid grid-cols-1 gap-6">
             <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
-              <Badge variant="neutral">INTEGRATION PATTERNS</Badge>
+              <Badge variant="secondary">INTEGRATION PATTERNS</Badge>
               <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
                 Recommended public package bundles
               </h2>
@@ -217,7 +217,7 @@ export default function EcosystemPage() {
         <Container>
           <article className="grid grid-cols-1 gap-6">
             <header className="w-full items-center flex flex-col gap-3 px-6 xl:px-12">
-              <Badge variant="primary">TRUST & GUARANTEES</Badge>
+              <Badge variant="secondary">TRUST & GUARANTEES</Badge>
               <h2 className="font-heading font-bold text-2xl/6 xl:text-5xl/12">
                 Runtime properties exposed by current OSS packages
               </h2>

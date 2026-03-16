@@ -30,6 +30,9 @@ export type PixelBlastProps = {
   variant?: PixelBlastVariant
   pixelSize?: number
   color?: string
+  primaryColor?: string
+  secondaryColor?: string
+  secondaryColorRatio?: number
   className?: string
   style?: React.CSSProperties
   antialias?: boolean

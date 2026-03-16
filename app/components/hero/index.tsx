@@ -16,7 +16,7 @@ export function Hero() {
         </p>
         <div className="flex flex-col gap-4 md:gap-10 md:flex-row md:items-center">
           <Button variant="primary" href="/services" size="lg">
-            INIT RUNTIME
+            SECURE RUNTIME
           </Button>
           <Button variant="secondary" href="/docs" size="lg">
             READ THE DOCUMENTS

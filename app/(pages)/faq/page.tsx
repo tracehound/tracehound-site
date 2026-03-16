@@ -95,7 +95,7 @@ const sections: {
     ],
   },
   {
-    title: 'Ecosystem & Roadmap',
+    title: 'Packages & Roadmap',
     items: [
       {
         q: 'Which packages are implemented in this repository today?',
@@ -132,7 +132,8 @@ const opsRunbook: { signal: string; check: string; action: string }[] = [
   {
     signal: 'Cold-storage write failures',
     check: 'Verify IAM/credentials/network and integrity pipeline',
-    action: 'Preserve hot-path stability, inspect archival sink health, and reconcile evidence flow after recovery',
+    action:
+      'Preserve hot-path stability, inspect archival sink health, and reconcile evidence flow after recovery',
   },
   {
     signal: 'Missing downstream notifications',
@@ -207,7 +208,11 @@ const conceptClarityRows: { row: string[] }[] = [
     row: ['WAF', 'Edge/network request filtering', 'No in-process forensic chain by default'],
   },
   {
-    row: ['SIEM', 'Aggregation, correlation, alerting, reporting', 'Not an in-request containment engine'],
+    row: [
+      'SIEM',
+      'Aggregation, correlation, alerting, reporting',
+      'Not an in-request containment engine',
+    ],
   },
   {
     row: ['SOC', 'People + process + tooling for operations', 'Not a single software package'],
@@ -247,16 +252,25 @@ const crashAndErrorRows: { row: string[] }[] = [
 
 const performanceRows: { row: string[] }[] = [
   {
-    row: ['Hot path model', 'Interpret scenario-test latency as current measurement, not fixed contractual SLA'],
+    row: [
+      'Hot path model',
+      'Interpret scenario-test latency as current measurement, not fixed contractual SLA',
+    ],
   },
   {
-    row: ['What is excluded from hot path', 'Async hound analysis, cold-storage writes, downstream delivery latency'],
+    row: [
+      'What is excluded from hot path',
+      'Async hound analysis, cold-storage writes, downstream delivery latency',
+    ],
   },
   {
     row: ['Memory model', 'Bounded buffers + eviction strategy; no unbounded growth by design'],
   },
   {
-    row: ['Performance tradeoff', 'Deterministic safety and evidence guarantees over deep inline analysis'],
+    row: [
+      'Performance tradeoff',
+      'Deterministic safety and evidence guarantees over deep inline analysis',
+    ],
   },
 ]
 
@@ -289,34 +303,62 @@ const testAssuranceRows: { row: string[] }[] = [
 
 const tradeoffRows: { row: string[] }[] = [
   {
-    row: ['Fail-open by design', 'Preserves uptime under internal failure', 'Possible short bypass window under degradation'],
+    row: [
+      'Fail-open by design',
+      'Preserves uptime under internal failure',
+      'Possible short bypass window under degradation',
+    ],
   },
   {
-    row: ['Local-first state', 'Low latency and simple defaults', 'No native global coordination in core'],
+    row: [
+      'Local-first state',
+      'Low latency and simple defaults',
+      'No native global coordination in core',
+    ],
   },
   {
-    row: ['Decision-free model', 'Clear trust boundaries and deterministic behavior', 'External detector quality directly affects outcomes'],
+    row: [
+      'Decision-free model',
+      'Clear trust boundaries and deterministic behavior',
+      'External detector quality directly affects outcomes',
+    ],
   },
   {
-    row: ['Bounded storage', 'Predictable memory and eviction behavior', 'Potential evidence loss under sustained pressure without archival'],
+    row: [
+      'Bounded storage',
+      'Predictable memory and eviction behavior',
+      'Potential evidence loss under sustained pressure without archival',
+    ],
   },
 ]
 
 const k8sRows: { row: string[] }[] = [
   {
-    row: ['Deployment shape', 'In-process library inside each app pod, not a separate Tracehound service'],
+    row: [
+      'Deployment shape',
+      'In-process library inside each app pod, not a separate Tracehound service',
+    ],
   },
   {
-    row: ['Readiness model', 'Do not gate readiness on Tracehound degradation; fail-open keeps app flow'],
+    row: [
+      'Readiness model',
+      'Do not gate readiness on Tracehound degradation; fail-open keeps app flow',
+    ],
   },
   {
-    row: ['Rate limiter and quarantine', 'Per-pod local state unless external coordination is introduced'],
+    row: [
+      'Rate limiter and quarantine',
+      'Per-pod local state unless external coordination is introduced',
+    ],
   },
   {
     row: ['Cold storage', 'Shared S3/R2/GCS layer is the cross-pod archival aggregation path'],
   },
   {
-    row: ['Scaling', 'HPA should be tuned against app profile; keep hound process limits bounded per pod'],
+    row: [
+      'Scaling',
+      'HPA should be tuned against app profile; keep hound process limits bounded per pod',
+    ],
   },
 ]
 
@@ -398,9 +440,12 @@ export default function FAQ() {
 
         <article className="grid grid-cols-1 gap-8 p-6 xl:p-12">
           <div className="p-6">
-            <h4 className="font-heading font-bold text-xl md:text-2xl">What It Is / What It Is Not / How</h4>
+            <h4 className="font-heading font-bold text-xl md:text-2xl">
+              What It Is / What It Is Not / How
+            </h4>
             <p className="mt-3 font-sans text-sm md:text-base">
-              Concept-clarity matrix to reduce category mistakes during architecture and procurement decisions.
+              Concept-clarity matrix to reduce category mistakes during architecture and procurement
+              decisions.
             </p>
             <div className="mt-5 overflow-x-auto">
               <Table
@@ -413,7 +458,8 @@ export default function FAQ() {
           <div className="p-6">
             <h4 className="font-heading font-bold text-xl md:text-2xl">Crash & Error Management</h4>
             <p className="mt-3 font-sans text-sm md:text-base">
-              Canonical handling model for failure states, consistent with fail-open and isolation principles.
+              Canonical handling model for failure states, consistent with fail-open and isolation
+              principles.
             </p>
             <div className="mt-5 overflow-x-auto">
               <Table
@@ -431,9 +477,12 @@ export default function FAQ() {
           </div>
 
           <div className="p-6">
-            <h4 className="font-heading font-bold text-xl md:text-2xl">Test & Assurance Evidence</h4>
+            <h4 className="font-heading font-bold text-xl md:text-2xl">
+              Test & Assurance Evidence
+            </h4>
             <p className="mt-3 font-sans text-sm md:text-base">
-              Confidence signals that can be shared with engineering leadership and security reviewers.
+              Confidence signals that can be shared with engineering leadership and security
+              reviewers.
             </p>
             <div className="mt-5 overflow-x-auto">
               <Table head={['Evidence Area', 'What Is Documented']} body={testAssuranceRows} />
@@ -448,9 +497,12 @@ export default function FAQ() {
           </div>
 
           <div className="p-6">
-            <h4 className="font-heading font-bold text-xl md:text-2xl">Kubernetes / Clusterized Operation</h4>
+            <h4 className="font-heading font-bold text-xl md:text-2xl">
+              Kubernetes / Clusterized Operation
+            </h4>
             <p className="mt-3 font-sans text-sm md:text-base">
-              Multi-instance behavior and operational implications based on K8s and local-state documents.
+              Multi-instance behavior and operational implications based on K8s and local-state
+              documents.
             </p>
             <div className="mt-5 overflow-x-auto">
               <Table head={['Topic', 'Guidance']} body={k8sRows} />
@@ -458,7 +510,9 @@ export default function FAQ() {
           </div>
 
           <div className="p-6">
-            <h4 className="font-heading font-bold text-xl md:text-2xl">Package Requirements & Dependencies</h4>
+            <h4 className="font-heading font-bold text-xl md:text-2xl">
+              Package Requirements & Dependencies
+            </h4>
             <div className="mt-5 overflow-x-auto">
               <Table
                 head={['Package', 'Requires `@tracehound/core`', 'Notes']}
