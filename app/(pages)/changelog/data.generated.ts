@@ -15,9 +15,72 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-10T16:03:12.095Z"
+export const changelogGeneratedAt = "2026-03-16T10:41:34.606Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.6",
+    "date": "2026-03-12",
+    "title": "Package README Modernization (Docs-Only)",
+    "summary": "This patch release refreshes stale package-level documentation and aligns examples with the current public API and runtime behavior. No runtime code paths or package contracts were changed.",
+    "highlights": [
+      "packages/core/README.md: Rewritten around the current createTracehound flow, Scent contract (source object + threat signal + optional ingressBytes), intercept statuses, and signed snapshot integration.",
+      "packages/express/README.md: Updated middleware options and behavior docs (emitTraceIdHeader, fail-open mapping, deterministic rawBody guidance, and onIntercept pattern).",
+      "packages/fastify/README.md: Updated plugin options and behavior docs (emitTraceIdHeader, fail-open mapping, deterministic req.rawBody requirement, and onIntercept pattern).",
+      "packages/cli/README.md: Expanded CLI command reference (status, stats, inspect, watch, history clear, disk clear) plus required snapshot env inputs and trace-inspection workflow.",
+      "packages/core/scenarios/README.md: Replaced outdated scenario notes with current scenario suite and execution commands.",
+      "No breaking changes.",
+      "No runtime behavior changes.",
+      "No configuration contract changes."
+    ]
+  },
+  {
+    "version": "1.8.5",
+    "date": "2026-03-12",
+    "title": "CLI Dashboard Overhaul, Soak Infrastructure, and Fix Wave",
+    "summary": "CLI Dashboard Overhaul, Soak Infrastructure, and Fix Wave",
+    "highlights": [
+      "CLI watch dashboard overhaul (packages/cli): Redesigned multi-screen ANSI live dashboard (watch.ts) with bold values, colon-separated key/value labels, and consistent color hierarchy via theme utilities. Screens: overview, watcher, quarantine, pool, agent, help. Nav keys: [1–5], [h], [r], [q]. Command bar pinned to terminal bottom row in TTY mode.",
+      "format.ts consolidation (packages/cli): Merged fmt.ts into format.ts as the single canonical formatting module — fmtBytes, fmtCount, fmtDuration, fmtStatus, fmtUptime.",
+      "Soak load-test infrastructure (infrastructure/soak): Moved soak harness from packages/ to infrastructure/soak; added server.ts, audit.ts, file-cold-storage.ts, metrics.ts, traffic.ts, main.ts. Updated pnpm-workspace.yaml accordingly.",
+      "CLI watch command exposed via src/index.ts.",
+      "startDashboard setInterval regression (packages/cli): Removed the early-return guard on !process.stdout.isTTY that prevented setInterval from being registered. Replaced process.stdin.isTTY checks with typeof process.stdin.setRawMode === 'function' so raw-mode setup and key-navigation work correctly in all environments.",
+      "refreshMs unit inconsistency (packages/cli): Removed erroneous Math.ceil(refreshMs / 1000) conversion in startDashboard and renderDashboard; the overview header was displaying refresh: 1ms instead of refresh: 1000ms.",
+      "Last-alert field label renamed from \"id\" to \"signature\" in the LAST ALERT DETAIL section to match the actual field name and domain terminology.",
+      "renderScreen void returns: Removed return statements from void renderScreen switch branches."
+    ]
+  },
+  {
+    "version": "1.8.4",
+    "date": "2026-03-11",
+    "title": "Post-1.8.3 Workflow and Security Maintenance Patch",
+    "summary": "This patch release captures all commits merged after v1.8.3, focused on workflow hardening, dependency security remediation, and fuzz/chaos pipeline stability.",
+    "highlights": [
+      "Applied OSV vulnerability remediation updates.",
+      "Added StepSecurity GitHub Actions hardening updates and follow-up workflow permission fixes.",
+      "Fixed workflow configuration regressions affecting CI and security automation.",
+      "Updated Scorecard workflow configuration and corrected token-permission placement issues.",
+      "Fixed chaos test workflow pnpm install and naming consistency issues.",
+      "Improved fuzz test workflow configuration.",
+      "Fixed fuzz helper loop-risk behavior in workflow/test support paths.",
+      "Updated README badge links."
+    ]
+  },
+  {
+    "version": "1.8.3",
+    "date": "2026-03-11",
+    "title": "ESLint Clock/RNG SSoT, Monotonic Evidence Timestamps, and Workflow Hardening",
+    "summary": "This patch release delivers injectable clock/RNG enforcement via ESLint, monotonic nanosecond timestamps on quarantined evidence, scheduler correctness fixes, and complete SHA-pinning of all GitHub Actions across the CI workflow suite.",
+    "highlights": [
+      "ESLint v9 flat config clock/RNG SSoT enforcement (packages/core, root): Added rules that prevent direct Date.now(), Math.random(), and crypto.random* calls from bypassing injectable clock and RNG entry points. Rules are error-level for Math.random and crypto.*; warn-level for Date.now() during the ongoing RuntimeContext migration. Injectable bridge closures in scheduler, rate-limiter, and watcher carry explicit disable comments explaining the intent.",
+      "Evidence monotonic timestamps (packages/core): Added injectable _hrtime bridge to EvidenceFactory so monotonic nanosecond timestamps (process.hrtime.bigint) are captured at quarantine time. Evidence exposes monoNs: bigint internally; RuntimeEvidenceHandle surfaces it as a decimal string for JSON safety. Enables strict ordering of evidence captured within the same millisecond without relying on wall-clock drift.",
+      "Scheduler jitter and capacity (packages/core): Corrected edge cases surfaced by code review (#25) — jitter clamping and capacity-boundary behavior now have explicit regression coverage.",
+      "Workflow pinned-dependencies (.github/workflows): All GitHub Actions across ci-main, ci-pr, chaos-verify, codecov, codeql-advanced, release, scorecard, security-paranoid, and semgrep workflows are now pinned by full commit SHA per OpenSSF Scorecard Pinned-Dependencies requirements.",
+      "Expanded coverage for EvidenceFactory monotonic timestamp injection, RuntimeEvidenceHandle monoNs serialization, rate-limiter injectable clock bridge, scheduler jitter/capacity boundaries, watcher injectable clock paths, and agent _hrtime pass-through.",
+      "Added CLI system-snapshot regression coverage for new injectable bridge behavior.",
+      "Documentation narrative and roadmap updates merged from main."
+    ]
+  },
   {
     "version": "1.8.2",
     "date": "2026-03-10",
@@ -33,69 +96,30 @@ export const recentReleases: ReleaseEntry[] = [
       "Optimized hot paths in quarantine and rate-limiter flows to reduce avoidable pressure amplification and align runtime behavior with documented boundedness intent.",
       "Updated fail-open, API, threat-model, performance-SLA, security-assurance, and roadmap/security docs to remove overclaims and align all normative statements with tested runtime behavior."
     ]
-  },
-  {
-    "version": "1.8.1",
-    "date": "N/A",
-    "title": "Security QA & Docs Alignment",
-    "summary": "This patch release packages the post-v1.8.0 correctness fixes, release-gate coverage recovery, and documentation alignment work needed before the next remediation branch begins. No breaking changes are intended in this patch.",
-    "highlights": [
-      "FailSafe.lastPanic now always reflects the most recently triggered panic event, even when severity-weighted history eviction removes an older lower-severity entry.",
-      "Scheduler capacity handling now permits rescheduling an existing task ID at the hard task cap, while still dropping the 257th unique task deterministically with a warning.",
-      "Scheduler jitter input is clamped before randomInt() so non-integer jitter configuration cannot exceed the declared bound.",
-      "EvidenceHandle.scentId remains optional for downstream/custom handle implementations, preventing an accidental patch-level type break.",
-      "Quarantine purge audit records now fall back to signature when scentId is absent, preserving traceability for legacy or custom evidence handles.",
-      "LaneQueue.onAlert() and HoundPool.onResult() remain void-returning APIs; internal drop-and-warn behavior is preserved without changing the public contract.",
-      "Added regression coverage for scheduler task-capacity boundaries, including explicit assertions for unique-task drop behavior and same-ID rescheduling at capacity.",
-      "Added regression coverage for fail-safe severity-weighted history eviction and lastPanic correctness immediately after eviction pressure."
-    ]
-  },
-  {
-    "version": "1.8.0",
-    "date": "2026-03-09",
-    "title": "TLS Source Signals and Runtime Hardening",
-    "summary": "TLS Source Signals and Runtime Hardening",
-    "highlights": [
-      "TLS source metadata support in runtime flow and adapters (cipherSuite, version, optional alpn) for Express and Fastify integrations.",
-      "Coverage-focused regression tests across core and CLI command surfaces to keep release gates green on branch-diff QA.",
-      "Rate limiter now enforces IP-ceiling-first behavior for new fingerprints to prevent composite map pressure under same-IP rotation attacks.",
-      "Source fingerprint key generation now normalizes oversized source components deterministically to reduce CPU amplification from oversized headers.",
-      "API documentation terminology was aligned with implementation semantics (sliding-window behavior clarity for consumers).",
-      "Hardened rate-limiter anti-rotation controls:",
-      "Prevents unnecessary composite entry allocation when the IP ceiling already rejects.",
-      "Keeps active IP-ceiling entries hot on reject paths to reduce eviction-based bypass opportunities."
-    ]
-  },
-  {
-    "version": "1.7.0",
-    "date": "2026-03-05",
-    "title": "Enhanced Quarantine Protocol and Evidence Lifecycle Hardening",
-    "summary": "This release delivers the roadmap scope for the Enhanced Quarantine Protocol, with core focus on deterministic evidence custody, bounded decay, and fail-open adapter behavior.",
-    "highlights": [
-      "Added TTL-driven background decay in Quarantine (ttlMs, decayIntervalMs, decayBatchSize).",
-      "Added cold-storage-backed decay archival with configurable failure policy and timeout controls.",
-      "Added support for raw ingress byte hashing via Scent.ingressBytes.",
-      "Added batched Merkle sealing in AuditChain for stronger lifecycle custody continuity.",
-      "Added AbortSignal support to IColdStorageAdapter.write(id, payload, signal?).",
-      "Quarantine stats now include richer decay/eviction visibility (evictedCount, archive/decay counters, next expiry metadata).",
-      "Express/Fastify ingress byte extraction is now deterministic and rawBody-based.",
-      "Unknown/forward-incompatible intercept statuses in adapters now fail open (no request lifecycle hangs)."
-    ]
-  },
-  {
-    "version": "1.6.1",
-    "date": "2026-03-07",
-    "title": "Memory Safety and Cryptographic RNG Hardening",
-    "summary": "Targeted security hardening pass on two latent vulnerability classes in the core runtime: uninitialized-memory disclosure via Buffer.allocUnsafe in IPC encoding paths, and weak RNG via Math.random() in forensic ID construction. No public API changes. No breaking changes.",
-    "highlights": [
-      "IPC buffer allocation (hound-ipc.ts): Replaced Buffer.allocUnsafe with Buffer.alloc across all four IPC message encoding paths. allocUnsafe can expose stale heap memory to child processes; zero-initialized allocation eliminates the uninitialized-memory disclosure class entirely.",
-      "Forensic RNG (quarantine.ts): Replaced Math.random() with generateSecureId() for PurgeRecord ID construction. All forensic pipeline identifiers now use crypto-strength randomness end-to-end.",
-      "Added security/artifacts/dependency-tree.txt, pnpm-audit.json, sbom.cdx.json. pnpm audit --prod reports 0 vulnerabilities at time of release."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.8.1",
+    "date": "N/A",
+    "title": "Security QA & Docs Alignment"
+  },
+  {
+    "version": "1.8.0",
+    "date": "2026-03-09",
+    "title": "TLS Source Signals and Runtime Hardening"
+  },
+  {
+    "version": "1.7.0",
+    "date": "2026-03-05",
+    "title": "Enhanced Quarantine Protocol and Evidence Lifecycle Hardening"
+  },
+  {
+    "version": "1.6.1",
+    "date": "2026-03-07",
+    "title": "Memory Safety and Cryptographic RNG Hardening"
+  },
   {
     "version": "1.6.0",
     "date": "2026-03-06",
