@@ -15,9 +15,25 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-18T06:03:58.921Z"
+export const changelogGeneratedAt = "2026-03-19T05:59:46.925Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.7",
+    "date": "2026-03-18",
+    "title": "Evidence Ownership Hardening and Test Type Safety",
+    "summary": "Previously the constructor stored the caller's buffer by reference; any code retaining the original reference could silently mutate forensic bytes after the one-time hash check, bypassing tamper detection entirely. The owned copy is now created first (bytes.slice(0)), and the hash is verified against that copy — closing the post-construction mutation window. allocating a defensive copy. The public bytes getter continues to return a copy on every call (required for external callers). HoundPool IPC send (_send) now uses _bytesRef to avoid a redundant allocation per evidence dispatch in the hot path. original buffer after construction\" — verifies that filling the caller-retained buffer with 0xde bytes after construction does not alter the evidence's stored bytes. import type. exactOptionalPropertyTypes violations resolved — npx tsc -p tsconfig.tests.json --noEmit now exits clean. continue using evidence.bytes.",
+    "highlights": [
+      "Evidence constructor now copies the caller-provided ArrayBuffer before hashing and storing it.",
+      "Added Evidence._bytesRef internal getter that returns the raw buffer reference without",
+      "Regression test added to evidence.test.ts: \"should not be affected by caller mutating the",
+      "Fixed remaining TypeScript strict-mode errors across the test suite (tsconfig.tests.json):",
+      "All previously failing noUncheckedIndexedAccess, noPropertyAccessFromIndexSignature, and",
+      "No breaking changes to the public API.",
+      "No configuration contract changes.",
+      "Evidence._bytesRef is an internal getter (underscore-prefixed); external consumers should"
+    ]
+  },
   {
     "version": "1.8.6",
     "date": "2026-03-12",
@@ -80,26 +96,15 @@ export const recentReleases: ReleaseEntry[] = [
       "Added CLI system-snapshot regression coverage for new injectable bridge behavior.",
       "Documentation narrative and roadmap updates merged from main."
     ]
-  },
-  {
-    "version": "1.8.2",
-    "date": "2026-03-10",
-    "title": "Security Hardening and Remediation Closure Wave",
-    "summary": "This patch release packages the fix/security-hardening branch and closes the high-priority remediation items tracked for runtime fail-open integrity, bounded control-plane behavior, webhook SSRF hardening, constant-time evidence checks, and documentation truth alignment.",
-    "highlights": [
-      "Restored fail-open default behavior in Express and Fastify adapters for internal status: 'error' outcomes, preserving host-app request survivability when Tracehound encounters runtime faults.",
-      "Hardened webhook delivery policy in the notification plane:",
-      "DNS-based private/special-use address rejection,",
-      "Completed constant-time comparison compliance for security-sensitive evidence hash verification paths.",
-      "Hardened async subscriber lifecycle handling in NotificationEmitter.subscribe() so iterator shutdown resolves pending consumers deterministically.",
-      "Added CI-safe chaos snapshot verification/readback behavior and richer diagnostics for snapshot export race/permission failures in GitHub runner environments.",
-      "Optimized hot paths in quarantine and rate-limiter flows to reduce avoidable pressure amplification and align runtime behavior with documented boundedness intent.",
-      "Updated fail-open, API, threat-model, performance-SLA, security-assurance, and roadmap/security docs to remove overclaims and align all normative statements with tested runtime behavior."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.8.2",
+    "date": "2026-03-10",
+    "title": "Security Hardening and Remediation Closure Wave"
+  },
   {
     "version": "1.8.1",
     "date": "N/A",
