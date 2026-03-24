@@ -11,13 +11,17 @@ export default function BlogPost() {
           Introducing Tracehound: Deterministic Security Buffer for Node.js
         </h3>
         <p className="font-sans font-light text-base mb-4 md:text-xl xl:text-2xl">
-          Why we built Tracehound, and how deterministic containment and tamper-evident evidence
-          fit modern Node.js security operations.
+          Why we built Tracehound, and how deterministic containment and tamper-evident evidence fit
+          modern Node.js security operations.
         </p>
 
         <div className="flex items-center gap-4 mb-2 xl:mb-4">
           <time dateTime="December 28, 2025">December 28, 2025</time>
           <strong>// Tracehound Team</strong>
+          <span className="size-1 rounded-full bg-(--border)" />
+          <span>01:40 minute read</span>
+          <span className="size-1 rounded-full bg-(--border)" />
+          <span>396 words</span>
         </div>
 
         <nav className="flex items-center gap-4">

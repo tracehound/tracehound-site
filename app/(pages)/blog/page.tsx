@@ -19,6 +19,37 @@ export default function Blog() {
       <article className="grid grid-cols-1 xl:grid-cols-2">
         <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
           <div className="flex items-center gap-4">
+            <time dateTime="March 16, 2026">March 24, 2026</time>
+            <strong>// Tracehound Team</strong>
+          </div>
+
+          <Link
+            href="/blog/forensic-readiness-is-becoming-a-strategic-security-discipline"
+            className="group">
+            <h3 className="mb-3 font-heading font-bold text-xl md:text-2xl xl:text-4xl group-hover:pl-2.5 group-hover:bg-(--accent-primary)/50 transition-all">
+              Forensic Readiness Is Becoming a Strategic Security Discipline
+            </h3>
+            <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+              The transition from a niche practice of DFIR to the discipline of risk management and
+              incident preparedness
+            </p>
+          </Link>
+
+          <nav className="flex items-center gap-4">
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #forensic-readiness
+            </span>
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #incident-preparedness
+            </span>
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #risk-management
+            </span>
+          </nav>
+        </div>
+
+        <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
+          <div className="flex items-center gap-4">
             <time dateTime="March 16, 2026">March 16, 2026</time>
             <strong>// Tracehound Team</strong>
           </div>
@@ -86,8 +117,8 @@ export default function Blog() {
               Introducing Tracehound: Deterministic Security Buffer for Node.js
             </h3>
             <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
-              Why we built Tracehound, and how deterministic containment and tamper-evident
-              evidence fit modern Node.js security operations.
+              Why we built Tracehound, and how deterministic containment and tamper-evident evidence
+              fit modern Node.js security operations.
             </p>
           </Link>
 

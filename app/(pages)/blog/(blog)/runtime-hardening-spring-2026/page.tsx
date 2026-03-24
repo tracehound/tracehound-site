@@ -19,6 +19,10 @@ export default function BlogPost() {
         <div className="flex items-center gap-4 mb-2 xl:mb-4">
           <time dateTime="March 9, 2026">March 9, 2026</time>
           <strong>// Tracehound Team</strong>
+          <span className="size-1 rounded-full bg-(--border)" />
+          <span>01:30 minute read</span>
+          <span className="size-1 rounded-full bg-(--border)" />
+          <span>356 words</span>
         </div>
 
         <nav className="flex items-center gap-4">
@@ -41,18 +45,18 @@ export default function BlogPost() {
           Why this wave matters
         </h3>
         <p className="font-sans md:text-lg xl:text-xl">
-          Over the last release cycle, we did not chase feature count. We tightened the trust
-          model. The focus was practical: make runtime state truthful, keep evidence custody
-          deterministic, and close bypass windows attackers actually use under pressure.
+          Over the last release cycle, we did not chase feature count. We tightened the trust model.
+          The focus was practical: make runtime state truthful, keep evidence custody deterministic,
+          and close bypass windows attackers actually use under pressure.
         </p>
 
         <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">
           v1.6: Operational truth first
         </h3>
         <p className="font-sans md:text-lg xl:text-xl">
-          We removed fabricated healthy fallbacks from operator-facing surfaces and moved CLI/runtime
-          status to signed snapshot input. If the snapshot is missing or invalid, operators now see
-          explicit disconnected states instead of false green.
+          We removed fabricated healthy fallbacks from operator-facing surfaces and moved
+          CLI/runtime status to signed snapshot input. If the snapshot is missing or invalid,
+          operators now see explicit disconnected states instead of false green.
         </p>
         <ul className="pl-2 space-y-2 xl:list-disc xl:pl-6 text-lg">
           <li>Signed system snapshots with integrity verification and freshness checks.</li>
@@ -70,7 +74,9 @@ export default function BlogPost() {
         <ul className="pl-2 space-y-2 xl:list-disc xl:pl-6 text-lg">
           <li>TTL-driven decay with bounded batch processing and explicit failure policy.</li>
           <li>Cold-storage archival path with timeout and cancellation semantics.</li>
-          <li>Raw ingress byte support for deterministic hashing when adapters expose `rawBody`.</li>
+          <li>
+            Raw ingress byte support for deterministic hashing when adapters expose `rawBody`.
+          </li>
           <li>Audit continuity reinforcement with stronger lifecycle-event custody.</li>
         </ul>
 

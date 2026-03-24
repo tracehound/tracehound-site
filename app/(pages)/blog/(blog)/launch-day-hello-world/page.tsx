@@ -19,6 +19,10 @@ export default function BlogPost() {
         <div className="flex items-center gap-4 mb-2 xl:mb-4">
           <time dateTime="March 16, 2026">March 16, 2026</time>
           <strong>// Tracehound Team</strong>
+          <span className="size-1 rounded-full bg-(--border)" />
+          <span>02:47 minute read</span>
+          <span className="size-1 rounded-full bg-(--border)" />
+          <span>659 words</span>
         </div>
 
         <nav className="flex items-center gap-4">
@@ -74,7 +78,9 @@ export default function BlogPost() {
           <li>Deterministic intercept outcomes instead of heuristic branching.</li>
           <li>Quarantine and evidence custody designed around bounded resource usage.</li>
           <li>Fail-open behavior so internal faults do not become application-layer outages.</li>
-          <li>Signed runtime snapshots so the CLI reports real state instead of synthetic green.</li>
+          <li>
+            Signed runtime snapshots so the CLI reports real state instead of synthetic green.
+          </li>
           <li>Thin Express and Fastify adapters with no hidden decision engine inside them.</li>
         </ul>
 
@@ -118,19 +124,22 @@ export default function BlogPost() {
 
         <ul className="pl-2 space-y-2 xl:list-disc xl:pl-6 text-lg">
           <li>It gives upstream security systems a deterministic execution partner.</li>
-          <li>It improves incident reconstruction because evidence custody is part of the runtime contract.</li>
+          <li>
+            It improves incident reconstruction because evidence custody is part of the runtime
+            contract.
+          </li>
           <li>It reduces ambiguity for operators by keeping runtime truth explicit and signed.</li>
-          <li>It protects availability by treating security-path faults as something to contain, not amplify.</li>
+          <li>
+            It protects availability by treating security-path faults as something to contain, not
+            amplify.
+          </li>
         </ul>
 
         <p className="font-sans md:text-lg xl:text-xl">
-          For us, that is the real value proposition: less security theater, more operational
-          truth.
+          For us, that is the real value proposition: less security theater, more operational truth.
         </p>
 
-        <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-          Why launch now
-        </h3>
+        <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">Why launch now</h3>
 
         <p className="font-sans md:text-lg xl:text-xl">
           Because the last few release waves made the foundation credible. From `v1.6` through
@@ -144,9 +153,7 @@ export default function BlogPost() {
           after the product has learned to be honest about its own boundaries.
         </p>
 
-        <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">
-          What comes next
-        </h3>
+        <h3 className="font-heading font-bold text-xl md:text-2xl xl:text-4xl">What comes next</h3>
 
         <p className="font-sans md:text-lg xl:text-xl">
           The near-term goal is not to turn Tracehound into a bigger buzzword machine. The goal is
