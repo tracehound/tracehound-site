@@ -55,32 +55,25 @@ app.listen(3000)
 export const expressAdapterCode = `
 import express from 'express'
 import { tracehound } from '@tracehound/express'
-import { createTracehound, generateSecureId } from '@tracehound/core'
+import { createTracehound } from '@tracehound/core'
 
 const app = express()
-const th = createTracehound()
+const th = createTracehound({ maxPayloadSize: 1_000_000 })
 
 app.use(
   tracehound({
     agent: th.agent,
-    extractScent: (req) => ({
-      id: generateSecureId(),
-      timestamp: Date.now(),
-      source: {
-        ip: req.ip || 'unknown',
-        userAgent:
-          typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
-      },
-      payload: {
-        method: req.method,
-        path: req.path,
-        headers: req.headers,
-      },
-      threat:
-        req.headers['x-risk-score'] === 'critical'
-          ? { category: 'unknown', severity: 'critical' }
-          : undefined,
-    }),
+
+    // Match the agent's maxPayloadSize to guard against memory amplification:
+    // skips body clone when Content-Length exceeds the limit so JSON.stringify
+    // + JSON.parse does not double a multi-MB body before agent rejection.
+    maxPayloadSize: 1_000_000,
+
+    // Use the direct socket IP when running behind a proxy or CDN.
+    // req.ip follows Express trust proxy — a misconfigured setting allows
+    // X-Forwarded-For spoofing to bypass rate limiting.
+    resolveSourceIp: (req) => req.socket.remoteAddress ?? 'unknown',
+
     onIntercept: (result, req, res) => {
       if (result.status === 'rate_limited') {
         return res.status(429).json({ error: 'Too many requests' })
@@ -94,10 +87,7 @@ app.use(
       if (result.status === 'error' && req.accepts('json') && !res.headersSent) {
         return res.status(200).json({
           ok: true,
-          tracehound: {
-            degraded: true,
-            code: result.error.code,
-          },
+          tracehound: { degraded: true, code: result.error.code },
         })
       }
     },
@@ -108,10 +98,11 @@ app.use(
 export const fastifyAdapterCode = `
 import fastify from 'fastify'
 import { tracehoundPlugin } from '@tracehound/fastify'
-import { createTracehound, generateSecureId } from '@tracehound/core'
+import { createTracehound } from '@tracehound/core'
 
 const app = fastify()
 const th = createTracehound({
+  maxPayloadSize: 1_000_000,
   houndPool: {
     poolSize: 6,
     timeout: 20_000,
@@ -119,23 +110,13 @@ const th = createTracehound({
   },
 })
 
+// Default scent extraction handles IP, path, query, headers, TLS, and rawBody
+// automatically. Use resolveSourceIp when running behind a reverse proxy or CDN
+// to prevent X-Forwarded-For spoofing from bypassing rate limiting.
 app.register(tracehoundPlugin, {
   agent: th.agent,
-  extractScent: (req) => ({
-    id: generateSecureId(),
-    timestamp: Date.now(),
-    source: {
-      ip: req.ip || 'unknown',
-      userAgent:
-        typeof req.headers['user-agent'] === 'string' ? req.headers['user-agent'] : undefined,
-    },
-    payload: {
-      method: req.method,
-      path: req.url,
-      body: req.body,
-    },
-    threat: req.headers['x-threat-score'] ? { category: 'flood', severity: 'high' } : undefined,
-  }),
+  maxPayloadSize: 1_000_000,
+  resolveSourceIp: (req) => req.socket.remoteAddress ?? 'unknown',
 })
 `.trimStart()
 

@@ -193,6 +193,45 @@ export default function APIReferences() {
             For most applications, prefer <strong>`createTracehound`</strong>.
           </DocsContentParagraph>
         </DocsContentBlock>
+        <Separator />
+
+        <DocsContentBlock title="Adapter Options (Express / Fastify)">
+          <DocsContentParagraph>
+            <strong>`@tracehound/express`</strong> and <strong>`@tracehound/fastify`</strong> expose
+            options beyond <strong>`agent`</strong> that affect memory safety and source IP
+            fidelity. See the full reference in{' '}
+            <a href="/docs/references/configuration">Configuration → Adapter Options</a>.
+          </DocsContentParagraph>
+          <Table
+            head={['Option', 'Description']}
+            body={[
+              {
+                row: [
+                  <strong key="mp">`maxPayloadSize`</strong>,
+                  'Body clone guard. Skips JSON.stringify+parse when Content-Length exceeds this value, preventing memory amplification before agent rejection.',
+                ],
+              },
+              {
+                row: [
+                  <strong key="ip">`resolveSourceIp`</strong>,
+                  'Custom IP resolver. Override req.ip when running behind a proxy or CDN to prevent X-Forwarded-For spoofing from bypassing rate limiting.',
+                ],
+              },
+              {
+                row: [
+                  <strong key="sig">`emitSignatureInResponse`</strong>,
+                  'Include evidence signature in HTTP 403 body. Disabled by default — prevents correlation attacks.',
+                ],
+              },
+              {
+                row: [
+                  <strong key="tid">`emitTraceIdHeader`</strong>,
+                  'Emit x-tracehound-trace-id on quarantined responses. Disabled by default for privacy-sensitive environments.',
+                ],
+              },
+            ]}
+          />
+        </DocsContentBlock>
       </DocsContent>
 
       <DocsNavigation

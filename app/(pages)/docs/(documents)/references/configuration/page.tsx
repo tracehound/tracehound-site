@@ -12,6 +12,8 @@ import { Separator } from '@/app/components/separator'
 import { Table } from '@/app/components/table'
 import type { Metadata } from 'next/types'
 import {
+  adapterOptionsExampleCode,
+  adapterOptionsInterfaceCode,
   createTracehoundExampleCode,
   envMappingCode,
   snapshotEnvKeysCode,
@@ -73,6 +75,53 @@ export default function Configuration() {
               { row: [<strong>`houndPool.onPoolExhausted`</strong>, <strong>`defer`</strong>] },
               { row: [<strong>`houndPool.deferQueueLimit`</strong>, <strong>`100`</strong>] },
               { row: [<strong>`snapshot.intervalMs`</strong>, <strong>`1000`</strong>] },
+            ]}
+          />
+        </DocsContentBlock>
+
+        <Separator />
+
+        <DocsContentBlock title="Adapter Options (Express / Fastify)">
+          <DocsContentParagraph>
+            Both <strong>`@tracehound/express`</strong> and{' '}
+            <strong>`@tracehound/fastify`</strong> accept the following options in addition to{' '}
+            <strong>`agent`</strong>:
+          </DocsContentParagraph>
+
+          <Code code={adapterOptionsInterfaceCode} />
+
+          <DocsContentSubtitle>Hardening example</DocsContentSubtitle>
+          <DocsContentParagraph>
+            Set <strong>`maxPayloadSize`</strong> to match your agent's limit and provide{' '}
+            <strong>`resolveSourceIp`</strong> when the app runs behind a reverse proxy or CDN:
+          </DocsContentParagraph>
+
+          <Code code={adapterOptionsExampleCode} />
+
+          <DocsList
+            items={[
+              <p key="amp">
+                <strong>`maxPayloadSize`</strong>: Guards against memory amplification from{' '}
+                <strong>`JSON.stringify + JSON.parse`</strong> on multi-MB bodies before the agent
+                rejects them. Uses the <strong>`Content-Length`</strong> header as a best-effort
+                pre-filter; the agent enforces the hard limit.
+              </p>,
+              <p key="ip">
+                <strong>`resolveSourceIp`</strong>: <strong>Security-sensitive.</strong>{' '}
+                <strong>`req.ip`</strong> follows the framework&apos;s trust proxy setting. A
+                misconfigured deployment behind a CDN or load balancer allows{' '}
+                <strong>`X-Forwarded-For`</strong> spoofing to bypass rate limiting. Override to use
+                the direct socket IP.
+              </p>,
+              <p key="sig">
+                <strong>`emitSignatureInResponse`</strong>: Disabled by default. Enabling it exposes
+                the evidence signature in HTTP 403 bodies, which enables correlation attacks.
+              </p>,
+              <p key="trace">
+                <strong>`emitTraceIdHeader`</strong>: Disabled by default. When enabled, emits{' '}
+                <strong>`x-tracehound-trace-id`</strong> on quarantined responses for operator
+                tracing. Disable in privacy-sensitive environments.
+              </p>,
             ]}
           />
         </DocsContentBlock>

@@ -113,6 +113,63 @@ const th = createTracehound({
 })
 `.trimStart()
 
+export const adapterOptionsInterfaceCode = `
+// Shared by @tracehound/express (TracehoundMiddlewareOptions)
+// and @tracehound/fastify (TracehoundPluginOptions)
+interface AdapterOptions {
+  // Required: agent instance from createTracehound()
+  agent: IAgent
+
+  // Body clone guard. Should match the agent's maxPayloadSize.
+  // When Content-Length exceeds this value, body clone is skipped to
+  // prevent memory amplification before agent rejection.
+  // ingressBytes (rawBody) is still captured for signature computation.
+  maxPayloadSize?: number
+
+  // Custom IP resolver.
+  // SECURITY: req.ip follows the framework's trust proxy setting.
+  // If misconfigured behind a CDN/LB, X-Forwarded-For spoofing can
+  // bypass rate limiting. Override to use a trusted source.
+  resolveSourceIp?: (req: Request) => string
+
+  // Include evidence signature in HTTP 403 body.
+  // false by default — prevents correlation attacks.
+  emitSignatureInResponse?: boolean
+
+  // Emit x-tracehound-trace-id on quarantined responses.
+  // false by default — disable in privacy-sensitive environments.
+  emitTraceIdHeader?: boolean
+
+  // Override full scent extraction. When set, maxPayloadSize and
+  // resolveSourceIp are ignored (custom function takes full responsibility).
+  extractScent?: (req: Request) => Scent
+
+  // Override HTTP response logic for non-clean intercept results.
+  onIntercept?: (result: InterceptResult, req: Request, res: Response) => void
+}
+`.trimStart()
+
+export const adapterOptionsExampleCode = `
+import { tracehound } from '@tracehound/express'
+import { createTracehound } from '@tracehound/core'
+
+const th = createTracehound({ maxPayloadSize: 1_000_000 })
+
+app.use(
+  tracehound({
+    agent: th.agent,
+
+    // Match agent maxPayloadSize to prevent memory amplification
+    // from body cloning before the agent rejects oversized requests.
+    maxPayloadSize: 1_000_000,
+
+    // Use direct connection IP instead of X-Forwarded-For to prevent
+    // rate-limit bypass via IP spoofing (relevant behind CDN/LB).
+    resolveSourceIp: (req) => req.socket.remoteAddress ?? 'unknown',
+  }),
+)
+`.trimStart()
+
 export const snapshotEnvKeysCode = `
 import { SYSTEM_SNAPSHOT_ENV } from '@tracehound/core'
 
