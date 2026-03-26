@@ -111,7 +111,19 @@ export default function PerformanceSLASpecification() {
           <Table
             head={['Signal', 'Interpretation']}
             body={[
-              { row: ['watcher.quarantine.capacityPercent', 'Quarantine memory pressure trend'] },
+              {
+                row: [
+                  'watcher.pressure.signals.quarantineCapacityPercent',
+                  'Canonical pressure trend across bytes and count saturation',
+                ],
+              },
+              { row: ['watcher.pressure.mode', 'Current pressure containment mode'] },
+              {
+                row: [
+                  'watcher.pressure.archiveSuppressed',
+                  'Critical-mode archival suppression state',
+                ],
+              },
               {
                 row: [
                   'houndPool.totalTimeouts / totalErrors',
@@ -119,7 +131,12 @@ export default function PerformanceSLASpecification() {
                 ],
               },
               { row: ['rateLimiter.totalRejections', 'Traffic pressure and abuse intensity'] },
-              { row: ['watcher.overloaded', 'System entered overload state indicator'] },
+              {
+                row: [
+                  'watcher.overloaded',
+                  'Acute overload indicator separated from sticky pressure mode',
+                ],
+              },
             ]}
           />
         </DocsContentBlock>

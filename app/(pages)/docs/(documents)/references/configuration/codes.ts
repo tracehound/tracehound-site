@@ -17,6 +17,11 @@ const th = createTracehound({
     alertWindowMs: 60_000,
     quarantineHighWatermark: 0.8,
   },
+  pressure: {
+    elevatedWatermark: 0.8,
+    criticalWatermark: 0.95,
+    recoveryCooldownMs: 5_000,
+  },
   houndPool: {
     poolSize: 4,
     timeout: 30_000,
@@ -51,6 +56,14 @@ interface TracehoundOptions {
     maxAlertsPerWindow?: number
     alertWindowMs?: number
     quarantineHighWatermark?: number
+  }
+
+  pressure?: {
+    elevatedWatermark?: number
+    criticalWatermark?: number
+    recoverToElevatedWatermark?: number
+    recoverToNormalWatermark?: number
+    recoveryCooldownMs?: number
   }
 
   houndPool?: {

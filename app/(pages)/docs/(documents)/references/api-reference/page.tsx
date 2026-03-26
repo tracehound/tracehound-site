@@ -122,7 +122,8 @@ export default function APIReferences() {
           <DocsContentParagraph>
             Common event types: <strong>`threat.detected`</strong>,{' '}
             <strong>`evidence.quarantined`</strong>, <strong>`rate_limit.exceeded`</strong>,{' '}
-            <strong>`system.panic`</strong>.
+            <strong>`pressure.transition`</strong>,{' '}
+            <strong>`pressure.archive_suppressed`</strong>, <strong>`system.panic`</strong>.
           </DocsContentParagraph>
 
           <DocsContentSubtitle>Webhook delivery policy</DocsContentSubtitle>

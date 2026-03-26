@@ -52,7 +52,11 @@ const limiter = th.rateLimiter.stats
 
 console.log({
   quarantineCapacityPercent: watcher.quarantine.capacityPercent,
+  pressureMode: watcher.pressure.mode,
+  archiveSuppressed: watcher.pressure.archiveSuppressed,
+  pressureOverloaded: watcher.pressure.signals.overloaded,
   watcherOverloaded: watcher.overloaded,
+  droppedEvents: watcher.pressure.signals.droppedEvents,
   totalTimeouts: pool.totalTimeouts,
   totalErrors: pool.totalErrors,
   rateLimitRejections: limiter.totalRejections,

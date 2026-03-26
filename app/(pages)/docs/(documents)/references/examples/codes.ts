@@ -167,13 +167,20 @@ export const observabilityCode = `
 const snapshot = th.watcher.snapshot()
 console.log({
   threats: snapshot.threats.total,
+  pressureMode: snapshot.pressure.mode,
+  archiveSuppressed: snapshot.pressure.archiveSuppressed,
   alerts: snapshot.totalAlerts,
   quarantineCount: snapshot.quarantine.count,
   quarantineCapacity: snapshot.quarantine.capacityPercent,
+  droppedEvents: snapshot.pressure.signals.droppedEvents,
 })
 
 th.notifications.on('threat.detected', (event) => {
   console.log('[threat.detected]', event.payload.category, event.payload.severity)
+})
+
+th.notifications.on('pressure.transition', (event) => {
+  console.log('[pressure.transition]', event.payload.currentMode, event.payload.reason)
 })
 
 th.notifications.on('rate_limit.exceeded', (event) => {

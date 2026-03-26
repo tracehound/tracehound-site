@@ -69,6 +69,11 @@ export default function Configuration() {
               { row: [<strong>`watcher.maxAlertsPerWindow`</strong>, <strong>`10`</strong>] },
               { row: [<strong>`watcher.alertWindowMs`</strong>, <strong>`60_000`</strong>] },
               { row: [<strong>`watcher.quarantineHighWatermark`</strong>, <strong>`0.8`</strong>] },
+              { row: [<strong>`pressure.elevatedWatermark`</strong>, <strong>`0.8`</strong>] },
+              { row: [<strong>`pressure.criticalWatermark`</strong>, <strong>`0.95`</strong>] },
+              { row: [<strong>`pressure.recoverToElevatedWatermark`</strong>, 'derived'] },
+              { row: [<strong>`pressure.recoverToNormalWatermark`</strong>, 'derived'] },
+              { row: [<strong>`pressure.recoveryCooldownMs`</strong>, <strong>`5_000`</strong>] },
               { row: [<strong>`houndPool.poolSize`</strong>, <strong>`4`</strong>] },
               { row: [<strong>`houndPool.timeout`</strong>, <strong>`30_000`</strong>] },
               { row: [<strong>`houndPool.rotationJitterMs`</strong>, <strong>`1000`</strong>] },
@@ -147,6 +152,11 @@ export default function Configuration() {
                 For CLI operational commands, use <strong>`SYSTEM_SNAPSHOT_ENV`</strong> keys:
                 required <strong>`PATH`</strong>/<strong>`SECRET`</strong>, optional{' '}
                 <strong>`MAX_AGE_MS`</strong>/<strong>`MAX_FUTURE_SKEW_MS`</strong>.
+              </p>,
+              <p key="pressure">
+                <strong>`pressure`</strong> thresholds are configurable, but hard caps remain
+                enforced: <strong>`maxPayloadSize`</strong>, <strong>`quarantine.maxBytes`</strong>,
+                and <strong>`quarantine.maxCount`</strong> still bound runtime behavior.
               </p>,
             ]}
           />

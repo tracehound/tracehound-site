@@ -17,6 +17,11 @@ const th = createTracehound({
     alertWindowMs: 60_000,
     quarantineHighWatermark: 0.8,
   },
+  pressure: {
+    elevatedWatermark: 0.8,
+    criticalWatermark: 0.95,
+    recoveryCooldownMs: 5_000,
+  },
   houndPool: {
     poolSize: 4,
     timeout: 30_000,
@@ -50,8 +55,13 @@ export const watcherCode = `
 const snapshot = th.watcher.snapshot()
 
 console.log(snapshot.threats.total)
+console.log(snapshot.pressure.mode)
+console.log(snapshot.pressure.archiveSuppressed)
 console.log(snapshot.quarantine.capacityPercent)
 console.log(snapshot.lastAlert?.type)
+console.log(snapshot.pressure.signals.quarantineCapacityPercent)
+console.log(snapshot.pressure.signals.droppedEvents)
+console.log(snapshot.pressure.signals.houndPressureEvents)
 `.trimStart()
 
 export const notificationsCode = `
@@ -61,6 +71,14 @@ th.notifications.on('threat.detected', (event) => {
 
 th.notifications.on('system.panic', (event) => {
   console.error(event.payload.level, event.payload.reason)
+})
+
+th.notifications.on('pressure.transition', (event) => {
+  console.log(event.payload.currentMode, event.payload.reason)
+})
+
+th.notifications.on('pressure.archive_suppressed', (event) => {
+  console.log(event.payload.suppressed)
 })
 
 // If you register webhook targets, keep auth in explicit headers.
