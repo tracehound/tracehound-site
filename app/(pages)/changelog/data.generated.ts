@@ -15,9 +15,25 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-25T06:02:35.933Z"
+export const changelogGeneratedAt = "2026-03-26T06:13:00.896Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.8",
+    "date": "2026-03-25",
+    "title": "Adapter Security Hardening and Zero-Dependency Core",
+    "summary": "option added to both adapters. When Content-Length exceeds the configured limit the body clone (JSON.stringify + JSON.parse) is skipped before agent.intercept() is called, preventing adversarial oversized payloads from causing 2–3× peak memory pressure. ingressBytes (rawBody) is still captured for deterministic signature computation. option allows deployments behind a CDN or load balancer to override req.ip (which follows the framework's trust proxy setting) with a trusted source such as req.socket.remoteAddress. A misconfigured trust-proxy deployment allows X-Forwarded-For spoofing to exhaust a victim's rate-limit budget — this option closes that gap. (e.g. /path?foo=bar), causing the same data to appear in both the path and query fields of every captured scent. Fixed with indexOf-based path extraction, consistent with Express req.path. non-standard per RFC 7230 §3.2.2 and may indicate header injection or request smuggling. The adapter now takes the first value as the canonical source and adds an x-multiple-user-agents: true forensic flag to the captured headers when duplicates are present. pnpm.overrides: { \"flatted\": \">=3.4.2\" }. Affected the `eslint → file-entry-cache → flat-cache → flatted` chain only. Production builds were unaffected. manager used across all CI workflows. Node.js built-in crypto.randomUUID() + crypto.randomBytes(). generateSecureId() output format is unchanged ({uuidv4}-{8 hex chars}); isValidSecureId() continues to validate the same format. @tracehound/core now has zero runtime dependencies. targets and is tested against Fastify v5. Updated to ^5.0.0. maxPayloadSize, resolveSourceIp, emitSignatureInResponse, emitTraceIdHeader, extractScent, and onIntercept with security rationale for each option. unaffected. Both options are strongly recommended for production use behind a proxy or CDN. ---",
+    "highlights": [
+      "Memory amplification prevention (@tracehound/express, @tracehound/fastify): New maxPayloadSize",
+      "IP spoofing / rate-limit bypass (@tracehound/express, @tracehound/fastify): New resolveSourceIp",
+      "Fastify duplicate path+query in Scent (@tracehound/fastify): req.url includes the query string",
+      "Multi-value User-Agent handling (@tracehound/fastify): Multiple User-Agent headers are",
+      "flatted prototype pollution (dev dependency chain): Patched GHSA-rf6f-7fwh-wjgh via",
+      "pnpm upgrade 9.1.4 → 10.33.0: Addresses CVE-2024-53866 and CVE-2025-69262 in the package",
+      "Zero runtime dependencies in @tracehound/core: Replaced the uuid runtime dependency with",
+      "Fastify peerDependency mismatch: fastify peer was declared as ^4.0.0 but the package"
+    ]
+  },
   {
     "version": "1.8.7",
     "date": "2026-03-18",
@@ -81,25 +97,15 @@ export const recentReleases: ReleaseEntry[] = [
       "Fixed fuzz helper loop-risk behavior in workflow/test support paths.",
       "Updated README badge links."
     ]
-  },
-  {
-    "version": "1.8.3",
-    "date": "2026-03-11",
-    "title": "ESLint Clock/RNG SSoT, Monotonic Evidence Timestamps, and Workflow Hardening",
-    "summary": "This patch release delivers injectable clock/RNG enforcement via ESLint, monotonic nanosecond timestamps on quarantined evidence, scheduler correctness fixes, and complete SHA-pinning of all GitHub Actions across the CI workflow suite.",
-    "highlights": [
-      "ESLint v9 flat config clock/RNG SSoT enforcement (packages/core, root): Added rules that prevent direct Date.now(), Math.random(), and crypto.random* calls from bypassing injectable clock and RNG entry points. Rules are error-level for Math.random and crypto.*; warn-level for Date.now() during the ongoing RuntimeContext migration. Injectable bridge closures in scheduler, rate-limiter, and watcher carry explicit disable comments explaining the intent.",
-      "Evidence monotonic timestamps (packages/core): Added injectable _hrtime bridge to EvidenceFactory so monotonic nanosecond timestamps (process.hrtime.bigint) are captured at quarantine time. Evidence exposes monoNs: bigint internally; RuntimeEvidenceHandle surfaces it as a decimal string for JSON safety. Enables strict ordering of evidence captured within the same millisecond without relying on wall-clock drift.",
-      "Scheduler jitter and capacity (packages/core): Corrected edge cases surfaced by code review (#25) — jitter clamping and capacity-boundary behavior now have explicit regression coverage.",
-      "Workflow pinned-dependencies (.github/workflows): All GitHub Actions across ci-main, ci-pr, chaos-verify, codecov, codeql-advanced, release, scorecard, security-paranoid, and semgrep workflows are now pinned by full commit SHA per OpenSSF Scorecard Pinned-Dependencies requirements.",
-      "Expanded coverage for EvidenceFactory monotonic timestamp injection, RuntimeEvidenceHandle monoNs serialization, rate-limiter injectable clock bridge, scheduler jitter/capacity boundaries, watcher injectable clock paths, and agent _hrtime pass-through.",
-      "Added CLI system-snapshot regression coverage for new injectable bridge behavior.",
-      "Documentation narrative and roadmap updates merged from main."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.8.3",
+    "date": "2026-03-11",
+    "title": "ESLint Clock/RNG SSoT, Monotonic Evidence Timestamps, and Workflow Hardening"
+  },
   {
     "version": "1.8.2",
     "date": "2026-03-10",
