@@ -15,14 +15,30 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-26T06:13:00.896Z"
+export const changelogGeneratedAt = "2026-03-27T06:13:10.984Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.9",
+    "date": "2026-03-26",
+    "title": "OSS Pressure Containment and Operational Truth Alignment",
+    "summary": "---",
+    "highlights": [
+      "RFC-0011 OSS pressure containment (@tracehound/core): Added deterministic pressure state transitions (normal | elevated | critical), bounded threshold configuration, runtime pressure observation, and critical-mode archive suppression for TTL decay paths. Pressure is now exposed as a first-class runtime signal via watcher snapshots, system snapshots, CLI surfaces, and notification events.",
+      "Pressure hysteresis and saturation correctness (@tracehound/core): Hardened Hound pressure recovery behavior so cooldown is honored, added count-based saturation tracking alongside byte capacity, and corrected default threshold normalization for high elevatedWatermark values and fractional cooldown inputs.",
+      "Snapshot compatibility and health derivation (@tracehound/core, @tracehound/cli): Signed snapshots produced by older versions remain readable; missing pressure fields are normalized to a safe default state on read. System health derivation now keeps Hound pool exhaustion at critical precedence even when pressure mode is only elevated.",
+      "Operator pressure visibility (@tracehound/cli): Human-readable status output now includes archive-failure pressure telemetry, aligning terminal output with the existing JSON snapshot surface.",
+      "RFC and docs alignment: Updated RFC-0000 Hound/IPC wording to match the shipped child-process + framed stdio implementation, marked implemented RFCs consistently, and completed RFC-0011 OSS-scope implementation notes.",
+      "Configuration and API docs: Added pressure configuration guidance, enforced threshold-ordering invariants, trace-id signaling/inspect workflow updates, and refreshed API/config references to match the current runtime.",
+      "No breaking public API changes.",
+      "Existing deployments can adopt pressure thresholds incrementally; hard caps and fail-open semantics remain unchanged."
+    ]
+  },
   {
     "version": "1.8.8",
     "date": "2026-03-25",
     "title": "Adapter Security Hardening and Zero-Dependency Core",
-    "summary": "option added to both adapters. When Content-Length exceeds the configured limit the body clone (JSON.stringify + JSON.parse) is skipped before agent.intercept() is called, preventing adversarial oversized payloads from causing 2–3× peak memory pressure. ingressBytes (rawBody) is still captured for deterministic signature computation. option allows deployments behind a CDN or load balancer to override req.ip (which follows the framework's trust proxy setting) with a trusted source such as req.socket.remoteAddress. A misconfigured trust-proxy deployment allows X-Forwarded-For spoofing to exhaust a victim's rate-limit budget — this option closes that gap. (e.g. /path?foo=bar), causing the same data to appear in both the path and query fields of every captured scent. Fixed with indexOf-based path extraction, consistent with Express req.path. non-standard per RFC 7230 §3.2.2 and may indicate header injection or request smuggling. The adapter now takes the first value as the canonical source and adds an x-multiple-user-agents: true forensic flag to the captured headers when duplicates are present. pnpm.overrides: { \"flatted\": \">=3.4.2\" }. Affected the `eslint → file-entry-cache → flat-cache → flatted` chain only. Production builds were unaffected. manager used across all CI workflows. Node.js built-in crypto.randomUUID() + crypto.randomBytes(). generateSecureId() output format is unchanged ({uuidv4}-{8 hex chars}); isValidSecureId() continues to validate the same format. @tracehound/core now has zero runtime dependencies. targets and is tested against Fastify v5. Updated to ^5.0.0. maxPayloadSize, resolveSourceIp, emitSignatureInResponse, emitTraceIdHeader, extractScent, and onIntercept with security rationale for each option. unaffected. Both options are strongly recommended for production use behind a proxy or CDN. ---",
+    "summary": "option added to both adapters. When Content-Length exceeds the configured limit the body clone (JSON.stringify + JSON.parse) is skipped before agent.intercept() is called, preventing adversarial oversized payloads from causing 2–3× peak memory pressure. ingressBytes (rawBody) is still captured for deterministic signature computation. option allows deployments behind a CDN or load balancer to override req.ip (which follows the framework's trust proxy setting) with a trusted source such as req.socket.remoteAddress. A misconfigured trust-proxy deployment allows X-Forwarded-For spoofing to exhaust a victim's rate-limit budget — this option closes that gap. (e.g. /path?foo=bar), causing the same data to appear in both the path and query fields of every captured scent. Fixed with indexOf-based path extraction, consistent with Express req.path. non-standard per RFC 7230 §3.2.2 and may indicate header injection or request smuggling. The adapter now takes the first value as the canonical source and adds an x-multiple-user-agents: true forensic flag to the captured headers when duplicates are present. pnpm.overrides: { \"flatted\": \">=3.4.2\" }. Affected the eslint → file-entry-cache → flat-cache → flatted chain only. Production builds were unaffected. manager used across all CI workflows. Node.js built-in crypto.randomUUID() + crypto.randomBytes(). generateSecureId() output format is unchanged ({uuidv4}-{8 hex chars}); isValidSecureId() continues to validate the same format. @tracehound/core now has zero runtime dependencies. targets and is tested against Fastify v5. Updated to ^5.0.0. maxPayloadSize, resolveSourceIp, emitSignatureInResponse, emitTraceIdHeader, extractScent, and onIntercept with security rationale for each option. unaffected. Both options are strongly recommended for production use behind a proxy or CDN. ---",
     "highlights": [
       "Memory amplification prevention (@tracehound/express, @tracehound/fastify): New maxPayloadSize",
       "IP spoofing / rate-limit bypass (@tracehound/express, @tracehound/fastify): New resolveSourceIp",
@@ -81,26 +97,15 @@ export const recentReleases: ReleaseEntry[] = [
       "Last-alert field label renamed from \"id\" to \"signature\" in the LAST ALERT DETAIL section to match the actual field name and domain terminology.",
       "renderScreen void returns: Removed return statements from void renderScreen switch branches."
     ]
-  },
-  {
-    "version": "1.8.4",
-    "date": "2026-03-11",
-    "title": "Post-1.8.3 Workflow and Security Maintenance Patch",
-    "summary": "This patch release captures all commits merged after v1.8.3, focused on workflow hardening, dependency security remediation, and fuzz/chaos pipeline stability.",
-    "highlights": [
-      "Applied OSV vulnerability remediation updates.",
-      "Added StepSecurity GitHub Actions hardening updates and follow-up workflow permission fixes.",
-      "Fixed workflow configuration regressions affecting CI and security automation.",
-      "Updated Scorecard workflow configuration and corrected token-permission placement issues.",
-      "Fixed chaos test workflow pnpm install and naming consistency issues.",
-      "Improved fuzz test workflow configuration.",
-      "Fixed fuzz helper loop-risk behavior in workflow/test support paths.",
-      "Updated README badge links."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.8.4",
+    "date": "2026-03-11",
+    "title": "Post-1.8.3 Workflow and Security Maintenance Patch"
+  },
   {
     "version": "1.8.3",
     "date": "2026-03-11",
