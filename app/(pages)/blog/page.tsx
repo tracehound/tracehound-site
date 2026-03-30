@@ -19,6 +19,39 @@ export default function Blog() {
       <article className="grid grid-cols-1 xl:grid-cols-2">
         <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
           <div className="flex items-center gap-4">
+            <time dateTime="March 30, 2026">March 30, 2026</time>
+            <strong>// Tracehound Team</strong>
+          </div>
+
+          <Link
+            href="/blog/how-regulation-is-turning-forensic-readiness-into-an-enterprise-requirement"
+            className="group">
+            <h3 className="mb-3 font-heading font-bold text-xl md:text-2xl xl:text-4xl group-hover:pl-2.5 group-hover:bg-(--accent-primary)/50 transition-all">
+              The 72-Hour Reality: How Regulation Is Turning Forensic Readiness into an Enterprise
+              Requirement
+            </h3>
+            <p className="font-sans md:text-lg xl:text-xl mb-3 lg:mb-6 xl:mb-9">
+              Incident disclosure regimes are changing what cyber preparedness means. Detection is
+              still necessary, but under compressed reporting timelines, evidence quality becomes
+              the deciding factor.
+            </p>
+          </Link>
+
+          <nav className="flex items-center gap-4">
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #forensic-readiness
+            </span>
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #incident-preparedness
+            </span>
+            <span className="text-xs font-mono text-(--border) bg-(--border-accent)/20 border border-dashed border-(--border-accent) px-2 py-1">
+              #enterprise-requirements
+            </span>
+          </nav>
+        </div>
+
+        <div className="flex flex-col p-6 xl:p-12 border-b border-dashed border-(--border-accent) xl:border-r">
+          <div className="flex items-center gap-4">
             <time dateTime="March 16, 2026">March 24, 2026</time>
             <strong>// Tracehound Team</strong>
           </div>

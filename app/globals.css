@@ -64,6 +64,12 @@
   --document-content-w: var(--document-content-width);
 }
 
+*::selection {
+  background-color: var(--accent-primary);
+  color: var(--foreground);
+  text-shadow: 1px 1px 0.5px oklch(99.641% 0.00655 97.462 / 0.5);
+}
+
 body {
   background: var(--background-accent);
   color: var(--foreground);
