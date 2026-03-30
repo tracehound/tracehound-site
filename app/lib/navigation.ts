@@ -52,7 +52,7 @@ export const navigation: Navigation[] = [
     slug: 'guides/security-assurance',
     title: 'Security Assurance',
     summary:
-      "This document outlines the proven facts, known limitations, and architectural rationale behind Tracehound's design as a High-Assurance Security Substrate. It is intended for Security Operations (SecOps) teams and architecture reviewers to understand both the empirical resilience of the system and its theoretical threat model gaps.",
+      "Validated security posture, fail-open boundaries, chaos coverage, and forensic correctness notes for the current OSS release line.",
     category: 'Guides',
   },
   {
@@ -65,7 +65,7 @@ export const navigation: Navigation[] = [
     slug: 'guides/threat-model',
     title: 'Threat Model',
     summary:
-      "This document outlines the deterministic security boundaries, predictable failure modes, and legal/liability constraints of the Tracehound Resilience Edge. It is designed to provide a clear understanding of the product's operational behavior under extreme duress.",
+      "Deterministic security boundaries, predictable failure modes, and runtime contract limits for the Tracehound forensic evidence substrate.",
     category: 'Guides',
   },
   {
@@ -96,3 +96,4 @@ export const navigation: Navigation[] = [
     category: 'Guides',
   },
 ]
+

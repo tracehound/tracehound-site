@@ -38,7 +38,7 @@ export default function Changelog() {
                   anti-rotation controls all land in the current public release train.
                 </li>
                 <li>
-                  Current public version is <strong>v1.8.2</strong>; review the generated entries
+                  Current public version is <strong>v1.8.9</strong>; review the generated entries
                   below for exact per-release deltas and migration-relevant notes.
                 </li>
               </ul>
@@ -124,3 +124,4 @@ export default function Changelog() {
     </div>
   )
 }
+

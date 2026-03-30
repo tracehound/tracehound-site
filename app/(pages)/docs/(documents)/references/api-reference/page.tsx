@@ -55,7 +55,12 @@ export default function APIReferences() {
               { row: [<strong>`th.auditChain`</strong>, 'Tamper-evident chain records'] },
               { row: [<strong>`th.notifications`</strong>, 'Event emitter for runtime signals'] },
               { row: [<strong>`th.houndPool`</strong>, 'Process-separated async worker pool'] },
-              { row: [<strong>`th.snapshot()`</strong>, 'Immutable runtime snapshot for signed transport'] },
+              {
+                row: [
+                  <strong>`th.snapshot()`</strong>,
+                  'Immutable runtime snapshot for signed transport',
+                ],
+              },
             ]}
           />
         </DocsContentBlock>
@@ -77,7 +82,12 @@ export default function APIReferences() {
               { row: [<strong>`rate_limited`</strong>, <strong>`retryAfter: number`</strong>] },
               { row: [<strong>`payload_too_large`</strong>, <strong>`limit: number`</strong>] },
               { row: [<strong>`ignored`</strong>, <strong>`signature: string`</strong>] },
-              { row: [<strong>`quarantined`</strong>, <strong>`handle: EvidenceHandle`</strong>] },
+              {
+                row: [
+                  <strong>`quarantined`</strong>,
+                  <strong>`handle: RuntimeEvidenceHandle`</strong>,
+                ],
+              },
               { row: [<strong>`error`</strong>, <strong>`error: TracehoundError`</strong>] },
             ]}
           />
@@ -103,8 +113,8 @@ export default function APIReferences() {
                 <strong>ThreatSignal.severity</strong>: low | medium | high | critical
               </p>,
               <p key="limiter-behavior">
-                <strong>Rate limiter behavior</strong>: sliding-window with composite source tracking +
-                IP ceiling enforcement to constrain same-IP fingerprint rotation.
+                <strong>Rate limiter behavior</strong>: sliding-window with composite source
+                tracking + IP ceiling enforcement to constrain same-IP fingerprint rotation.
               </p>,
             ]}
           />
@@ -122,8 +132,8 @@ export default function APIReferences() {
           <DocsContentParagraph>
             Common event types: <strong>`threat.detected`</strong>,{' '}
             <strong>`evidence.quarantined`</strong>, <strong>`rate_limit.exceeded`</strong>,{' '}
-            <strong>`pressure.transition`</strong>,{' '}
-            <strong>`pressure.archive_suppressed`</strong>, <strong>`system.panic`</strong>.
+            <strong>`pressure.transition`</strong>, <strong>`pressure.archive_suppressed`</strong>,{' '}
+            <strong>`system.panic`</strong>.
           </DocsContentParagraph>
 
           <DocsContentSubtitle>Webhook delivery policy</DocsContentSubtitle>
@@ -137,9 +147,10 @@ export default function APIReferences() {
                 destinations are rejected.
               </p>,
               <p key="webhook-credentials">
-                Embedded URL credentials such as <strong>`https://user:pass@example.com/hook`</strong>{' '}
-                are intentionally rejected. If the receiver needs authentication, send it through
-                explicit headers such as <strong>`Authorization`</strong>.
+                Embedded URL credentials such as{' '}
+                <strong>`https://user:pass@example.com/hook`</strong> are intentionally rejected. If
+                the receiver needs authentication, send it through explicit headers such as{' '}
+                <strong>`Authorization`</strong>.
               </p>,
             ]}
           />
@@ -165,9 +176,8 @@ export default function APIReferences() {
           <DocsContentParagraph>
             <strong>@tracehound/core</strong> also exports canonical operational helpers such as{' '}
             <strong>`SYSTEM_SNAPSHOT_ENV`</strong>, <strong>`HOUND_PRESSURE_ERRORS`</strong>,{' '}
-            <strong>`HoundPressureErrorCode`</strong>, and{' '}
-            <strong>`isHoundPressureError`</strong> so CLI wiring and pressure matching do not rely
-            on raw string literals.
+            <strong>`HoundPressureErrorCode`</strong>, and <strong>`isHoundPressureError`</strong>{' '}
+            so CLI wiring and pressure matching do not rely on raw string literals.
           </DocsContentParagraph>
         </DocsContentBlock>
 
@@ -181,7 +191,12 @@ export default function APIReferences() {
           <Table
             head={['Need', 'API']}
             body={[
-              { row: ['Manual retention control', <strong>`new Quarantine(config, auditChain)`</strong>] },
+              {
+                row: [
+                  'Manual retention control',
+                  <strong>`new Quarantine(config, auditChain)`</strong>,
+                ],
+              },
               { row: ['Custom agent wiring', <strong>`createAgent(...)`</strong>] },
               { row: ['Independent limiter instance', <strong>`createRateLimiter(...)`</strong>] },
               { row: ['Pull-only observer state', <strong>`createWatcher(...)`</strong>] },
@@ -250,4 +265,3 @@ export default function APIReferences() {
     </DocsPageLayout>
   )
 }
-
