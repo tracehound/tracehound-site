@@ -15,9 +15,25 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-03-30T06:53:22.503Z"
+export const changelogGeneratedAt = "2026-03-31T06:16:44.584Z"
 
 export const recentReleases: ReleaseEntry[] = [
+  {
+    "version": "1.8.10",
+    "date": "2026-03-30",
+    "title": "Release Boundary Hardening and Validation Uplift",
+    "summary": "Release Boundary Hardening and Validation Uplift",
+    "highlights": [
+      "Release trust boundary formalization (repo, security, docs): Publish provenance is now consistently defined around immutable lockfile input, offline/clean install expectations, tsc-first package artifacts, package parity verification, and release manifest metadata. Test tooling remains outside the trusted release boundary.",
+      "Dedicated forensic lab (infrastructure/forensic-lab): Added a deterministic forensic validation lane focused on signed snapshot readback, custody invariants, trace-registry continuity, cold-storage parity, and legacy snapshot compatibility.",
+      "Dedicated chaos workspace (infrastructure/chaos): Extracted chaos verification into its own workspace package with compiled entrypoints and release-aware result summaries, reducing root dependency ownership and clarifying validation boundaries.",
+      "Dedicated soak smoke lane (infrastructure/soak): Added a short-lived soak smoke runner that validates startup, telemetry output, release metadata emission, and traffic generation without promoting full soak behavior into the regular unit-test gate.",
+      "Root dependency ownership (repo): Moved chaos-specific runtime dependencies out of the root manifest and into the dedicated chaos workspace so root devDependencies better reflect actual top-level tooling needs.",
+      "Fail-safe injected clock propagation (@tracehound/core): createFailSafe() now preserves _now injection from partial config, restoring deterministic testability for factory-based callers.",
+      "Forensic harness cold-storage safety (infrastructure/forensic-lab): Hardened artifact filename derivation, validated metadata shape before successful reads, and isolated payload copies returned to callers to avoid shared-buffer exposure.",
+      "Soak metadata resilience (infrastructure/soak): Release metadata writing is now best-effort, package version lookup is repo-root based instead of cwd-sensitive, and smoke validation now guards against early child exit, stale artifact timestamps, and shutdown races."
+    ]
+  },
   {
     "version": "1.8.9",
     "date": "2026-03-26",
@@ -81,26 +97,15 @@ export const recentReleases: ReleaseEntry[] = [
       "No runtime behavior changes.",
       "No configuration contract changes."
     ]
-  },
-  {
-    "version": "1.8.5",
-    "date": "2026-03-12",
-    "title": "CLI Dashboard Overhaul, Soak Infrastructure, and Fix Wave",
-    "summary": "CLI Dashboard Overhaul, Soak Infrastructure, and Fix Wave",
-    "highlights": [
-      "CLI watch dashboard overhaul (packages/cli): Redesigned multi-screen ANSI live dashboard (watch.ts) with bold values, colon-separated key/value labels, and consistent color hierarchy via theme utilities. Screens: overview, watcher, quarantine, pool, agent, help. Nav keys: [1–5], [h], [r], [q]. Command bar pinned to terminal bottom row in TTY mode.",
-      "format.ts consolidation (packages/cli): Merged fmt.ts into format.ts as the single canonical formatting module — fmtBytes, fmtCount, fmtDuration, fmtStatus, fmtUptime.",
-      "Soak load-test infrastructure (infrastructure/soak): Moved soak harness from packages/ to infrastructure/soak; added server.ts, audit.ts, file-cold-storage.ts, metrics.ts, traffic.ts, main.ts. Updated pnpm-workspace.yaml accordingly.",
-      "CLI watch command exposed via src/index.ts.",
-      "startDashboard setInterval regression (packages/cli): Removed the early-return guard on !process.stdout.isTTY that prevented setInterval from being registered. Replaced process.stdin.isTTY checks with typeof process.stdin.setRawMode === 'function' so raw-mode setup and key-navigation work correctly in all environments.",
-      "refreshMs unit inconsistency (packages/cli): Removed erroneous Math.ceil(refreshMs / 1000) conversion in startDashboard and renderDashboard; the overview header was displaying refresh: 1ms instead of refresh: 1000ms.",
-      "Last-alert field label renamed from \"id\" to \"signature\" in the LAST ALERT DETAIL section to match the actual field name and domain terminology.",
-      "renderScreen void returns: Removed return statements from void renderScreen switch branches."
-    ]
   }
 ]
 
 export const timelineRows: TimelineRow[] = [
+  {
+    "version": "1.8.5",
+    "date": "2026-03-12",
+    "title": "CLI Dashboard Overhaul, Soak Infrastructure, and Fix Wave"
+  },
   {
     "version": "1.8.4",
     "date": "2026-03-11",
