@@ -74,6 +74,16 @@ const posts: Post[] = [
     tags: ['SIEM', 'forensic-readiness', 'evidence-readiness'],
     href: '/blog/siem-does-not-mean-forensic-readiness',
   },
+  {
+    id: 'what-enterprises-actually-buy-forensic-readiness',
+    title: 'The Forensic Readiness Market Is Fragmented: What Enterprises Really Purchase',
+    description:
+      'The forensic readiness market is real, but fragmented. Here is what enterprises actually purchase across SIEM, DFIR tooling, evidence handling, and incident response services.',
+    date: 'April 14, 2026',
+    author: 'Tracehound Team',
+    tags: ['DFIR', 'forensic-readiness', 'enterprise-security'],
+    href: '/blog/what-enterprises-actually-buy-forensic-readiness',
+  },
 ].reverse()
 
 export default function Blog() {
