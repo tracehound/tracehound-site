@@ -84,6 +84,16 @@ const posts: Post[] = [
     tags: ['DFIR', 'forensic-readiness', 'enterprise-security'],
     href: '/blog/what-enterprises-actually-buy-forensic-readiness',
   },
+  {
+    id: 'forensic-readiness-narrow-but-growing-enterprise-security-niche',
+    title: 'Forensic Readiness Is a Narrow but Growing Enterprise Security Niche',
+    description:
+      'Forensic readiness is not yet a clean standalone category, but enterprises are already spending on the underlying problem through digital forensics, incident response, and evidence-focused security workflows.',
+    date: 'April 21, 2026',
+    author: 'Tracehound Team',
+    tags: ['DFIR', 'forensic-readiness', 'enterprise-security'],
+    href: '/blog/forensic-readiness-narrow-but-growing-enterprise-security-niche',
+  },
 ].reverse()
 
 export default function Blog() {
