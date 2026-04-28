@@ -94,6 +94,16 @@ const posts: Post[] = [
     tags: ['DFIR', 'forensic-readiness', 'enterprise-security'],
     href: '/blog/forensic-readiness-narrow-but-growing-enterprise-security-niche',
   },
+  {
+    id: 'tracehound-forensic-readiness-control-plane',
+    title: 'Tracehound and the Case for a Forensic Readiness Control Plane',
+    description:
+      'The security market is crowded with visibility tools. Tracehound fits better as a forensic readiness control plane focused on preserving incident-relevant context and evidentiary continuity.',
+    date: 'April 28, 2026',
+    author: 'Tracehound Team',
+    tags: ['control-plane', 'forensic-readiness', 'DFIR'],
+    href: '/blog/tracehound-forensic-readiness-control-plane',
+  },
 ].reverse()
 
 export default function Blog() {

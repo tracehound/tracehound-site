@@ -11,8 +11,8 @@ export function Footer() {
 
         <header className="w-full flex flex-col p-6 xl:p-12">
           <Logo className="mb-3 [&_path]:fill-(--border)!" />
-          <h4 className="font-bold font-heading text-xl mb-2 md:text-2xl xl:text-5xl">
-            Runtime security buffer
+          <h4 className="font-bold font-heading text-xl mb-2 md:text-2xl xl:text-4xl">
+            Operational security controls with forensic guarantees.
           </h4>
           <p className="text-xl md:text-2xl">Built for Security Teams and MSSP environments</p>
           <div className="flex items-center gap-2 -ml-2 mt-2">

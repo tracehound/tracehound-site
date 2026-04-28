@@ -23,7 +23,7 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Tracehound',
-  description: 'The Deterministic Runtime Security Buffer',
+  description: 'Operational security controls with forensic guarantees.',
   icons: [
     {
       rel: 'icon',
