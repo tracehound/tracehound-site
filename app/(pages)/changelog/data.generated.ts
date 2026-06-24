@@ -15,7 +15,7 @@ export type TimelineRow = {
   title: string
 }
 
-export const changelogGeneratedAt = "2026-06-23T08:29:39.437Z"
+export const changelogGeneratedAt = "2026-06-24T08:22:53.742Z"
 
 export const recentReleases: ReleaseEntry[] = [
   {
